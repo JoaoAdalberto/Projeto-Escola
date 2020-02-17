@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/02/17 09:05:56.973.pas,C:\Users\joaopereira\Documents\RAD Studio\Projects\Unit6.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmPrincipal.pas</Transaction>
+    <Transaction>2020/02/17 09:05:56.973.dfm,C:\Users\joaopereira\Documents\RAD Studio\Projects\Unit6.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmPrincipal.dfm</Transaction>
+    <Transaction>2020/02/17 09:06:10.759.dproj,C:\Users\joaopereira\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\joaopereira\Documents\Projeto Escola\ProjetoEscola.dproj</Transaction>
+    <Transaction>2020/02/17 11:02:18.219.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uCadastrarEscola.pas</Transaction>
+    <Transaction>2020/02/17 11:02:55.571.pas,C:\Users\joaopereira\Documents\Projeto Escola\view\uCadastrarEscola.pas=</Transaction>
+    <Transaction>2020/02/17 11:03:10.621.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\uFrmCadastrarEscola.pas</Transaction>
+    <Transaction>2020/02/17 11:03:10.621.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\uFrmCadastrarEscola.dfm</Transaction>
+    <Transaction>2020/02/17 11:04:22.372.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarEscola.pas</Transaction>
+    <Transaction>2020/02/17 11:04:22.372.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarEscola.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
