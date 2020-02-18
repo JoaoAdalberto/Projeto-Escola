@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, StdCtrls, ExtCtrls, uFrmCadastrarEscola, Grids, DBGrids,
-  DBCtrls, Mask;
+  Dialogs, Menus, StdCtrls, ExtCtrls, uFrmCadastrarEscola;
 
 type
   TunFrmPrincipal = class(TForm)
@@ -23,7 +22,6 @@ type
     lblDataHora: TLabel;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,8 +32,6 @@ var
   unFrmPrincipal: TunFrmPrincipal;
 
 implementation
-
-uses uDmConexao;
 
 {$R *.dfm}
 
@@ -54,12 +50,6 @@ begin
   finally
     FreeAndNil(frmCadastrarEscola)
   end;
-end;
-
-
-procedure TunFrmPrincipal.FormShow(Sender: TObject);
-begin
-  uDmConexao.dmConexao.cdsEscola.active := True;
 end;
 
 end.

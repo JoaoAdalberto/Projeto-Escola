@@ -2,8 +2,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   Left = 0
   Top = 0
   Caption = 'Cadastrar Escola'
-  ClientHeight = 411
-  ClientWidth = 688
+  ClientHeight = 327
+  ClientWidth = 587
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -29,21 +29,14 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object Label1: TLabel
     Left = 48
-    Top = 184
+    Top = 131
     Width = 19
     Height = 13
     Caption = 'CEP'
   end
-  object lblDataCadastr: TLabel
-    Left = 391
-    Top = 63
-    Width = 85
-    Height = 13
-    Caption = 'Data de Cadastro'
-  end
   object lbledtDescricao: TLabeledEdit
     Left = 48
-    Top = 152
+    Top = 99
     Width = 529
     Height = 21
     EditLabel.Width = 46
@@ -53,7 +46,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtEstado: TLabeledEdit
     Left = 543
-    Top = 245
+    Top = 192
     Width = 34
     Height = 21
     EditLabel.Width = 33
@@ -63,7 +56,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtRua: TLabeledEdit
     Left = 128
-    Top = 197
+    Top = 144
     Width = 193
     Height = 21
     EditLabel.Width = 19
@@ -73,7 +66,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtNumero: TLabeledEdit
     Left = 344
-    Top = 197
+    Top = 144
     Width = 41
     Height = 21
     EditLabel.Width = 37
@@ -83,7 +76,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtComplemento: TLabeledEdit
     Left = 48
-    Top = 245
+    Top = 192
     Width = 273
     Height = 21
     EditLabel.Width = 65
@@ -93,7 +86,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtBairro: TLabeledEdit
     Left = 408
-    Top = 197
+    Top = 144
     Width = 169
     Height = 21
     EditLabel.Width = 28
@@ -103,7 +96,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtCidade: TLabeledEdit
     Left = 344
-    Top = 245
+    Top = 192
     Width = 169
     Height = 21
     EditLabel.Width = 33
@@ -113,7 +106,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object mskedtCep: TMaskEdit
     Left = 48
-    Top = 197
+    Top = 144
     Width = 65
     Height = 21
     EditMask = '00000\-000;1;_'
@@ -123,7 +116,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object btnConfirmarCadastro: TButton
     Left = 176
-    Top = 272
+    Top = 240
     Width = 273
     Height = 25
     Caption = 'Confirmar Cadastro'
@@ -132,7 +125,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object btnCancelarCadastro: TButton
     Left = 176
-    Top = 319
+    Top = 287
     Width = 273
     Height = 25
     Caption = 'Cancelar Cadastro'
@@ -140,7 +133,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object lbledtNome: TLabeledEdit
     Left = 48
-    Top = 109
+    Top = 56
     Width = 531
     Height = 21
     EditLabel.Width = 27
@@ -148,28 +141,9 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     EditLabel.Caption = 'Nome'
     TabOrder = 0
   end
-  object lbledtCodigo: TLabeledEdit
-    Left = 240
-    Top = 54
-    Width = 121
-    Height = 21
-    EditLabel.Width = 33
-    EditLabel.Height = 13
-    EditLabel.Caption = 'Codigo'
-    TabOrder = 11
-  end
-  object dattimpickDataCadastro: TDateTimePicker
-    Left = 391
-    Top = 82
-    Width = 186
-    Height = 21
-    Date = 43879.557137164350000000
-    Time = 43879.557137164350000000
-    TabOrder = 12
-  end
   object DataSource1: TDataSource
     DataSet = dmConexao.cdsEscola
-    Left = 616
-    Top = 288
+    Left = 544
+    Top = 280
   end
 end

@@ -1,0 +1,70 @@
+unit uEscolaController;
+
+interface
+
+uses
+  uEscolaModel, uDMConexao, sysUtils, DB, DBClient;
+
+type
+  TClienteController = class
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure CarregarCliente(oEscola: TEscola; iCodigo: Integer);
+    procedure Pesquisar(sNome: string; AFonteDeDados: TDataSource);
+    function Inserir(oEscola: TEscola; var sError: String) : Boolean;
+    function Alterar(oEscola: TEscola; var sError: String) : Boolean;
+    function Excluir(iCodigo: Integer; var sError: string) : Boolean;
+
+
+
+  end;
+
+implementation
+
+{ TClienteController }
+
+{ TClienteController }
+
+function TClienteController.Alterar(oCliente: TEscola;
+  var sError: String): Boolean;
+begin
+  Result := dmCliente.Alterar(oCliente, sError);
+end;
+
+procedure TClienteController.CarregarCliente(oCliente: TEscola;
+  iCodigo: Integer);
+begin
+  DmCliente.CarregarUsuario(oCliente, iCodigo);
+end;
+
+constructor TClienteController.Create;
+begin
+  DmCliente := TDmCliente.Create(nil);
+end;
+
+destructor TClienteController.Destroy;
+begin
+  FreeAndNil(DmCliente);
+  inherited;
+end;
+
+function TClienteController.Excluir(iCodigo: Integer;
+  var sError: string): Boolean;
+begin
+  Result := DmCliente.Excluir(iCodigo, sError);
+end;
+
+function TClienteController.Inserir(oCliente: TEscola;
+  var sError: String): Boolean;
+begin
+  Result := DmCliente.Inserir(oCliente, sError);
+end;
+
+
+procedure TClienteController.Pesquisar(sNome: string; AFonteDeDados: TDataSource);
+begin
+  AFonteDeDados.DataSet := DmCliente.Pesquisar(sNome);
+end;
+
+end.

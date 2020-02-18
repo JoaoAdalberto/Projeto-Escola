@@ -10,5 +10,15 @@
     <Transaction>2020/02/17 11:03:10.621.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\uFrmCadastrarEscola.dfm</Transaction>
     <Transaction>2020/02/17 11:04:22.372.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarEscola.pas</Transaction>
     <Transaction>2020/02/17 11:04:22.372.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarEscola.dfm</Transaction>
+    <Transaction>2020/02/17 12:27:24.234.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\model\uEscolaModel.pas</Transaction>
+    <Transaction>2020/02/17 13:21:09.843.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.pas</Transaction>
+    <Transaction>2020/02/17 13:21:21.657.pas,C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.pas=</Transaction>
+    <Transaction>2020/02/17 13:21:37.884.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.pas</Transaction>
+    <Transaction>2020/02/17 13:21:37.884.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.dfm</Transaction>
+    <Transaction>2020/02/17 13:32:21.761.pas,C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.pas=</Transaction>
+    <Transaction>2020/02/17 13:32:21.761.dfm,C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.dfm=</Transaction>
+    <Transaction>2020/02/17 13:32:42.072.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.pas</Transaction>
+    <Transaction>2020/02/17 13:32:42.072.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.dfm</Transaction>
+    <Transaction>2020/02/18 09:40:14.891.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\controller\uEscolaController.pas</Transaction>
   </Transactions>
 </BorlandProject>

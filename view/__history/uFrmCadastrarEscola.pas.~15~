@@ -84,10 +84,10 @@ begin
   oEscola := TEscola.Create;
   oEscolaController := TEscolaController.Create;
   try
-    //oEscola.ESCCOD := StrToInt(lbledtCodigo.Text);
+    oEscola.ESCCOD := StrToInt(lbledtCodigo.Text);
     oEscola.ESCNOM := lbledtNome.Text;
     oEscola.ESCDES := lbledtDescricao.Text;
-    //oEscola.ESCDATCAD := dattimpickDataCadastro.Date;
+    oEscola.ESCDATCAD := dattimpickDataCadastro.Date;
     oEscola.ESCCEP := mskedtCep.Text;
     oEscola.ESCRUA := lbledtRua.Text;
     oEscola.ESCNUM := lbledtNumero.Text;

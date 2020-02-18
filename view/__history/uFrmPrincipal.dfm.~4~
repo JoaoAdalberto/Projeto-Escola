@@ -12,7 +12,6 @@ object unFrmPrincipal: TunFrmPrincipal
   Font.Style = []
   Menu = mainmenPrincipal
   OldCreateOrder = False
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object lblSCEFA: TLabel
@@ -83,7 +82,7 @@ object unFrmPrincipal: TunFrmPrincipal
   end
   object datetime: TTimer
     OnTimer = datetimeTimer
-    Left = 696
-    Top = 344
+    Left = 600
+    Top = 280
   end
 end

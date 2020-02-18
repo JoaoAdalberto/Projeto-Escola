@@ -21,9 +21,14 @@ type
     Cargos1: TMenuItem;
     datetime: TTimer;
     lblDataHora: TLabel;
+    Label3: TLabel;
+    DBEdit2: TDBEdit;
+    DBNavigator1: TDBNavigator;
+    DBGrid1: TDBGrid;
+    Label4: TLabel;
+    DBEdit3: TDBEdit;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,12 +59,6 @@ begin
   finally
     FreeAndNil(frmCadastrarEscola)
   end;
-end;
-
-
-procedure TunFrmPrincipal.FormShow(Sender: TObject);
-begin
-  uDmConexao.dmConexao.cdsEscola.active := True;
 end;
 
 end.

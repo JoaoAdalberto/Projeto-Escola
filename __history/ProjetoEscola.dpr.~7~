@@ -5,8 +5,7 @@ uses
   uFrmPrincipal in 'view\uFrmPrincipal.pas' {unFrmPrincipal},
   uFrmCadastrarEscola in 'view\uFrmCadastrarEscola.pas' {frmCadastrarEscola},
   uEscolaModel in 'model\uEscolaModel.pas',
-  uDmConexao in 'dao\uDmConexao.pas' {dmConexao: TDataModule},
-  uEscolaController in 'controller\uEscolaController.pas';
+  uDmConexao in 'dao\uDmConexao.pas' {dmConexao: TDataModule};
 
 {$R *.res}
 

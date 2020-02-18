@@ -24,6 +24,7 @@ type
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -56,6 +57,11 @@ begin
   end;
 end;
 
+procedure TunFrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if uDmConexao.dmConexao.cdsEscola.changecount > 0 then uDmConexao.dmConexao.cdsEscola.Applyupdates(0);
+    uDmConexao.dmConexao.cdsEscola.Active := false;
+end;
 
 procedure TunFrmPrincipal.FormShow(Sender: TObject);
 begin
