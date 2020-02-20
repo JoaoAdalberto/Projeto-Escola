@@ -30,14 +30,26 @@
     <DelphiCompile Include="ProjetoEscola.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="controller\uCargoController.pas" />
     <DCCReference Include="controller\uEscolaController.pas" />
     <DCCReference Include="dao\uDmConexao.pas">
       <Form>dmConexao</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
+    <DCCReference Include="model\uCargoModel.pas" />
     <DCCReference Include="model\uEscolaModel.pas" />
+    <DCCReference Include="model\uFuncionarioModel.pas" />
+    <DCCReference Include="view\uFrmCadastrarCargo.pas">
+      <Form>frmCadastrarCargo</Form>
+    </DCCReference>
     <DCCReference Include="view\uFrmCadastrarEscola.pas">
       <Form>frmCadastrarEscola</Form>
+    </DCCReference>
+    <DCCReference Include="view\ufrmCadastrarFuncionario.pas">
+      <Form>frmCadastrarFuncionario</Form>
+    </DCCReference>
+    <DCCReference Include="view\uFrmExcluirEscola.pas">
+      <Form>frmExcluirEscola</Form>
     </DCCReference>
     <DCCReference Include="view\uFrmPrincipal.pas">
       <Form>unFrmPrincipal</Form>

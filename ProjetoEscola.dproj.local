@@ -20,5 +20,22 @@
     <Transaction>2020/02/17 13:32:42.072.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.pas</Transaction>
     <Transaction>2020/02/17 13:32:42.072.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmConexao.dfm</Transaction>
     <Transaction>2020/02/18 09:40:14.891.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\controller\uEscolaController.pas</Transaction>
+    <Transaction>2020/02/19 10:11:36.956.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmExcluirEscola.pas</Transaction>
+    <Transaction>2020/02/19 10:11:36.956.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmExcluirEscola.dfm</Transaction>
+    <Transaction>2020/02/19 11:02:04.227.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\model\uCargoModel.pas</Transaction>
+    <Transaction>2020/02/19 11:12:27.095.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmCargo.pas</Transaction>
+    <Transaction>2020/02/19 11:12:27.095.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmCargo.dfm</Transaction>
+    <Transaction>2020/02/19 11:16:55.583.pas,C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmCargo.pas=</Transaction>
+    <Transaction>2020/02/19 11:16:55.583.dfm,C:\Users\joaopereira\Documents\Projeto Escola\dao\uDmCargo.dfm=</Transaction>
+    <Transaction>2020/02/19 11:25:26.729.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\controller\uCargoController.pas</Transaction>
+    <Transaction>2020/02/19 11:30:30.265.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarCargo.pas</Transaction>
+    <Transaction>2020/02/19 11:30:30.265.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarCargo.dfm</Transaction>
+    <Transaction>2020/02/20 08:10:40.396.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionário.pas</Transaction>
+    <Transaction>2020/02/20 08:10:40.396.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionário.dfm</Transaction>
+    <Transaction>2020/02/20 08:10:46.622.pas,C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionário.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionario.pas</Transaction>
+    <Transaction>2020/02/20 08:10:46.622.dfm,C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionário.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionario.dfm</Transaction>
+    <Transaction>2020/02/20 08:11:19.721.pas,C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionario.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\ufrmCadastrarFuncionario.pas</Transaction>
+    <Transaction>2020/02/20 08:11:19.721.dfm,C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionario.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\ufrmCadastrarFuncionario.dfm</Transaction>
+    <Transaction>2020/02/20 09:06:46.932.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\model\uFuncionarioModel.pas</Transaction>
   </Transactions>
 </BorlandProject>

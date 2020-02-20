@@ -3,7 +3,7 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel;
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uCargoModel;
 
 type
   TdmConexao = class(TDataModule)
@@ -14,7 +14,6 @@ type
     sqlSelectEscolaESCCOD: TIntegerField;
     sqlSelectEscolaESCNOM: TStringField;
     sqlSelectEscolaESCDES: TStringField;
-    sqlSelectEscolaESCDATCAD: TSQLTimeStampField;
     sqlSelectEscolaESCCEP: TStringField;
     sqlSelectEscolaESCRUA: TStringField;
     sqlSelectEscolaESCNUM: TStringField;
@@ -36,12 +35,29 @@ type
     sqlInserirEscola: TSQLDataSet;
     sqlExcluirEscola: TSQLDataSet;
     sqlAlterarEscola: TSQLDataSet;
+    dspCargo: TDataSetProvider;
+    cdsCargo: TClientDataSet;
+    sqlInserirCargo: TSQLDataSet;
+    sqlInserirCargoESCCOD: TIntegerField;
+    sqlInserirCargoESCNOM: TStringField;
+    sqlInserirCargoESCDES: TStringField;
+    sqlInserirCargoESCCEP: TStringField;
+    sqlInserirCargoESCRUA: TStringField;
+    sqlInserirCargoESCNUM: TStringField;
+    sqlInserirCargoESCCOM: TStringField;
+    sqlInserirCargoESCBAIRRO: TStringField;
+    sqlInserirCargoESCCIDADE: TStringField;
+    sqlInserirCargoESCEST: TStringField;
+    dsCargo: TDataSource;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
-    //function GerarCOD: Integer;
+    procedure CarregarCargo(oCargo : TCargo; iCodigo: Integer);
+    function GerarCOD: Integer;
+    function GerarCodCargo: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
     //function PesquisarPorCodigo(ACodigo: Integer): TDataSet;
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
+    function InserirCargo(oCargo : TCargo; out sErro: string) :Boolean;
 
 
 
@@ -57,47 +73,61 @@ var
 implementation
 
 {$R *.dfm}
-procedure TdmConexao.CarregarEscola(oEscola: TEscola; iCodigo: Integer);
+procedure TdmConexao.CarregarCargo(oCargo: TCargo; iCodigo: Integer);
 var
-  sqlCliente : TSQLDataSet;
+  sqlCargo :TSQLDataSet;
 begin
-  sqlCliente := TSQLDataSet.Create(nil);
+  sqlCargo := TSQLDataSet.Create(nil);
   try
-    sqlCliente.SQLConnection := sqlConexao;
-    sqlCliente.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
-    sqlCliente.Open;
-    //oEscola.ESCCOD := sqlCliente.FieldByName('ESCCOD').AsInteger;
-    oEscola.ESCNOM := sqlCliente.FieldByName('ESCNOM').AsString;
-    oEscola.ESCDES := sqlCliente.FieldByName('ESCDES').AsString;
-    //oEscola.ESCDATCAD := sqlCliente.FieldByName('ESCDATCAD').AsDateTime;
-    oEscola.ESCCEP := sqlCliente.FieldByName('ESCCEP').AsString;
-    oEscola.ESCRUA := sqlCliente.FieldByName('ESCRUA').AsString;
-    oEscola.ESCNUM := sqlCliente.FieldByName('ESCNUM').AsString;
-    oEscola.ESCCOM := sqlCliente.FieldByName('ESCCOM').AsString;
-    oEscola.ESCBAIRRO := sqlCliente.FieldByName('ESCBAIRRO').AsString;
-    oEscola.ESCCIDADE := sqlCliente.FieldByName('ESCCIDADE').AsString;
-    oEscola.ESCEST := sqlCliente.FieldByName('ESCEST').AsString;
-
+    sqlCargo.SQLConnection := sqlConexao;
+    sqlCargo.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
+    sqlCargo.Open;
+    oCargo.CARCOD := sqlCargo.FieldByName('CARCOD').AsInteger;
+    oCargo.CARDES := sqlCargo.FieldByName('CARDES').AsString;
   finally
 
   end;
 end;
 
-//function TdmConexao.GerarCOD: Integer;
-//var
-//  sqlSequencia : TSQLDataSet;
-//begin
-//  sqlSequencia := TSQLDataSet.Create(nil);
-//  try
-//    sqlSequencia.SQLConnection := DmConexao.sqlConexao;
-//    sqlSequencia.CommandText := 'select coalesce(max(ESCCOD), 0) + 1 as seq from Escola';
-//    sqlSequencia.Open;
-//    Result := sqlSequencia.FieldByName('seq').AsInteger;
-//  finally
-//    FreeAndNil(sqlSequencia);
-//
-//  end;
-//end;
+procedure TdmConexao.CarregarEscola(oEscola: TEscola; iCodigo: Integer);
+var
+  sqlEscola : TSQLDataSet;
+begin
+  sqlEscola := TSQLDataSet.Create(nil);
+  try
+    sqlEscola.SQLConnection := sqlConexao;
+    sqlEscola.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
+    sqlEscola.Open;
+    oEscola.ESCCOD := sqlEscola.FieldByName('ESCCOD').AsInteger;
+    oEscola.ESCNOM := sqlEscola.FieldByName('ESCNOM').AsString;
+    oEscola.ESCDES := sqlEscola.FieldByName('ESCDES').AsString;
+    //oEscola.ESCDATCAD := sqlCliente.FieldByName('ESCDATCAD').AsDateTime;
+    oEscola.ESCCEP := sqlEscola.FieldByName('ESCCEP').AsString;
+    oEscola.ESCRUA := sqlEscola.FieldByName('ESCRUA').AsString;
+    oEscola.ESCNUM := sqlEscola.FieldByName('ESCNUM').AsString;
+    oEscola.ESCCOM := sqlEscola.FieldByName('ESCCOM').AsString;
+    oEscola.ESCBAIRRO := sqlEscola.FieldByName('ESCBAIRRO').AsString;
+    oEscola.ESCCIDADE := sqlEscola.FieldByName('ESCCIDADE').AsString;
+    oEscola.ESCEST := sqlEscola.FieldByName('ESCEST').AsString;
+  finally
+  end;
+end;
+
+function TdmConexao.GerarCOD: Integer;
+var
+  sqlSequencia : TSQLDataSet;
+begin
+  sqlSequencia := TSQLDataSet.Create(nil);
+  try
+    sqlSequencia.SQLConnection := DmConexao.sqlConexao;
+    sqlSequencia.CommandText := 'select coalesce(max(ESCCOD), 0) + 1 as seq from Escola';
+    sqlSequencia.Open;
+    Result := sqlSequencia.FieldByName('seq').AsInteger;
+  finally
+    FreeAndNil(sqlSequencia);
+
+  end;
+end;
 
 
 //procedure TdmConexao.cdsEscolaNewRecord(DataSet: TDataSet);
@@ -122,23 +152,55 @@ end;
 
 function TdmConexao.Inserir(oEscola: TEscola; out sErro: string): Boolean;
 begin
-  //sqlInserirEscola.Params[0].AsInteger := GerarCod;
-  sqlInserirEscola.Params[1].AsString := oEscola.ESCNOM;
-  sqlInserirEscola.Params[2].AsString := oEscola.ESCDES;
-  sqlInserirEscola.Params[3].AsString := oEscola.ESCCEP;
-  sqlInserirEscola.Params[4].AsString := oEscola.ESCRUA;
-  sqlInserirEscola.Params[5].AsString := oEscola.ESCNUM;
-  sqlInserirEscola.Params[6].AsString := oEscola.ESCCOM;
-  sqlInserirEscola.Params[7].AsString := oEscola.ESCBAIRRO;
-  sqlInserirEscola.Params[8].AsString := oEscola.ESCCIDADE;
-  sqlInserirEscola.Params[9].AsString := oEscola.ESCEST;
-  //sqlInserirEscola.Params[10].AsDate := oEscola.ESCDATCAD;
+  sqlInserirEscola.Params.FindParam('ESCCOD').AsInteger := GerarCod;
+  sqlInserirEscola.Params.FindParam('ESCNOM').AsString := oEscola.ESCNOM;
+  sqlInserirEscola.Params.FindParam('ESCDES').AsString := oEscola.ESCDES;
+  sqlInserirEscola.Params.FindParam('ESCCEP').AsString := oEscola.ESCCEP;
+  sqlInserirEscola.Params.FindParam('ESCRUA').AsString := oEscola.ESCRUA;
+  sqlInserirEscola.Params.FindParam('ESCNUM').AsString := oEscola.ESCNUM;
+  sqlInserirEscola.Params.FindParam('ESCCOM').AsString := oEscola.ESCCOM;
+  sqlInserirEscola.Params.FindParam('ESCBAIRRO').AsString := oEscola.ESCBAIRRO;
+  sqlInserirEscola.Params.FindParam('ESCCIDADE').AsString := oEscola.ESCCIDADE;
+  sqlInserirEscola.Params.FindParam('ESCEST').AsString := oEscola.ESCEST;
+
   try
-    sqlInserirEscola.ExecSQL();
+    sqlInserirEscola.ExecSQL;
     Result := True;
   except on E: Exception do
     begin
       sErro := 'Ocorreu um erro ao inserir cliente: ' + sLineBreak + E.Message;
+      Result := False;
+    end;
+  end;
+end;
+
+
+function TdmConexao.GerarCODCargo: Integer;
+var
+  sqlSequencia : TSQLDataSet;
+begin
+  sqlSequencia := TSQLDataSet.Create(nil);
+  try
+    sqlSequencia.SQLConnection := DmConexao.sqlConexao;
+    sqlSequencia.CommandText := 'select coalesce(max(CARCOD), 0) + 1 as seq from Cargo';
+    sqlSequencia.Open;
+    Result := sqlSequencia.FieldByName('seq').AsInteger;
+  finally
+    FreeAndNil(sqlSequencia);
+
+  end;
+end;
+
+function TdmConexao.InserirCargo(oCargo : TCargo; out sErro: string):Boolean;
+begin
+  sqlInserirCargo.Params.FindParam('CARCOD').AsInteger := GerarCODCargo;
+  sqlInserirCargo.Params.FindParam('CARDES').AsString := oCargo.CARDES;
+  try
+    sqlInserirCargo.ExecSQL;
+    Result := True;
+  except on E: Exception do
+    begin
+      sErro := 'Ocorreu um erro ao inserir cargo: ' + sLineBreak + E.Message;
       Result := False;
     end;
   end;

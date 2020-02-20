@@ -3,7 +3,7 @@ unit uEscolaController;
 interface
 
 uses
-  uEscolaModel, uDMConexao, sysUtils, DB, DBClient;
+  uEscolaModel, uDmConexao, sysUtils, DB, DBClient;
 
 type
   TEscolaController = class

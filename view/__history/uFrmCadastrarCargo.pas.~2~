@@ -1,0 +1,27 @@
+unit uFrmCadastrarCargo;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menu, StdCtrls, ExtCtrls,;
+
+type
+  TfrmCadastrarCargo = class(TForm)
+    Label1: TLabel;
+    lbledtCargoDes: TLabeledEdit;
+    btnCadastrarCargo: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastrarCargo: TfrmCadastrarCargo;
+
+implementation
+
+{$R *.dfm}
+
+end.

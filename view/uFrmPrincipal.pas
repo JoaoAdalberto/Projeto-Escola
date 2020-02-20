@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, StdCtrls, ExtCtrls, uFrmCadastrarEscola, Grids, DBGrids,
-  DBCtrls, Mask;
+  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarCargo;
 
 type
   TunFrmPrincipal = class(TForm)
@@ -21,9 +21,13 @@ type
     Cargos1: TMenuItem;
     datetime: TTimer;
     lblDataHora: TLabel;
+    Excluir1: TMenuItem;
+    Escola1: TMenuItem;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Escola1Click(Sender: TObject);
+    procedure Cargos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,6 +43,17 @@ uses uDmConexao;
 
 {$R *.dfm}
 
+procedure TunFrmPrincipal.Cargos1Click(Sender: TObject);
+begin
+  frmCadastrarCargo := TFrmCadastrarCargo.Create(nil);
+  try
+    frmCadastrarCargo.ShowModal;
+  finally
+  FreeAndNil(frmCadastrarCargo);
+
+  end;
+end;
+
 procedure TunFrmPrincipal.datetimeTimer(Sender: TObject);
 begin
   lblDataHora.Caption := DateTimetoStr(now);
@@ -46,13 +61,23 @@ end;
 
 
 
+procedure TunFrmPrincipal.Escola1Click(Sender: TObject);
+begin
+  frmExcluirEscola := TfrmExcluirEscola.Create(nil);
+  try
+    frmExcluirEscola.ShowModal;
+  finally
+  FreeAndNil(frmExcluirEscola);
+  end;
+end;
+
 procedure TunFrmPrincipal.Escolas1Click(Sender: TObject);
 begin
   frmCadastrarEscola := TfrmCadastrarEscola.Create(nil);
   try
     frmCadastrarEscola.ShowModal;
   finally
-    FreeAndNil(frmCadastrarEscola)
+    FreeAndNil(frmCadastrarEscola);
   end;
 end;
 

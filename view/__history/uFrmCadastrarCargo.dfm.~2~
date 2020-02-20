@@ -1,0 +1,47 @@
+object frmCadastrarCargo: TfrmCadastrarCargo
+  Left = 0
+  Top = 0
+  Caption = 'Cadastrar Cargo'
+  ClientHeight = 121
+  ClientWidth = 593
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 1
+    Width = 593
+    Height = 33
+    Caption = 'Insira o cargo a ser cadastrado'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lbledtCargoDes: TLabeledEdit
+    Left = 8
+    Top = 56
+    Width = 553
+    Height = 21
+    EditLabel.Width = 29
+    EditLabel.Height = 13
+    EditLabel.Caption = 'Cargo'
+    TabOrder = 0
+  end
+  object btnCadastrarCargo: TButton
+    Left = 248
+    Top = 88
+    Width = 105
+    Height = 25
+    Caption = 'Cadastrar Cargo'
+    TabOrder = 1
+  end
+end

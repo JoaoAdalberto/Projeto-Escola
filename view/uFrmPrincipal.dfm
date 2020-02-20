@@ -13,6 +13,9 @@ object unFrmPrincipal: TunFrmPrincipal
   Menu = mainmenPrincipal
   OldCreateOrder = False
   OnShow = FormShow
+  DesignSize = (
+    804
+    375)
   PixelsPerInch = 96
   TextHeight = 13
   object lblSCEFA: TLabel
@@ -48,6 +51,7 @@ object unFrmPrincipal: TunFrmPrincipal
     Width = 5
     Height = 19
     Alignment = taCenter
+    Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -72,12 +76,20 @@ object unFrmPrincipal: TunFrmPrincipal
       end
       object Cargos1: TMenuItem
         Caption = 'Cargos'
+        OnClick = Cargos1Click
       end
       object Series1: TMenuItem
         Caption = 'Series'
       end
       object Disciplinas1: TMenuItem
         Caption = 'Disciplinas'
+      end
+    end
+    object Excluir1: TMenuItem
+      Caption = 'Excluir'
+      object Escola1: TMenuItem
+        Caption = 'Escola'
+        OnClick = Escola1Click
       end
     end
   end
