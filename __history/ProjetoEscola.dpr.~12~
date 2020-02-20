@@ -12,9 +12,7 @@ uses
   uCargoController in 'controller\uCargoController.pas',
   uFrmCadastrarCargo in 'view\uFrmCadastrarCargo.pas' {frmCadastrarCargo},
   ufrmCadastrarFuncionario in 'view\ufrmCadastrarFuncionario.pas' {frmCadastrarFuncionario},
-  uFuncionarioModel in 'model\uFuncionarioModel.pas',
-  uFrmCadastrarAluno in 'view\uFrmCadastrarAluno.pas' {frmCadastrarAluno},
-  uFrmCadastrarSerie in 'view\uFrmCadastrarSerie.pas' {frmCadastrarSerie};
+  uFuncionarioModel in 'model\uFuncionarioModel.pas';
 
 {$R *.res}
 
@@ -25,8 +23,6 @@ begin
   Application.CreateForm(TfrmExcluirEscola, frmExcluirEscola);
   Application.CreateForm(TfrmCadastrarCargo, frmCadastrarCargo);
   Application.CreateForm(TfrmCadastrarFuncionario, frmCadastrarFuncionario);
-  Application.CreateForm(TfrmCadastrarAluno, frmCadastrarAluno);
-  Application.CreateForm(TfrmCadastrarSerie, frmCadastrarSerie);
   //Application.CreateForm(TfrmCadastrarEscola, frmCadastrarEscola);
   Application.CreateForm(TdmConexao, dmConexao);
   Application.Run;

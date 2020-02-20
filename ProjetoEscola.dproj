@@ -39,6 +39,9 @@
     <DCCReference Include="model\uCargoModel.pas" />
     <DCCReference Include="model\uEscolaModel.pas" />
     <DCCReference Include="model\uFuncionarioModel.pas" />
+    <DCCReference Include="view\uFrmCadastrarAluno.pas">
+      <Form>frmCadastrarAluno</Form>
+    </DCCReference>
     <DCCReference Include="view\uFrmCadastrarCargo.pas">
       <Form>frmCadastrarCargo</Form>
     </DCCReference>
@@ -47,6 +50,9 @@
     </DCCReference>
     <DCCReference Include="view\ufrmCadastrarFuncionario.pas">
       <Form>frmCadastrarFuncionario</Form>
+    </DCCReference>
+    <DCCReference Include="view\uFrmCadastrarSerie.pas">
+      <Form>frmCadastrarSerie</Form>
     </DCCReference>
     <DCCReference Include="view\uFrmExcluirEscola.pas">
       <Form>frmExcluirEscola</Form>

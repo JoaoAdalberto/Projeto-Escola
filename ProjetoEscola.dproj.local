@@ -37,5 +37,9 @@
     <Transaction>2020/02/20 08:11:19.721.pas,C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionario.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\ufrmCadastrarFuncionario.pas</Transaction>
     <Transaction>2020/02/20 08:11:19.721.dfm,C:\Users\joaopereira\Documents\Projeto Escola\view\frmCadastrarFuncionario.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\ufrmCadastrarFuncionario.dfm</Transaction>
     <Transaction>2020/02/20 09:06:46.932.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\model\uFuncionarioModel.pas</Transaction>
+    <Transaction>2020/02/20 09:31:39.356.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarAluno.pas</Transaction>
+    <Transaction>2020/02/20 09:31:39.356.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarAluno.dfm</Transaction>
+    <Transaction>2020/02/20 09:44:14.791.pas,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.pas=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarSerie.pas</Transaction>
+    <Transaction>2020/02/20 09:44:14.791.dfm,C:\Users\joaopereira\Documents\Projeto Escola\Unit1.dfm=C:\Users\joaopereira\Documents\Projeto Escola\view\uFrmCadastrarSerie.dfm</Transaction>
   </Transactions>
 </BorlandProject>

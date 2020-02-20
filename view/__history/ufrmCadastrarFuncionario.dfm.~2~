@@ -176,8 +176,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Top = 123
     Width = 145
     Height = 21
-    Date = 43881.557137164350000000
-    Time = 43881.557137164350000000
+    Date = 43879.557137164350000000
+    Time = 43879.557137164350000000
     TabOrder = 4
   end
   object cbxSexo: TComboBox
@@ -187,6 +187,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Height = 21
     ItemHeight = 13
     TabOrder = 2
+    Text = 'cbxSexo'
     Items.Strings = (
       'M'
       'F')
@@ -196,8 +197,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Top = 123
     Width = 161
     Height = 21
-    Date = 43881.557137164350000000
-    Time = 43881.557137164350000000
+    Date = 43879.557137164350000000
+    Time = 43879.557137164350000000
     TabOrder = 3
   end
   object mskedtCPF: TMaskEdit
@@ -227,6 +228,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Height = 21
     ItemHeight = 13
     TabOrder = 7
+    Text = 'cbxCargo'
   end
   object cbxDisciplina: TComboBox
     Left = 358
@@ -235,5 +237,6 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Height = 21
     ItemHeight = 13
     TabOrder = 14
+    Text = 'ComboBox1'
   end
 end

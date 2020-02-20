@@ -4,10 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmCadastrarSerie = class(TForm)
+    lblTopo: TLabel;
+    lblSexo: TLabel;
+    lbledtNome: TLabeledEdit;
+    cbxEscolherAlunos: TComboBox;
+    memoAlunos: TMemo;
+    memoProfessores: TMemo;
+    cbxEscolherprofessores: TComboBox;
+    Label1: TLabel;
   private
     { Private declarations }
   public
@@ -15,7 +23,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmCadastrarSerie: TfrmCadastrarSerie;
 
 implementation
 
