@@ -152,61 +152,66 @@ object dmConexao: TdmConexao
     SchemaName = 'sa'
     CommandText = 
       'insert into Escola (ESCCOD ,ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCN' +
-      'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST)'#13#10'values (:ESCCOD, :ESC' +
-      'NOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ESCBAIRRO, :E' +
-      'SCCIDADE, :ESCEST)'
+      'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD)'#13#10'values (:E' +
+      'SCCOD, :ESCNOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ES' +
+      'CBAIRRO, :ESCCIDADE, :ESCEST, :ESCDATCAD)'
     DbxCommandType = 'Dbx.SQL'
     DataSource = dsEscola
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ESCCOD'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCNOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCDES'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCEP'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCRUA'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCNUM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCBAIRRO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCIDADE'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCEST'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'ESCDATCAD'
         ParamType = ptInput
       end>
     SQLConnection = sqlConexao

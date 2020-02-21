@@ -3,8 +3,7 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uCargoModel,
-  DateUtils, StrUtils, Variants;
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uCargoModel;
 
 type
   TdmConexao = class(TDataModule)
@@ -151,11 +150,8 @@ begin
 end;
 
 
-
 function TdmConexao.Inserir(oEscola: TEscola; out sErro: string): Boolean;
 begin
-
-
   sqlInserirEscola.Params.FindParam('ESCCOD').AsInteger := GerarCod;
   sqlInserirEscola.Params.FindParam('ESCNOM').AsString := oEscola.ESCNOM;
   sqlInserirEscola.Params.FindParam('ESCDES').AsString := oEscola.ESCDES;
@@ -166,7 +162,6 @@ begin
   sqlInserirEscola.Params.FindParam('ESCBAIRRO').AsString := oEscola.ESCBAIRRO;
   sqlInserirEscola.Params.FindParam('ESCCIDADE').AsString := oEscola.ESCCIDADE;
   sqlInserirEscola.Params.FindParam('ESCEST').AsString := oEscola.ESCEST;
-  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
 
   try
     sqlInserirEscola.ExecSQL;

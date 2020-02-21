@@ -12,7 +12,7 @@ type
     FESCCOD: Integer;
     FESCNOM: String;
     FESCDES: String;
-    //FESCDATCAD: TDateTime;
+    FESCDATCAD: TDateTime;
     FESCCEP: String;
     FESCRUA: String;
     FESCNUM: String;
@@ -29,7 +29,7 @@ type
     property ESCCOD: Integer read FESCCOD write FESCCOD;
     property ESCNOM: String  read FESCNOM write SetNome;
     property ESCDES: String read FESCDES write FESCDES;
-    //property ESCDATCAD: TDateTime read FESCDATCAD write FESCDATCAD;
+    property ESCDATCAD: TDateTime read FESCDATCAD write FESCDATCAD;
     property ESCCEP: String read FESCCEP write FESCCEP;
     property ESCRUA: String read FESCRUA write FESCRUA;
     property ESCNUM: String  read FESCNUM write FESCNUM;
