@@ -154,64 +154,59 @@ object dmConexao: TdmConexao
       'insert into Escola (ESCCOD ,ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCN' +
       'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD)'#13#10'values (:E' +
       'SCCOD, :ESCNOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ES' +
-      'CBAIRRO, :ESCCIDADE, :ESCEST, :ESCDATCAD)'
+      'CBAIRRO, :ESCCIDADE, :ESCEST, GETDATE())'
     DbxCommandType = 'Dbx.SQL'
     DataSource = dsEscola
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ESCCOD'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCNOM'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCDES'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCCEP'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCRUA'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCNUM'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCCOM'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCBAIRRO'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCCIDADE'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESCEST'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftString
-        Name = 'ESCDATCAD'
         ParamType = ptInput
       end>
     SQLConnection = sqlConexao

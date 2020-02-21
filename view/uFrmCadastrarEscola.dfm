@@ -56,9 +56,11 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     Top = 245
     Width = 34
     Height = 21
+    CharCase = ecUpperCase
     EditLabel.Width = 33
     EditLabel.Height = 13
     EditLabel.Caption = 'Estado'
+    MaxLength = 2
     TabOrder = 8
   end
   object lbledtRua: TLabeledEdit
@@ -79,6 +81,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     EditLabel.Width = 37
     EditLabel.Height = 13
     EditLabel.Caption = 'N'#250'mero'
+    MaxLength = 5
     TabOrder = 4
   end
   object lbledtComplemento: TLabeledEdit
