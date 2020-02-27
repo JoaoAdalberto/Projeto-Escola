@@ -74,8 +74,6 @@ begin
   frmCadastrarEscola := TfrmCadastrarEscola.Create(nil);
   try
     frmCadastrarEscola.ShowModal;
-    frmCadastrarEscola.tbDados.TabVisible := True;
-
   finally
     FreeAndNil(frmCadastrarEscola);
   end;

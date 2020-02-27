@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uCargoModel,
-  DateUtils, StrUtils, Variants, Messages, Dialogs;
+  DateUtils, StrUtils, Variants;
 
 type
   TdmConexao = class(TDataModule)
@@ -56,10 +56,10 @@ type
     function GerarCOD: Integer;
     function GerarCodCargo: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
-    function Pesquisar(ANome: string): TDataSet;
+    //function PesquisarPorCodigo(ACodigo: Integer): TDataSet;
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
     function InserirCargo(oCargo : TCargo; out sErro: string) :Boolean;
-    function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
+
 
 
   private
@@ -74,29 +74,6 @@ var
 implementation
 
 {$R *.dfm}
-function TdmConexao.Alterar(oEscola: TEscola; out sErro: string): Boolean;
-begin
-  sqlAlterarEscola.Params[0].AsString := oEscola.ESCNOM;
-  sqlAlterarEscola.Params[1].AsString  := oEscola.ESCDES;
-  sqlAlterarEscola.Params[2].AsString  := oEscola.ESCCEP;
-  sqlAlterarEscola.Params[3].AsString  := oEscola.ESCRUA;
-  sqlAlterarEscola.Params[4].AsString  := oEscola.ESCNUM;
-  sqlAlterarEscola.Params[5].AsString  := oEscola.ESCCOM;
-  sqlAlterarEscola.Params[6].AsString  := oEscola.ESCBAIRRO;
-  sqlAlterarEscola.Params[7].AsString  := oEscola.ESCCIDADE;
-  sqlAlterarEscola.Params[8].AsString  := oEscola.ESCEST;
-  sqlAlterarEscola.Params[9].AsInteger  := oEscola.ESCCOD;
-  try
-    sqlAlterarEscola.ExecSQL();
-    Result := True;
-  except on E: Exception do
-    begin
-      sErro := 'Ocorreu um erro ao alterar Escola: ' + sLineBreak + E.Message;
-      Result := False;
-    end;
-  end;
-end;
-
 procedure TdmConexao.CarregarCargo(oCargo: TCargo; iCodigo: Integer);
 var
   sqlCargo :TSQLDataSet;
@@ -120,7 +97,7 @@ begin
   sqlEscola := TSQLDataSet.Create(nil);
   try
     sqlEscola.SQLConnection := sqlConexao;
-    sqlEscola.CommandText := 'select * from escola where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
+    sqlEscola.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
     sqlEscola.Open;
     oEscola.ESCCOD := sqlEscola.FieldByName('ESCCOD').AsInteger;
     oEscola.ESCNOM := sqlEscola.FieldByName('ESCNOM').AsString;
@@ -194,9 +171,6 @@ begin
   try
     sqlInserirEscola.ExecSQL;
     Result := True;
-    cdsEscola.Active := False;
-    cdsEscola.Active := True;
-
   except on E: Exception do
     begin
       sErro := 'Ocorreu um erro ao inserir cliente: ' + sLineBreak + E.Message;
@@ -237,19 +211,14 @@ begin
   end;
 end;
 
-
-
-
-function TdmConexao.Pesquisar(ANome: string): TDataSet;
-begin
-  ShowMessage(ANome);
-  if cdsEscola.Active then
-    cdsEscola.Close;
-  cdsEscola.CommandText := Format('select * from Escola where ESCNOM like %s',[ QuotedStr('%' + ANome + '%') ]);
-  cdsEscola.Open;
-  cdsEscola.First;
-
-
-end;
+//function TdmConexao.PesquisarPorCodigo(ACodigo: integer): TDataSet;
+//begin
+//  if cdsEscola.Active then
+//    cdsEscola.Close;
+//  cdsEscola.CommandText := 'select * from Escola';
+//  cdsEscola.Open;
+//  cdsEscola.First;
+//
+//end;
 
 end.

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, ExtCtrls, DBCtrls, DB, DBGrids, uEscolaController, uEscolaModel, uDmConexao;
+  Dialogs, StdCtrls, Mask, ExtCtrls, DBCtrls, DB, DBGrids, uEscolaController, uEscolaModel, uDmConexao,
+  ComCtrls;
 
 type
   TfrmCadastrarEscola = class(TForm)
@@ -22,9 +23,15 @@ type
     Label1: TLabel;
     DataSource1: TDataSource;
     lbledtNome: TLabeledEdit;
+    dattimpickDataCadastro: TDateTimePicker;
+    lblDataCadastr: TLabel;
+    pgcEscola: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
 
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarCadastroClick(Sender: TObject);
+    procedure btnCancelarCadastroClick(Sender: TObject);
   private
     procedure Inserir;
     { Private declarations }
@@ -42,13 +49,13 @@ procedure ClearEdits(Owner: TfrmCadastrarEscola);
 var i: integer;
 begin
   for i := 0 to Owner.ComponentCount - 1 do
-    if Owner.Components[i] is TDBEdit then
+    if Owner.Components[i] is TLabeledEdit then
     begin
-      TDBEdit(Owner.Components[i]).Clear;
+      TLabeledEdit(Owner.Components[i]).Clear;
     end
-    else if Owner.Components[i] is TComboBox then
+    else if Owner.Components[i] is TMaskEdit then
     begin
-      TComboBox(Owner.Components[i]).Clear;
+      TMaskEdit(Owner.Components[i]).Clear;
     end
 end;
 
@@ -61,9 +68,20 @@ end;
 //end;
 
 
+procedure TfrmCadastrarEscola.btnCancelarCadastroClick(Sender: TObject);
+begin
+  frmCadastrarEscola.Close;
+end;
+
 procedure TfrmCadastrarEscola.btnConfirmarCadastroClick(Sender: TObject);
 begin
   Inserir;
+  if MessageDlg('Escola adicionada com sucesso.'+#13+#10+'Deseja adicionar outra?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+      ClearEdits(frmCadastrarEscola);
+      end
+  else
+    frmCadastrarEscola.Close;
 end;
 
 procedure TfrmCadastrarEscola.FormShow(Sender: TObject);
@@ -80,16 +98,17 @@ begin
   oEscola := TEscola.Create;
   oEscolaController := TEscolaController.Create;
   try
+    //oEscola.ESCCOD := StrToIntDef(lbledtCodigo.Text, 0);
     oEscola.ESCNOM := lbledtNome.Text;
     oEscola.ESCDES := lbledtDescricao.Text;
-    //oEscola.ESCDATCAD := TDateTime(now);
-    oEscola.ESCCEP := mskedtCep.Text;
+    oEscola.ESCCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oEscola.ESCRUA := lbledtRua.Text;
     oEscola.ESCNUM := lbledtNumero.Text;
     oEscola.ESCBAIRRO := lbledtBairro.Text;
     oEscola.ESCCOM := lbledtComplemento.Text;
     oEscola.ESCCIDADE := lbledtCidade.Text;
     oEscola.ESCEST := lbledtEstado.Text;
+    //oEscola.ESCDATCAD := TDateTime(now);
     if oEscolaController.Inserir(oEscola, sError) = False then
       raise Exception.Create(sError);
   finally

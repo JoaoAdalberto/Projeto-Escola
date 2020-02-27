@@ -25,10 +25,10 @@ implementation
 
 { TClienteController }
 
-function TEscolaController.Alterar(oEscola: TEscola;
+function TClienteController.Alterar(oCliente: TEscola;
   var sError: String): Boolean;
 begin
-  Result := dmConexao.Alterar(oEscola, sError);
+  Result := dmConexao.Alterar(oCliente, sError);
 end;
 
 procedure TEscolaController.CarregarEscola(oEscola: TEscola;

@@ -43,16 +43,19 @@ object dmConexao: TdmConexao
     Left = 136
     Top = 48
     object cdsEscolaESCCOD: TIntegerField
+      DisplayWidth = 3
       FieldName = 'ESCCOD'
       ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
     object cdsEscolaESCNOM: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCNOM'
       Required = True
       Size = 100
     end
     object cdsEscolaESCDES: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCDES'
       Size = 100
     end
@@ -61,10 +64,12 @@ object dmConexao: TdmConexao
       Size = 8
     end
     object cdsEscolaESCRUA: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCRUA'
       Size = 100
     end
     object cdsEscolaESCCOM: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCCOM'
       Size = 100
     end
@@ -73,10 +78,12 @@ object dmConexao: TdmConexao
       Size = 5
     end
     object cdsEscolaESCBAIRRO: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCBAIRRO'
       Size = 30
     end
     object cdsEscolaESCCIDADE: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCCIDADE'
       Required = True
       Size = 50
@@ -232,55 +239,55 @@ object dmConexao: TdmConexao
   object sqlAlterarEscola: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'update Escola'#13#10'set ESCNOME = :ESCNOME, ESCDES = :ESCDES, ESCCEP ' +
-      '= :ESCCEP, ESCRUA = :ESCRUA, ESCNUM = :ESCNUM,'#13#10'ESCCOM = :ESCCOM' +
-      ', ESCBAIRRO = :ESCBAIRRO, '#13#10'ESCCIDADE = :ESCCIDADE, ESCEST = :ES' +
-      'CEST'#13#10'where (ESCCOD = :ESCCOD)'
+      'update Escola'#13#10'set ESCNOM = :ESCNOM, ESCDES = :ESCDES, ESCCEP = ' +
+      ':ESCCEP, ESCRUA = :ESCRUA, ESCNUM = :ESCNUM,'#13#10'ESCCOM = :ESCCOM, ' +
+      'ESCBAIRRO = :ESCBAIRRO, '#13#10'ESCCIDADE = :ESCCIDADE, ESCEST = :ESCE' +
+      'ST'#13#10'where (ESCCOD = :ESCCOD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
-        Name = 'ESCNOME'
+        DataType = ftString
+        Name = 'ESCNOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCDES'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCEP'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCRUA'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCNUM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCBAIRRO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCIDADE'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCEST'
         ParamType = ptInput
       end
