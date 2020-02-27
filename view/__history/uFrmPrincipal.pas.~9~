@@ -21,6 +21,8 @@ type
     Cargos1: TMenuItem;
     datetime: TTimer;
     lblDataHora: TLabel;
+    Excluir1: TMenuItem;
+    Escola1: TMenuItem;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);

@@ -3,7 +3,7 @@ object dmConexao: TdmConexao
   Height = 394
   Width = 796
   object sqlConexao: TSQLConnection
-    ConnectionName = 'MSSQLCONNECTION'
+    ConnectionName = 'MSSQLConnection'
     DriverName = 'MSSQL'
     GetDriverFunc = 'getSQLDriverMSSQL'
     LibraryName = 'dbxmss30.dll'
@@ -11,15 +11,15 @@ object dmConexao: TdmConexao
     Params.Strings = (
       'SchemaOverride=sa.dbo'
       'DriverName=MSSQL'
-      'HostName=NCDEV28'
+      'HostName=PSDEVD14\MSSQLSERVER01'
       'DataBase=ProjEscola'
-      'User_Name=sa'
-      'Password=fcm123'
+      'User_Name='
+      'Password='
       'BlobSize=-1'
       'ErrorResourceFile='
       'LocaleCode=0000'
       'MSSQL TransIsolation=ReadCommited'
-      'OS Authentication=False'
+      'OS Authentication=True'
       'Prepare SQL=False')
     VendorLib = 'oledb'
     Connected = True

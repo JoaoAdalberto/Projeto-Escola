@@ -11,9 +11,9 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure CarregarEscola(oEscola: TEscola; iCodigo: Integer);
-    procedure Pesquisar(sNome: String);
+    //procedure PesquisarPorCodigo(sCodigo: Integer; AFonteDeDados: TDataSource);
     function Inserir(oEscola: TEscola; var sError: String) : Boolean;
-    function Alterar(oEscola: TEscola; var sError: String) : Boolean;
+    //function Alterar(oEscola: TEscola; var sError: String) : Boolean;
     function Excluir(iCodigo: Integer; var sError: string) : Boolean;
 
 
@@ -25,11 +25,11 @@ implementation
 
 { TClienteController }
 
-function TClienteController.Alterar(oCliente: TEscola;
-  var sError: String): Boolean;
-begin
-  Result := dmConexao.Alterar(oCliente, sError);
-end;
+//function TClienteController.Alterar(oCliente: TEscola;
+//  var sError: String): Boolean;
+//begin
+//  Result := dmConexao.Alterar(oCliente, sError);
+//end;
 
 procedure TEscolaController.CarregarEscola(oEscola: TEscola;
   iCodigo: Integer);
@@ -61,9 +61,9 @@ begin
 end;
 
 
-procedure TEscolaController.Pesquisar(sNome: string);
-begin
-  DmConexao.Pesquisar(sNome);
-end;
+//procedure TEscolaController.PesquisarPorCodigo(sCodigo: integer; AFonteDeDados: TDataSource);
+//begin
+//  AFonteDeDados.DataSet := DmConexao.PesquisarPorCodigo(sCodigo);
+//end;
 
 end.

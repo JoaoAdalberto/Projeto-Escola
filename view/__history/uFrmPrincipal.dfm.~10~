@@ -2,8 +2,8 @@ object unFrmPrincipal: TunFrmPrincipal
   Left = 0
   Top = 0
   Caption = 'CRUD Completo Escola'
-  ClientHeight = 376
-  ClientWidth = 751
+  ClientHeight = 375
+  ClientWidth = 804
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object unFrmPrincipal: TunFrmPrincipal
   OldCreateOrder = False
   OnShow = FormShow
   DesignSize = (
-    751
-    376)
+    804
+    375)
   PixelsPerInch = 96
   TextHeight = 13
   object lblSCEFA: TLabel
@@ -46,8 +46,8 @@ object unFrmPrincipal: TunFrmPrincipal
     ParentFont = False
   end
   object lblDataHora: TLabel
-    Left = 592
-    Top = 351
+    Left = 645
+    Top = 350
     Width = 5
     Height = 19
     Alignment = taCenter
@@ -58,8 +58,6 @@ object unFrmPrincipal: TunFrmPrincipal
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    ExplicitLeft = 645
-    ExplicitTop = 350
   end
   object mainmenPrincipal: TMainMenu
     Left = 104
@@ -85,6 +83,13 @@ object unFrmPrincipal: TunFrmPrincipal
       end
       object Disciplinas1: TMenuItem
         Caption = 'Disciplinas'
+      end
+    end
+    object Excluir1: TMenuItem
+      Caption = 'Excluir'
+      object Escola1: TMenuItem
+        Caption = 'Escola'
+        OnClick = Escola1Click
       end
     end
   end

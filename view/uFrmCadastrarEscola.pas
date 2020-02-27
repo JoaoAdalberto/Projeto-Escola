@@ -25,6 +25,9 @@ type
     lbledtNome: TLabeledEdit;
     dattimpickDataCadastro: TDateTimePicker;
     lblDataCadastr: TLabel;
+    pgcEscola: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
 
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarCadastroClick(Sender: TObject);

@@ -161,6 +161,22 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     Time = 43879.557137164350000000
     TabOrder = 11
   end
+  object pgcEscola: TPageControl
+    Left = 160
+    Top = 136
+    Width = 289
+    Height = 193
+    ActivePage = TabSheet2
+    TabOrder = 12
+    object TabSheet1: TTabSheet
+      Caption = 'tbPesquisar'
+      ExplicitLeft = -23
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'tbDados'
+      ImageIndex = 1
+    end
+  end
   object DataSource1: TDataSource
     DataSet = dmConexao.cdsEscola
     Left = 616
