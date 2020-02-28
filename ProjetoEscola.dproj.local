@@ -45,5 +45,6 @@
     <Transaction>2020/02/28 09:21:22.472.dfm,D:\Joao\Documents\GitHub\Projeto-Escola\view\uFrmCadastrarCargo.dfm=D:\Joao\Documents\GitHub\Projeto-Escola\view\uFrmCadastrarEspecialidades.dfm</Transaction>
     <Transaction>2020/02/28 09:25:03.629.pas,D:\Joao\Documents\GitHub\Projeto-Escola\model\uCargoModel.pas=D:\Joao\Documents\GitHub\Projeto-Escola\model\uEspecialidadeModel.pas</Transaction>
     <Transaction>2020/02/28 09:25:08.507.pas,D:\Joao\Documents\GitHub\Projeto-Escola\controller\uCargoController.pas=D:\Joao\Documents\GitHub\Projeto-Escola\controller\uEspecialidadeController.pas</Transaction>
+    <Transaction>2020/02/28 10:31:00.797.pas,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.pas=D:\Joao\Documents\GitHub\Projeto-Escola\controller\uFuncionarioController.pas</Transaction>
   </Transactions>
 </BorlandProject>

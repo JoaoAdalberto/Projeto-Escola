@@ -76,7 +76,7 @@ begin
     oFuncionario.FUNCOM := lbledtComplemento.Text;
     oFuncionario.FUNCID := lbledtCidade.Text;
     oFuncionario.FUNEST := lbledtEstado.Text;
-    if not oFuncionarioController.Inserir(oFuncionario, sError) then
+    if oFuncionarioController.Inserir(oFuncionario, sError) = False then
       raise Exception.Create(sError);
   finally
     FreeAndNil(oFuncionario);

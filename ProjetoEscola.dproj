@@ -32,6 +32,7 @@
     </DelphiCompile>
     <DCCReference Include="controller\uEscolaController.pas" />
     <DCCReference Include="controller\uEspecialidadeController.pas" />
+    <DCCReference Include="controller\uFuncionarioController.pas" />
     <DCCReference Include="dao\uDmConexao.pas">
       <Form>dmConexao</Form>
       <DesignClass>TDataModule</DesignClass>
@@ -50,6 +51,9 @@
     </DCCReference>
     <DCCReference Include="view\ufrmCadastrarFuncionario.pas">
       <Form>frmCadastrarFuncionario</Form>
+    </DCCReference>
+    <DCCReference Include="view\uFrmCadastrarSerie.pas">
+      <Form>frmCadastrarSerie</Form>
     </DCCReference>
     <DCCReference Include="view\uFrmExcluirEscola.pas">
       <Form>frmExcluirEscola</Form>

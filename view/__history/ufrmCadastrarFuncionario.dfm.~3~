@@ -27,8 +27,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     ParentFont = False
   end
   object Label1: TLabel
-    Left = 48
-    Top = 150
+    Left = 216
+    Top = 155
     Width = 19
     Height = 13
     Caption = 'CEP'
@@ -62,16 +62,23 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Caption = 'CPF'
   end
   object lblCargo: TLabel
-    Left = 434
-    Top = 242
-    Width = 64
+    Left = 48
+    Top = 150
+    Width = 29
     Height = 13
-    Caption = 'Especialidade'
+    Caption = 'Cargo'
+  end
+  object Label4: TLabel
+    Left = 358
+    Top = 243
+    Width = 43
+    Height = 13
+    Caption = 'Disciplina'
   end
   object lbledtEstado: TLabeledEdit
-    Left = 236
+    Left = 216
     Top = 261
-    Width = 177
+    Width = 113
     Height = 21
     EditLabel.Width = 33
     EditLabel.Height = 13
@@ -79,9 +86,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     TabOrder = 12
   end
   object lbledtRua: TLabeledEdit
-    Left = 143
-    Top = 169
-    Width = 330
+    Left = 328
+    Top = 168
+    Width = 251
     Height = 21
     EditLabel.Width = 19
     EditLabel.Height = 13
@@ -89,9 +96,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     TabOrder = 8
   end
   object lbledtNumero: TLabeledEdit
-    Left = 490
-    Top = 169
-    Width = 89
+    Left = 48
+    Top = 213
+    Width = 65
     Height = 21
     EditLabel.Width = 37
     EditLabel.Height = 13
@@ -99,9 +106,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     TabOrder = 9
   end
   object lbledtComplemento: TLabeledEdit
-    Left = 236
+    Left = 328
     Top = 213
-    Width = 343
+    Width = 251
     Height = 21
     EditLabel.Width = 65
     EditLabel.Height = 13
@@ -109,7 +116,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     TabOrder = 11
   end
   object lbledtBairro: TLabeledEdit
-    Left = 48
+    Left = 144
     Top = 213
     Width = 161
     Height = 21
@@ -129,9 +136,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     TabOrder = 13
   end
   object mskedtCep: TMaskEdit
-    Left = 48
-    Top = 169
-    Width = 65
+    Left = 216
+    Top = 168
+    Width = 89
     Height = 21
     EditMask = '00000\-000;1;_'
     MaxLength = 9
@@ -144,8 +151,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Width = 226
     Height = 25
     Caption = 'Confirmar Cadastro'
-    TabOrder = 14
-    OnClick = btnConfirmarCadastroClick
+    TabOrder = 15
   end
   object btnCancelarCadastro: TButton
     Left = 187
@@ -153,7 +159,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Width = 226
     Height = 25
     Caption = 'Cancelar Cadastro'
-    TabOrder = 15
+    TabOrder = 16
   end
   object lbledtNome: TLabeledEdit
     Left = 48
@@ -188,7 +194,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
   object dattimpckDataNascimento: TDateTimePicker
     Left = 144
     Top = 123
-    Width = 153
+    Width = 161
     Height = 21
     Date = 43881.557137164350000000
     Time = 43881.557137164350000000
@@ -214,12 +220,20 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     EditLabel.Caption = 'C'#243'digo da Escola'
     TabOrder = 1
   end
-  object cbxEspecialidade: TComboBox
-    Left = 434
-    Top = 261
+  object cbxCargo: TComboBox
+    Left = 48
+    Top = 168
     Width = 145
     Height = 21
     ItemHeight = 13
     TabOrder = 7
+  end
+  object cbxDisciplina: TComboBox
+    Left = 358
+    Top = 261
+    Width = 221
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 14
   end
 end

@@ -3,7 +3,7 @@ object dmConexao: TdmConexao
   Height = 394
   Width = 796
   object sqlConexao: TSQLConnection
-    ConnectionName = 'MSSQLCONNECTION'
+    ConnectionName = 'MSSQLConnection'
     DriverName = 'MSSQL'
     GetDriverFunc = 'getSQLDriverMSSQL'
     LibraryName = 'dbxmss30.dll'
@@ -11,15 +11,15 @@ object dmConexao: TdmConexao
     Params.Strings = (
       'SchemaOverride=sa.dbo'
       'DriverName=MSSQL'
-      'HostName=NCDEV28'
+      'HostName=PSDEVD14\MSSQLSERVER01'
       'DataBase=ProjEscola'
-      'User_Name=sa'
-      'Password=fcm123'
+      'User_Name='
+      'Password='
       'BlobSize=-1'
       'ErrorResourceFile='
       'LocaleCode=0000'
       'MSSQL TransIsolation=ReadCommited'
-      'OS Authentication=False'
+      'OS Authentication=True'
       'Prepare SQL=False')
     VendorLib = 'oledb'
     Connected = True
@@ -43,16 +43,19 @@ object dmConexao: TdmConexao
     Left = 136
     Top = 48
     object cdsEscolaESCCOD: TIntegerField
+      DisplayWidth = 3
       FieldName = 'ESCCOD'
       ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
     object cdsEscolaESCNOM: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCNOM'
       Required = True
       Size = 100
     end
     object cdsEscolaESCDES: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCDES'
       Size = 100
     end
@@ -61,10 +64,12 @@ object dmConexao: TdmConexao
       Size = 8
     end
     object cdsEscolaESCRUA: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCRUA'
       Size = 100
     end
     object cdsEscolaESCCOM: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCCOM'
       Size = 100
     end
@@ -73,10 +78,12 @@ object dmConexao: TdmConexao
       Size = 5
     end
     object cdsEscolaESCBAIRRO: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCBAIRRO'
       Size = 30
     end
     object cdsEscolaESCCIDADE: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCCIDADE'
       Required = True
       Size = 50
@@ -152,9 +159,9 @@ object dmConexao: TdmConexao
     SchemaName = 'sa'
     CommandText = 
       'insert into Escola (ESCCOD ,ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCN' +
-      'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST)'#13#10'values (:ESCCOD, :ESC' +
-      'NOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ESCBAIRRO, :E' +
-      'SCCIDADE, :ESCEST)'
+      'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD)'#13#10'values (:E' +
+      'SCCOD, :ESCNOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ES' +
+      'CBAIRRO, :ESCCIDADE, :ESCEST, GETDATE())'
     DbxCommandType = 'Dbx.SQL'
     DataSource = dsEscola
     MaxBlobSize = -1
@@ -232,55 +239,55 @@ object dmConexao: TdmConexao
   object sqlAlterarEscola: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'update Escola'#13#10'set ESCNOME = :ESCNOME, ESCDES = :ESCDES, ESCCEP ' +
-      '= :ESCCEP, ESCRUA = :ESCRUA, ESCNUM = :ESCNUM,'#13#10'ESCCOM = :ESCCOM' +
-      ', ESCBAIRRO = :ESCBAIRRO, '#13#10'ESCCIDADE = :ESCCIDADE, ESCEST = :ES' +
-      'CEST'#13#10'where (ESCCOD = :ESCCOD)'
+      'update Escola'#13#10'set ESCNOM = :ESCNOM, ESCDES = :ESCDES, ESCCEP = ' +
+      ':ESCCEP, ESCRUA = :ESCRUA, ESCNUM = :ESCNUM,'#13#10'ESCCOM = :ESCCOM, ' +
+      'ESCBAIRRO = :ESCBAIRRO, '#13#10'ESCCIDADE = :ESCCIDADE, ESCEST = :ESCE' +
+      'ST'#13#10'where (ESCCOD = :ESCCOD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
-        Name = 'ESCNOME'
+        DataType = ftString
+        Name = 'ESCNOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCDES'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCEP'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCRUA'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCNUM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCBAIRRO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCIDADE'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCEST'
         ParamType = ptInput
       end
@@ -293,88 +300,168 @@ object dmConexao: TdmConexao
     Left = 40
     Top = 176
   end
-  object dspCargo: TDataSetProvider
-    DataSet = sqlInserirCargo
+  object dspEspecialidade: TDataSetProvider
+    DataSet = sqlInserirEspecialidade
     Options = [poCascadeDeletes, poCascadeUpdates, poAllowCommandText, poUseQuoteChar]
     UpdateMode = upWhereChanged
     Left = 592
     Top = 40
   end
-  object cdsCargo: TClientDataSet
+  object cdsEspecialidade: TClientDataSet
     Aggregates = <>
+    CommandText = 'SELECT ESPCOD, ESPDES FROM ESPECIALIDADE'
     Params = <>
-    ProviderName = 'dspCargo'
+    ProviderName = 'dspEspecialidade'
     Left = 544
     Top = 40
+    object cdsEspecialidadeESPCOD: TIntegerField
+      FieldName = 'ESPCOD'
+      Required = True
+    end
+    object cdsEspecialidadeESPDES: TStringField
+      FieldName = 'ESPDES'
+      Required = True
+      Size = 100
+    end
   end
-  object sqlInserirCargo: TSQLDataSet
+  object sqlInserirEspecialidade: TSQLDataSet
     SchemaName = 'sa'
-    CommandText = 'insert into Cargo (CARCOD , CARDES)'#13#10'values (:CARCOD, :CARDES)'
+    CommandText = 
+      'insert into Especialidade (ESPCOD ,ESPDES)'#13#10'values (:ESPCOD, :ES' +
+      'PDES)'
     DbxCommandType = 'Dbx.SQL'
+    DataSource = dsEspecialidade
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
-        Name = 'CARCOD'
+        DataType = ftUnknown
+        Name = 'ESPCOD'
         ParamType = ptInput
       end
       item
-        DataType = ftString
-        Name = 'CARDES'
+        DataType = ftUnknown
+        Name = 'ESPDES'
         ParamType = ptInput
-        Size = 100
       end>
     SQLConnection = sqlConexao
     Left = 592
     Top = 96
-    object sqlInserirCargoESCCOD: TIntegerField
-      FieldName = 'ESCCOD'
-      ProviderFlags = [pfInUpdate, pfInKey]
-      Required = True
-    end
-    object sqlInserirCargoESCNOM: TStringField
-      FieldName = 'ESCNOM'
-      Required = True
-      Size = 100
-    end
-    object sqlInserirCargoESCDES: TStringField
-      FieldName = 'ESCDES'
-      Size = 100
-    end
-    object sqlInserirCargoESCCEP: TStringField
-      FieldName = 'ESCCEP'
-      Size = 8
-    end
-    object sqlInserirCargoESCRUA: TStringField
-      FieldName = 'ESCRUA'
-      Size = 100
-    end
-    object sqlInserirCargoESCNUM: TStringField
-      FieldName = 'ESCNUM'
-      Size = 5
-    end
-    object sqlInserirCargoESCCOM: TStringField
-      FieldName = 'ESCCOM'
-      Size = 100
-    end
-    object sqlInserirCargoESCBAIRRO: TStringField
-      FieldName = 'ESCBAIRRO'
-      Size = 30
-    end
-    object sqlInserirCargoESCCIDADE: TStringField
-      FieldName = 'ESCCIDADE'
-      Required = True
-      Size = 50
-    end
-    object sqlInserirCargoESCEST: TStringField
-      FieldName = 'ESCEST'
-      Required = True
-      Size = 2
-    end
   end
-  object dsCargo: TDataSource
-    DataSet = cdsCargo
+  object dsEspecialidade: TDataSource
+    DataSet = cdsEspecialidade
     Left = 640
     Top = 40
+  end
+  object sqlInserirFuncionario: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 
+      'insert into Funcionario (FUNCOD ,FUNNOM, FUNDATNAS, FUNDATEMP, F' +
+      'UNSEX, FUNCPF, FUNESC, FUNESP, FUNCEP, FUNRUA, FUNNUM, FUNCOM, F' +
+      'UNBAI, FUNCID, FUNEST)'#13#10'values (:FUNCOD, :FUNNOM, :FUNDATNAS, GE' +
+      'TDATE() :FUNSEX, :FUNCPF, :FUNESC , :FUNESP, :FUNCEP, :FUNRUA, :' +
+      'FUNNUM, :FUNCOM, :FUNBAI, :FUNCID, :FUNEST)'
+    DbxCommandType = 'Dbx.SQL'
+    DataSource = dsFuncionario
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'FUNCOD'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNNOM'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDateTime
+        Name = 'FUNDATNAS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNSEX'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNCPF'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNESC'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNESP'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNCEP'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNRUA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNNUM'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNCOM'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNBAI'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNCID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNEST'
+        ParamType = ptInput
+      end>
+    SQLConnection = sqlConexao
+    Left = 592
+    Top = 224
+  end
+  object dsFuncionario: TDataSource
+    DataSet = cdsFuncionario
+    Left = 640
+    Top = 160
+  end
+  object dspFuncionario: TDataSetProvider
+    DataSet = sqlInserirFuncionario
+    Left = 592
+    Top = 160
+  end
+  object cdsFuncionario: TClientDataSet
+    Aggregates = <>
+    CommandText = 
+      'SELECT FUNCOD ,FUNNOM, FUNDATNAS, FUNDATEMP, FUNSEX, FUNCPF, FUN' +
+      'ESC, FUNESP, FUNCEP, FUNRUA, FUNNUM, FUNCOM, FUNBAI, FUNCID, FUN' +
+      'EST FROM FUNCIONARIO'
+    Params = <>
+    ProviderName = 'dspFuncionario'
+    Left = 528
+    Top = 160
+  end
+  object SQLQuery1: TSQLQuery
+    Params = <>
+    Left = 136
+    Top = 256
   end
 end

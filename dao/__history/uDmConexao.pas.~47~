@@ -271,7 +271,7 @@ begin
   //diaNascimento := StrToDate(FormatDateTime('YYYY/MM/DD', oFuncionario.FUNDATNAS));
   sqlInserirFuncionario.Params.FindParam('FUNCOD').AsInteger := GerarCODFuncionario;
   sqlInserirFuncionario.Params.FindParam('FUNNOM').AsString := oFuncionario.FUNNOM;
-  sqlInserirFuncionario.Params.FindParam('FUNDATNAS').AsString := FormatDateTime('DD/MM/YYYY', oFuncionario.FUNDATNAS);
+  sqlInserirFuncionario.Params.FindParam('FUNDATNAS').AsDateTime := oFuncionario.FUNDATNAS;
   //sqlInserirFuncionario.Params.FindParam('FUNDATEMP').AsDate := oFuncionario.FUNDATEMP;
   sqlInserirFuncionario.Params.FindParam('FUNSEX').AsString := oFuncionario.FUNSEX;
   sqlInserirFuncionario.Params.FindParam('FUNCPF').AsString := oFuncionario.FUNCPF;
