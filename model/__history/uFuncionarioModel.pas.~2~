@@ -12,27 +12,24 @@ type
     FFUNEST: String;
     FFUNDIS: Integer;
     FFUNNUM: String;
-    FFUNESP: Integer;
+    FFUNCAR: Integer;
     FFUNCPF: String;
     FFUNNOM: String;
     FFUNESC: Integer;
-
     FFUNCEP: String;
     FFUNCOM: String;
     FFUNBAI: String;
-    FFUNDATNAS: String;
-    FFUNDATEMP: String;
     procedure SetNome(const Value: String);
 
     public
     property FUNCOD: Integer read FFUNCOD write FFUNCOD;
     property FUNNOM: String  read FFUNNOM write SetNome;
-    property FUNDATNAS: DateTime read FFUNDATNAS write FFUNDATNASC;
-    property FUNDATEMP: String read FFUNDATEMP write FFUNDATEMP;
+    //property FUNDATNAS: String read FESCDES write FESCDES;
+//    property FUNDATEMP: String read FESCCEP write FESCCEP;
     property FUNSEX: String read FFUNSEX write FFUNSEX;
     property FUNCPF: String  read FFUNCPF write FFUNCPF;
     property FUNESC: Integer read FFUNESC write FFUNESC;
-    property FUNCAR: Integer read FFUNESP write FFUNESP;
+    property FUNCAR: Integer read FFUNCAR write FFUNCAR;
     property FUNCEP: String read FFUNCEP write FFUNCEP;
     property FUNRUA: String read FFUNRUA write FFUNRUA;
     property FUNNUM: String read FFUNNUM write FFUNNUM;
