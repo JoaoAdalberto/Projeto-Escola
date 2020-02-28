@@ -300,87 +300,89 @@ object dmConexao: TdmConexao
     Left = 40
     Top = 176
   end
-  object dspCargo: TDataSetProvider
-    DataSet = sqlInserirCargo
+  object dspEspecialidade: TDataSetProvider
+    DataSet = sqlInserirEspecialidade
     Options = [poCascadeDeletes, poCascadeUpdates, poAllowCommandText, poUseQuoteChar]
     UpdateMode = upWhereChanged
     Left = 592
     Top = 40
   end
-  object cdsCargo: TClientDataSet
+  object cdsEspecialidade: TClientDataSet
     Aggregates = <>
+    CommandText = 'SELECT ESPCOD, ESPDES FROM ESPECIALIDADE'
     Params = <>
-    ProviderName = 'dspCargo'
+    ProviderName = 'dspEspecialidade'
     Left = 544
     Top = 40
   end
-  object sqlInserirCargo: TSQLDataSet
+  object sqlInserirEspecialidade: TSQLDataSet
     SchemaName = 'sa'
-    CommandText = 'insert into Cargo (CARCOD , CARDES)'#13#10'values (:CARCOD, :CARDES)'
+    CommandText = 
+      'insert into Especialidade (ESPCOD , ESPDES)'#13#10'values (:ESPCOD, :E' +
+      'SPDES)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftInteger
-        Name = 'CARCOD'
+        Name = 'ESPCOD'
         ParamType = ptInput
       end
       item
         DataType = ftString
-        Name = 'CARDES'
+        Name = 'ESPDES'
         ParamType = ptInput
-        Size = 100
       end>
     SQLConnection = sqlConexao
     Left = 592
     Top = 96
-    object sqlInserirCargoESCCOD: TIntegerField
+    object sqlInserirEspecialidadeESCCOD: TIntegerField
       FieldName = 'ESCCOD'
       ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
-    object sqlInserirCargoESCNOM: TStringField
+    object sqlInserirEspecialidadeESCNOM: TStringField
       FieldName = 'ESCNOM'
       Required = True
       Size = 100
     end
-    object sqlInserirCargoESCDES: TStringField
+    object sqlInserirEspecialidadeESCDES: TStringField
       FieldName = 'ESCDES'
       Size = 100
     end
-    object sqlInserirCargoESCCEP: TStringField
+    object sqlInserirEspecialidadeESCCEP: TStringField
       FieldName = 'ESCCEP'
       Size = 8
     end
-    object sqlInserirCargoESCRUA: TStringField
+    object sqlInserirEspecialidadeESCRUA: TStringField
       FieldName = 'ESCRUA'
       Size = 100
     end
-    object sqlInserirCargoESCNUM: TStringField
+    object sqlInserirEspecialidadeESCNUM: TStringField
       FieldName = 'ESCNUM'
       Size = 5
     end
-    object sqlInserirCargoESCCOM: TStringField
+    object sqlInserirEspecialidadeESCCOM: TStringField
       FieldName = 'ESCCOM'
       Size = 100
     end
-    object sqlInserirCargoESCBAIRRO: TStringField
+    object sqlInserirEspecialidadeESCBAIRRO: TStringField
       FieldName = 'ESCBAIRRO'
       Size = 30
     end
-    object sqlInserirCargoESCCIDADE: TStringField
+    object sqlInserirEspecialidadeESCCIDADE: TStringField
       FieldName = 'ESCCIDADE'
       Required = True
       Size = 50
     end
-    object sqlInserirCargoESCEST: TStringField
+    object sqlInserirEspecialidadeESCEST: TStringField
       FieldName = 'ESCEST'
       Required = True
       Size = 2
     end
   end
-  object dsCargo: TDataSource
-    DataSet = cdsCargo
+  object dsEspecialidade: TDataSource
+    DataSet = cdsEspecialidade
     Left = 640
     Top = 40
   end

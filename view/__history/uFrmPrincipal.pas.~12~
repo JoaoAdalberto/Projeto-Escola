@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, StdCtrls, ExtCtrls, uFrmCadastrarEscola, Grids, DBGrids,
-  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarEspecialidades, uFrmCadastrarFuncionario;
+  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarCargo;
 
 type
   TunFrmPrincipal = class(TForm)
@@ -25,7 +25,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure Escola1Click(Sender: TObject);
     procedure Especialidades1Click(Sender: TObject);
-    procedure Funcionarios1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,11 +42,11 @@ uses uDmConexao;
 
 procedure TunFrmPrincipal.Especialidades1Click(Sender: TObject);
 begin
-  frmCadastrarEspecialidades := TFrmCadastrarEspecialidades.Create(nil);
+  frmCadastrarCargo := TFrmCadastrarCargo.Create(nil);
   try
-    frmCadastrarEspecialidades.ShowModal;
+    frmCadastrarCargo.ShowModal;
   finally
-  FreeAndNil(frmCadastrarEspecialidades);
+  FreeAndNil(frmCadastrarCargo);
 
   end;
 end;
@@ -85,16 +84,6 @@ end;
 procedure TunFrmPrincipal.FormShow(Sender: TObject);
 begin
   uDmConexao.dmConexao.cdsEscola.active := True;
-end;
-
-procedure TunFrmPrincipal.Funcionarios1Click(Sender: TObject);
-begin
-frmCadastrarFuncionario := TfrmCadastrarFuncionario.Create(nil);
-  try
-    frmCadastrarFuncionario.ShowModal;
-  finally
-  FreeAndNil(frmCadastrarFuncionario);
-  end;
 end;
 
 end.

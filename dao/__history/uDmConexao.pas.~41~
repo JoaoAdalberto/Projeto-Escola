@@ -3,7 +3,7 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel,
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uCargoModel,
   DateUtils, StrUtils, Variants, Messages, Dialogs;
 
 type
@@ -52,13 +52,13 @@ type
     dsEspecialidade: TDataSource;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
-    procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
+    procedure CarregarCargo(oCargo : TCargo; iCodigo: Integer);
     function GerarCOD: Integer;
     function GerarCodCargo: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
     function Pesquisar(ANome: string): TDataSet;
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
-    function InserirCargo(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
+    function InserirCargo(oCargo : TCargo; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
 
 
@@ -99,7 +99,7 @@ begin
   end;
 end;
 
-procedure TdmConexao.CarregarCargo(oEspecialidade: TEspecialidade; iCodigo: Integer);
+procedure TdmConexao.CarregarCargo(oCargo: TCargo; iCodigo: Integer);
 var
   sqlCargo :TSQLDataSet;
 begin
@@ -108,8 +108,8 @@ begin
     sqlCargo.SQLConnection := sqlConexao;
     sqlCargo.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
     sqlCargo.Open;
-    oEspecialidade.ESPCOD := sqlCargo.FieldByName('ESPCOD').AsInteger;
-    oEspecialidade.ESPDES := sqlCargo.FieldByName('ESPDES').AsString;
+    oCargo.CARCOD := sqlCargo.FieldByName('CARCOD').AsInteger;
+    oCargo.CARDES := sqlCargo.FieldByName('CARDES').AsString;
   finally
 
   end;
@@ -219,12 +219,12 @@ begin
   end;
 end;
 
-function TdmConexao.InserirCargo(oEspecialidade : TEspecialidade; out sErro: string):Boolean;
+function TdmConexao.InserirCargo(oCargo : TCargo; out sErro: string):Boolean;
 begin
-  sqlInserirEspecialidade.Params.FindParam('ESPCOD').AsInteger := GerarCODCargo;
-  sqlInserirEspecialidade.Params.FindParam('ESPDES').AsString := oEspecialidade.ESPDES;
+  sqlInserirCargo.Params.FindParam('CARCOD').AsInteger := GerarCODCargo;
+  sqlInserirCargo.Params.FindParam('CARDES').AsString := oCargo.CARDES;
   try
-    sqlInserirEspecialidade.ExecSQL;
+    sqlInserirCargo.ExecSQL;
     Result := True;
   except on E: Exception do
     begin

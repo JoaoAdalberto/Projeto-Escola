@@ -3,7 +3,7 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel,
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uCargoModel,
   DateUtils, StrUtils, Variants, Messages, Dialogs;
 
 type
@@ -36,29 +36,29 @@ type
     sqlInserirEscola: TSQLDataSet;
     sqlExcluirEscola: TSQLDataSet;
     sqlAlterarEscola: TSQLDataSet;
-    dspEspecialidade: TDataSetProvider;
-    cdsEspecialidade: TClientDataSet;
-    sqlInserirEspecialidade: TSQLDataSet;
-    sqlInserirEspecialidadeESCCOD: TIntegerField;
-    sqlInserirEspecialidadeESCNOM: TStringField;
-    sqlInserirEspecialidadeESCDES: TStringField;
-    sqlInserirEspecialidadeESCCEP: TStringField;
-    sqlInserirEspecialidadeESCRUA: TStringField;
-    sqlInserirEspecialidadeESCNUM: TStringField;
-    sqlInserirEspecialidadeESCCOM: TStringField;
-    sqlInserirEspecialidadeESCBAIRRO: TStringField;
-    sqlInserirEspecialidadeESCCIDADE: TStringField;
-    sqlInserirEspecialidadeESCEST: TStringField;
-    dsEspecialidade: TDataSource;
+    dspCargo: TDataSetProvider;
+    cdsCargo: TClientDataSet;
+    sqlInserirCargo: TSQLDataSet;
+    sqlInserirCargoESCCOD: TIntegerField;
+    sqlInserirCargoESCNOM: TStringField;
+    sqlInserirCargoESCDES: TStringField;
+    sqlInserirCargoESCCEP: TStringField;
+    sqlInserirCargoESCRUA: TStringField;
+    sqlInserirCargoESCNUM: TStringField;
+    sqlInserirCargoESCCOM: TStringField;
+    sqlInserirCargoESCBAIRRO: TStringField;
+    sqlInserirCargoESCCIDADE: TStringField;
+    sqlInserirCargoESCEST: TStringField;
+    dsCargo: TDataSource;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
-    procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
+    procedure CarregarCargo(oCargo : TCargo; iCodigo: Integer);
     function GerarCOD: Integer;
     function GerarCodCargo: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
     function Pesquisar(ANome: string): TDataSet;
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
-    function InserirCargo(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
+    function InserirCargo(oCargo : TCargo; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
 
 
@@ -72,8 +72,6 @@ var
   dmConexao: TdmConexao;
 
 implementation
-
-uses uFrmCadastrarEscola;
 
 {$R *.dfm}
 function TdmConexao.Alterar(oEscola: TEscola; out sErro: string): Boolean;
@@ -99,7 +97,7 @@ begin
   end;
 end;
 
-procedure TdmConexao.CarregarCargo(oEspecialidade: TEspecialidade; iCodigo: Integer);
+procedure TdmConexao.CarregarCargo(oCargo: TCargo; iCodigo: Integer);
 var
   sqlCargo :TSQLDataSet;
 begin
@@ -108,8 +106,8 @@ begin
     sqlCargo.SQLConnection := sqlConexao;
     sqlCargo.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
     sqlCargo.Open;
-    oEspecialidade.ESPCOD := sqlCargo.FieldByName('ESPCOD').AsInteger;
-    oEspecialidade.ESPDES := sqlCargo.FieldByName('ESPDES').AsString;
+    oCargo.CARCOD := sqlCargo.FieldByName('CARCOD').AsInteger;
+    oCargo.CARDES := sqlCargo.FieldByName('CARDES').AsString;
   finally
 
   end;
@@ -179,6 +177,8 @@ end;
 
 function TdmConexao.Inserir(oEscola: TEscola; out sErro: string): Boolean;
 begin
+
+
   sqlInserirEscola.Params.FindParam('ESCCOD').AsInteger := GerarCod;
   sqlInserirEscola.Params.FindParam('ESCNOM').AsString := oEscola.ESCNOM;
   sqlInserirEscola.Params.FindParam('ESCDES').AsString := oEscola.ESCDES;
@@ -194,6 +194,9 @@ begin
   try
     sqlInserirEscola.ExecSQL;
     Result := True;
+    cdsEscola.Active := False;
+    cdsEscola.Active := True;
+
   except on E: Exception do
     begin
       sErro := 'Ocorreu um erro ao inserir cliente: ' + sLineBreak + E.Message;
@@ -219,12 +222,12 @@ begin
   end;
 end;
 
-function TdmConexao.InserirCargo(oEspecialidade : TEspecialidade; out sErro: string):Boolean;
+function TdmConexao.InserirCargo(oCargo : TCargo; out sErro: string):Boolean;
 begin
-  sqlInserirEspecialidade.Params.FindParam('ESPCOD').AsInteger := GerarCODCargo;
-  sqlInserirEspecialidade.Params.FindParam('ESPDES').AsString := oEspecialidade.ESPDES;
+  sqlInserirCargo.Params.FindParam('CARCOD').AsInteger := GerarCODCargo;
+  sqlInserirCargo.Params.FindParam('CARDES').AsString := oCargo.CARDES;
   try
-    sqlInserirEspecialidade.ExecSQL;
+    sqlInserirCargo.ExecSQL;
     Result := True;
   except on E: Exception do
     begin
@@ -243,11 +246,9 @@ begin
   if cdsEscola.Active then
     cdsEscola.Close;
   cdsEscola.CommandText := Format('select * from Escola where ESCNOM like %s',[ QuotedStr('%' + ANome + '%') ]);
-//  cdsEscola.Filtered := False;
-//  cdsEscola.Filter := 'ESCNOM = ' +QuotedStr('%' + ANome + '%');
-//  cdsEscola.Filtered := True;
   cdsEscola.Open;
   cdsEscola.First;
+
 
 end;
 

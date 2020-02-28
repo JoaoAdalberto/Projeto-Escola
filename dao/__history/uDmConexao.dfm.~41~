@@ -1,9 +1,9 @@
 object dmConexao: TdmConexao
   OldCreateOrder = False
-  Height = 480
-  Width = 844
+  Height = 394
+  Width = 796
   object sqlConexao: TSQLConnection
-    ConnectionName = 'MSSQLCONNECTION'
+    ConnectionName = 'MSSQLConnection'
     DriverName = 'MSSQL'
     GetDriverFunc = 'getSQLDriverMSSQL'
     LibraryName = 'dbxmss30.dll'
@@ -11,15 +11,15 @@ object dmConexao: TdmConexao
     Params.Strings = (
       'SchemaOverride=sa.dbo'
       'DriverName=MSSQL'
-      'HostName=NCDEV28'
+      'HostName=PSDEVD14\MSSQLSERVER01'
       'DataBase=ProjEscola'
-      'User_Name=sa'
-      'Password=fcm123'
+      'User_Name='
+      'Password='
       'BlobSize=-1'
       'ErrorResourceFile='
       'LocaleCode=0000'
       'MSSQL TransIsolation=ReadCommited'
-      'OS Authentication=False'
+      'OS Authentication=True'
       'Prepare SQL=False')
     VendorLib = 'oledb'
     Connected = True
@@ -43,16 +43,19 @@ object dmConexao: TdmConexao
     Left = 136
     Top = 48
     object cdsEscolaESCCOD: TIntegerField
+      DisplayWidth = 3
       FieldName = 'ESCCOD'
       ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
     object cdsEscolaESCNOM: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCNOM'
       Required = True
       Size = 100
     end
     object cdsEscolaESCDES: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCDES'
       Size = 100
     end
@@ -61,10 +64,12 @@ object dmConexao: TdmConexao
       Size = 8
     end
     object cdsEscolaESCRUA: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCRUA'
       Size = 100
     end
     object cdsEscolaESCCOM: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCCOM'
       Size = 100
     end
@@ -73,10 +78,12 @@ object dmConexao: TdmConexao
       Size = 5
     end
     object cdsEscolaESCBAIRRO: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCBAIRRO'
       Size = 30
     end
     object cdsEscolaESCCIDADE: TStringField
+      DisplayWidth = 25
       FieldName = 'ESCCIDADE'
       Required = True
       Size = 50
@@ -154,7 +161,7 @@ object dmConexao: TdmConexao
       'insert into Escola (ESCCOD ,ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCN' +
       'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD)'#13#10'values (:E' +
       'SCCOD, :ESCNOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ES' +
-      'CBAIRRO, :ESCCIDADE, :ESCEST, :ESCDATCAD)'
+      'CBAIRRO, :ESCCIDADE, :ESCEST, GETDATE())'
     DbxCommandType = 'Dbx.SQL'
     DataSource = dsEscola
     MaxBlobSize = -1
@@ -208,12 +215,6 @@ object dmConexao: TdmConexao
         DataType = ftUnknown
         Name = 'ESCEST'
         ParamType = ptInput
-      end
-      item
-        DataType = ftDateTime
-        Name = 'ESCDATCAD'
-        ParamType = ptInput
-        Size = 30
       end>
     SQLConnection = sqlConexao
     Left = 40
@@ -229,6 +230,7 @@ object dmConexao: TdmConexao
         DataType = ftInteger
         Name = 'ESCCOD'
         ParamType = ptInput
+        Size = 10
       end>
     SQLConnection = sqlConexao
     Left = 40
@@ -237,55 +239,55 @@ object dmConexao: TdmConexao
   object sqlAlterarEscola: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'update Escola'#13#10'set ESCNOME = :ESCNOME, ESCDES = :ESCDES, ESCCEP ' +
-      '= :ESCCEP, ESCRUA = :ESCRUA, ESCNUM = :ESCNUM,'#13#10'ESCCOM = :ESCCOM' +
-      ', ESCBAIRRO = :ESCBAIRRO, '#13#10'ESCCIDADE = :ESCCIDADE, ESCEST = :ES' +
-      'CEST'#13#10'where (ESCCOD = :ESCCOD)'
+      'update Escola'#13#10'set ESCNOM = :ESCNOM, ESCDES = :ESCDES, ESCCEP = ' +
+      ':ESCCEP, ESCRUA = :ESCRUA, ESCNUM = :ESCNUM,'#13#10'ESCCOM = :ESCCOM, ' +
+      'ESCBAIRRO = :ESCBAIRRO, '#13#10'ESCCIDADE = :ESCCIDADE, ESCEST = :ESCE' +
+      'ST'#13#10'where (ESCCOD = :ESCCOD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
-        Name = 'ESCNOME'
+        DataType = ftString
+        Name = 'ESCNOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCDES'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCEP'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCRUA'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCNUM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCBAIRRO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCCIDADE'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ESCEST'
         ParamType = ptInput
       end
@@ -297,5 +299,89 @@ object dmConexao: TdmConexao
     SQLConnection = sqlConexao
     Left = 40
     Top = 176
+  end
+  object dspCargo: TDataSetProvider
+    DataSet = sqlInserirCargo
+    Options = [poCascadeDeletes, poCascadeUpdates, poAllowCommandText, poUseQuoteChar]
+    UpdateMode = upWhereChanged
+    Left = 592
+    Top = 40
+  end
+  object cdsCargo: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCargo'
+    Left = 544
+    Top = 40
+  end
+  object sqlInserirCargo: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 'insert into Cargo (CARCOD , CARDES)'#13#10'values (:CARCOD, :CARDES)'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CARCOD'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'CARDES'
+        ParamType = ptInput
+        Size = 100
+      end>
+    SQLConnection = sqlConexao
+    Left = 592
+    Top = 96
+    object sqlInserirCargoESCCOD: TIntegerField
+      FieldName = 'ESCCOD'
+      ProviderFlags = [pfInUpdate, pfInKey]
+      Required = True
+    end
+    object sqlInserirCargoESCNOM: TStringField
+      FieldName = 'ESCNOM'
+      Required = True
+      Size = 100
+    end
+    object sqlInserirCargoESCDES: TStringField
+      FieldName = 'ESCDES'
+      Size = 100
+    end
+    object sqlInserirCargoESCCEP: TStringField
+      FieldName = 'ESCCEP'
+      Size = 8
+    end
+    object sqlInserirCargoESCRUA: TStringField
+      FieldName = 'ESCRUA'
+      Size = 100
+    end
+    object sqlInserirCargoESCNUM: TStringField
+      FieldName = 'ESCNUM'
+      Size = 5
+    end
+    object sqlInserirCargoESCCOM: TStringField
+      FieldName = 'ESCCOM'
+      Size = 100
+    end
+    object sqlInserirCargoESCBAIRRO: TStringField
+      FieldName = 'ESCBAIRRO'
+      Size = 30
+    end
+    object sqlInserirCargoESCCIDADE: TStringField
+      FieldName = 'ESCCIDADE'
+      Required = True
+      Size = 50
+    end
+    object sqlInserirCargoESCEST: TStringField
+      FieldName = 'ESCEST'
+      Required = True
+      Size = 2
+    end
+  end
+  object dsCargo: TDataSource
+    DataSet = cdsCargo
+    Left = 640
+    Top = 40
   end
 end

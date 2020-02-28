@@ -89,11 +89,11 @@ end;
 
 procedure TunFrmPrincipal.Funcionarios1Click(Sender: TObject);
 begin
-frmCadastrarFuncionario := TfrmCadastrarFuncionario.Create(nil);
+frmCadastrarFuncionario := TfrmCadastrastarFuncionario.Create(nil);
   try
-    frmCadastrarFuncionario.ShowModal;
+    frmExcluirEscola.ShowModal;
   finally
-  FreeAndNil(frmCadastrarFuncionario);
+  FreeAndNil(frmExcluirEscola);
   end;
 end;
 

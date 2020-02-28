@@ -30,29 +30,26 @@
     <DelphiCompile Include="ProjetoEscola.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
-    <DCCReference Include="controller\uCargoController.pas" />
     <DCCReference Include="controller\uEscolaController.pas" />
+    <DCCReference Include="controller\uEspecialidadeController.pas" />
     <DCCReference Include="dao\uDmConexao.pas">
       <Form>dmConexao</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
-    <DCCReference Include="model\uCargoModel.pas" />
     <DCCReference Include="model\uEscolaModel.pas" />
+    <DCCReference Include="model\uEspecialidadeModel.pas" />
     <DCCReference Include="model\uFuncionarioModel.pas" />
     <DCCReference Include="view\uFrmCadastrarAluno.pas">
       <Form>frmCadastrarAluno</Form>
     </DCCReference>
-    <DCCReference Include="view\uFrmCadastrarCargo.pas">
-      <Form>frmCadastrarCargo</Form>
-    </DCCReference>
     <DCCReference Include="view\uFrmCadastrarEscola.pas">
       <Form>frmCadastrarEscola</Form>
     </DCCReference>
+    <DCCReference Include="view\uFrmCadastrarEspecialidades.pas">
+      <Form>frmCadastrarEspecialidades</Form>
+    </DCCReference>
     <DCCReference Include="view\ufrmCadastrarFuncionario.pas">
       <Form>frmCadastrarFuncionario</Form>
-    </DCCReference>
-    <DCCReference Include="view\uFrmCadastrarSerie.pas">
-      <Form>frmCadastrarSerie</Form>
     </DCCReference>
     <DCCReference Include="view\uFrmExcluirEscola.pas">
       <Form>frmExcluirEscola</Form>

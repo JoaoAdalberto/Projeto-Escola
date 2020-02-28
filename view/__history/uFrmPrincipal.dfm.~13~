@@ -1,9 +1,9 @@
 object unFrmPrincipal: TunFrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'CRUD Completo Escola'
-  ClientHeight = 375
-  ClientWidth = 804
+  Caption = 'Projeto Scefa'
+  ClientHeight = 376
+  ClientWidth = 751
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,10 @@ object unFrmPrincipal: TunFrmPrincipal
   Font.Style = []
   Menu = mainmenPrincipal
   OldCreateOrder = False
+  OnShow = FormShow
+  DesignSize = (
+    751
+    376)
   PixelsPerInch = 96
   TextHeight = 13
   object lblSCEFA: TLabel
@@ -42,17 +46,20 @@ object unFrmPrincipal: TunFrmPrincipal
     ParentFont = False
   end
   object lblDataHora: TLabel
-    Left = 645
-    Top = 350
+    Left = 592
+    Top = 351
     Width = 5
     Height = 19
     Alignment = taCenter
+    Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    ExplicitLeft = 645
+    ExplicitTop = 350
   end
   object mainmenPrincipal: TMainMenu
     Left = 104
@@ -63,26 +70,24 @@ object unFrmPrincipal: TunFrmPrincipal
         Caption = 'Escolas'
         OnClick = Escolas1Click
       end
-      object Funcionrios1: TMenuItem
+      object Funcionarios1: TMenuItem
         Caption = 'Funcionarios'
       end
       object Alunos1: TMenuItem
         Caption = 'Alunos'
       end
-      object Cargos1: TMenuItem
-        Caption = 'Cargos'
+      object Especialidades1: TMenuItem
+        Caption = 'Especialidades'
+        OnClick = Especialidades1Click
       end
       object Series1: TMenuItem
         Caption = 'Series'
-      end
-      object Disciplinas1: TMenuItem
-        Caption = 'Disciplinas'
       end
     end
   end
   object datetime: TTimer
     OnTimer = datetimeTimer
-    Left = 600
-    Top = 280
+    Left = 696
+    Top = 344
   end
 end

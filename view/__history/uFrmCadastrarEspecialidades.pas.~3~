@@ -1,0 +1,66 @@
+unit uFrmCadastrarEspecialidades;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, uEspecialidadeModel, uEspecialidadeController;
+
+type
+  TfrmCadastrarEspecialidades = class(TForm)
+    Label1: TLabel;
+    lbledtCargoDes: TLabeledEdit;
+    btnCadastrarCargo: TButton;
+    procedure btnCadastrarCargoClick(Sender: TObject);
+    procedure btnCancelarCadastroClick(Sender: TObject);
+
+  private
+    procedure InserirEspecialidade;
+    public
+    { Public declarations }
+  end;
+
+var
+  frmCadastrarEspecialidades: TfrmCadastrarEspecialidades;
+
+implementation
+
+procedure TfrmCadastrarEspecialidades.btnCancelarCadastroClick(Sender: TObject);
+begin
+  frmCadastrarEspecialidades.Close;
+end;
+
+procedure TfrmCadastrarEspecialidades.InserirEspecialidade;
+var
+  oEspecialidade : TEspecialidade;
+  oEspecialidadeController : TEspecialidadeController;
+  sError : string;
+begin
+  oEspecialidade := TEspecialidade.Create;
+  oEspecialidadeController := TEspecialidadeController.Create;
+  try
+    //oEscola.ESCCOD := StrToIntDef(lbledtCodigo.Text, 0);
+    oEspecialidade.ESPDES := lbledtCargoDes.Text;
+    if oEspecialidadeController.InserirCargo(oEspecialidade, sError) = False then
+      raise Exception.Create(sError);
+  finally
+    FreeAndNil(oEspecialidade);
+    FreeAndNil(oEspecialidadeController);
+  end;
+end;
+
+procedure TfrmCadastrarEspecialidades.btnCadastrarCargoClick(Sender: TObject);
+begin
+InserirEspecialidade;
+  if MessageDlg('Cargo adicionada com sucesso.'+#13+#10+'Deseja adicionar outro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+      TLabeledEdit(lbledtCargoDes).Clear;
+      end
+  else
+    frmCadastrarEspecialidades.Close;
+end;
+
+
+{$R *.dfm}
+
+end.

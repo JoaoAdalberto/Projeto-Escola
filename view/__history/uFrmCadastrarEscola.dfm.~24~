@@ -19,7 +19,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     Top = -2
     Width = 612
     Height = 274
-    ActivePage = tbDados
+    ActivePage = tbPesquisar
     Align = alBottom
     TabOrder = 0
     object tbPesquisar: TTabSheet

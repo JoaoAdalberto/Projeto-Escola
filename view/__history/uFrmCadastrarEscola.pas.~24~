@@ -51,7 +51,6 @@ type
     procedure dbEscolaCellClick(Column: TColumn);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
-    procedure btnFecharClick(Sender: TObject);
   private
     procedure Inserir;
     procedure CarregarEscola;
@@ -114,8 +113,6 @@ begin
   finally
     FreeAndNil(oEscolaController);
     FreeAndNil(oEscola);
-    dsEscola.DataSet.Refresh;
-    pgcEscola.ActivePage := tbPesquisar;
   end;
 end;
 
@@ -159,12 +156,6 @@ procedure TfrmCadastrarEscola.btnExcluirClick(Sender: TObject);
 begin
   Excluir;
   MessageDlg('Escola excluída com sucesso.', mtInformation, [mbOk], 0);
-
-end;
-
-procedure TfrmCadastrarEscola.btnFecharClick(Sender: TObject);
-begin
-  frmCadastrarEscola.Close;
 end;
 
 procedure TfrmCadastrarEscola.btnListarClick(Sender: TObject);
@@ -178,8 +169,6 @@ begin
   tbPesquisar.TabVisible := False;
   btnListar.Enabled := False;
   btnAlterar.Enabled := False;
-  btnConfirmarCadastro.Enabled := True;
-  btnCancelarCadastro.Enabled := True;
   ClearEdits(Self);
 
 end;
@@ -234,7 +223,6 @@ begin
   CodigoEscolaExcluir  := StrToInt(dbEscola.Fields[(0)].Text);
   oEscolaController := TEscolaController.Create;
   oEscolaController.Excluir(CodigoEscolaExcluir, sError);
-  dsEscola.DataSet.Refresh;
 end;
 
 procedure TfrmCadastrarEscola.btnPesquisarClick(Sender: TObject);
@@ -244,10 +232,8 @@ begin
   oEscolaController := TEscolaController.Create;
     try
       oEscolaController.Pesquisar(edtPesquisar.Text);
-      dsEscola.DataSet.Refresh;
     finally
       freeandnil(oEscolaController);
-
     end;
 end;
 
@@ -284,7 +270,6 @@ begin
   finally
     FreeAndNil(oEscola);
     FreeAndNil(oEscolaController);
-    dsEscola.DataSet.Refresh;
   end;
 end;
 
