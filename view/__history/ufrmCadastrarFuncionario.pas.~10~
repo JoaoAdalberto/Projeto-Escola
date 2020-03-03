@@ -62,11 +62,11 @@ type
     procedure btnConfirmarCadastroClick(Sender: TObject);
     procedure btnDetalharClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure pgcFuncionarioChange(Sender: TObject);
-    procedure btnFecharClick(Sender: TObject);
   private
 
     { Private declarations }
@@ -228,13 +228,10 @@ begin
 
 end;
 
-
-
 procedure TfrmCadastrarFuncionario.btnFecharClick(Sender: TObject);
 begin
- frmCadastrarFuncionario.Close;
+  frmCadastrarFuncionario.Close;
 end;
-
 
 procedure TfrmCadastrarFuncionario.btnListarClick(Sender: TObject);
 begin

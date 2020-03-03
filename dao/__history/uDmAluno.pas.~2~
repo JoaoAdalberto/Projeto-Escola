@@ -81,7 +81,7 @@ begin
   sqlAlterarAluno.Params[8].AsString  := oAluno.ALUBAI;
   sqlAlterarAluno.Params[9].AsString  := oAluno.ALUCID;
   sqlAlterarAluno.Params[10].AsString  := oAluno.ALUEST;
-  sqlAlterarAluno.Params[11].AsInteger  := StrToInt(oAluno.ALUSER);
+  sqlAlterarAluno.Params[11].AsInteger  := oAluno.ALUSER;
   sqlAlterarAluno.Params[12].AsString  := oAluno.ALURES;
   sqlAlterarAluno.Params[13].AsInteger  := oAluno.ALUCOD;
   try
@@ -118,7 +118,7 @@ begin
     oAluno.ALUBAI := sqlAluno.FieldByName('ALUBAI').AsString;
     oAluno.ALUCID := sqlAluno.FieldByName('ALUCID').AsString;
     oAluno.ALUEST := sqlAluno.FieldByName('ALUEST').AsString;
-    oAluno.ALUSER := sqlAluno.FieldByName('ALUSER').AsString;
+    oAluno.ALUSER := sqlAluno.FieldByName('ALUSER').AsInteger;
     oAluno.ALURES := sqlAluno.FieldByName('ALURES').AsString;
   finally
 
@@ -172,7 +172,7 @@ begin
   sqlInserirAluno.Params.FindParam('ALUBAI').AsString := oAluno.ALUCPF;
   sqlInserirAluno.Params.FindParam('ALUCID').AsString := oAluno.ALUCEP;
   sqlInserirAluno.Params.FindParam('ALUEST').AsString := oAluno.ALUEST;
-  sqlInserirAluno.Params.FindParam('ALUSER').AsString := oAluno.ALUSER;
+  sqlInserirAluno.Params.FindParam('ALUSER').AsInteger := oAluno.ALUSER;
   sqlInserirAluno.Params.FindParam('ALURES').AsString := oAluno.ALURES;
 
 //  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);

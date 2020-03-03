@@ -33,7 +33,7 @@ end;
 
 constructor TAlunoController.Create;
 begin
-  dmAluno := TdmAluno.Create(nil);
+  dmAluno = TdmAluno.Create(nil);
 end;
 
 destructor TAlunoController.Destroy;
