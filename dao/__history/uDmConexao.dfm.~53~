@@ -314,76 +314,47 @@ object dmConexao: TdmConexao
     ProviderName = 'dspEspecialidade'
     Left = 544
     Top = 40
+    object cdsEspecialidadeESPCOD: TIntegerField
+      FieldName = 'ESPCOD'
+      Required = True
+    end
+    object cdsEspecialidadeESPDES: TStringField
+      FieldName = 'ESPDES'
+      Required = True
+      Size = 100
+    end
   end
   object sqlInserirEspecialidade: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'insert into Especialidade (ESPCOD , ESPDES)'#13#10'values (:ESPCOD, :E' +
-      'SPDES)'
+      'insert into Especialidade (ESPCOD ,ESPDES)'#13#10'values (:ESPCOD, :ES' +
+      'PDES)'
     DbxCommandType = 'Dbx.SQL'
+    DataSource = dsEspecialidade
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ESPCOD'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'ESPDES'
         ParamType = ptInput
       end>
     SQLConnection = sqlConexao
     Left = 592
     Top = 96
-    object sqlInserirEspecialidadeESCCOD: TIntegerField
-      FieldName = 'ESCCOD'
-      ProviderFlags = [pfInUpdate, pfInKey]
-      Required = True
-    end
-    object sqlInserirEspecialidadeESCNOM: TStringField
-      FieldName = 'ESCNOM'
-      Required = True
-      Size = 100
-    end
-    object sqlInserirEspecialidadeESCDES: TStringField
-      FieldName = 'ESCDES'
-      Size = 100
-    end
-    object sqlInserirEspecialidadeESCCEP: TStringField
-      FieldName = 'ESCCEP'
-      Size = 8
-    end
-    object sqlInserirEspecialidadeESCRUA: TStringField
-      FieldName = 'ESCRUA'
-      Size = 100
-    end
-    object sqlInserirEspecialidadeESCNUM: TStringField
-      FieldName = 'ESCNUM'
-      Size = 5
-    end
-    object sqlInserirEspecialidadeESCCOM: TStringField
-      FieldName = 'ESCCOM'
-      Size = 100
-    end
-    object sqlInserirEspecialidadeESCBAIRRO: TStringField
-      FieldName = 'ESCBAIRRO'
-      Size = 30
-    end
-    object sqlInserirEspecialidadeESCCIDADE: TStringField
-      FieldName = 'ESCCIDADE'
-      Required = True
-      Size = 50
-    end
-    object sqlInserirEspecialidadeESCEST: TStringField
-      FieldName = 'ESCEST'
-      Required = True
-      Size = 2
-    end
   end
   object dsEspecialidade: TDataSource
     DataSet = cdsEspecialidade
     Left = 640
     Top = 40
+  end
+  object SQLQuery1: TSQLQuery
+    Params = <>
+    Left = 136
+    Top = 256
   end
 end

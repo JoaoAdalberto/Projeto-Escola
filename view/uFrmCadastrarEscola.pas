@@ -213,7 +213,7 @@ end;
 
 procedure TfrmCadastrarEscola.dbEscolaCellClick(Column: TColumn);
 begin
-  //CarregarEscola;
+//CarregarEscola;
 end;
 
 procedure TfrmCadastrarEscola.dbEscolaDblClick(Sender: TObject);

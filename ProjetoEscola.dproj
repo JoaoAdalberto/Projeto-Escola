@@ -30,16 +30,32 @@
     <DelphiCompile Include="ProjetoEscola.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="controller\uAlunoController.pas" />
     <DCCReference Include="controller\uEscolaController.pas" />
     <DCCReference Include="controller\uEspecialidadeController.pas" />
     <DCCReference Include="controller\uFuncionarioController.pas" />
+    <DCCReference Include="controller\uSerieController.pas" />
+    <DCCReference Include="dao\uDmAluno.pas">
+      <Form>dmAluno</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
     <DCCReference Include="dao\uDmConexao.pas">
       <Form>dmConexao</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
+    <DCCReference Include="dao\uDmFuncionario.pas">
+      <Form>dmFuncionario</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="dao\uDmSerie.pas">
+      <Form>dmSerie</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="model\uAlunoModel.pas" />
     <DCCReference Include="model\uEscolaModel.pas" />
     <DCCReference Include="model\uEspecialidadeModel.pas" />
     <DCCReference Include="model\uFuncionarioModel.pas" />
+    <DCCReference Include="model\uSerieModel.pas" />
     <DCCReference Include="view\uFrmCadastrarAluno.pas">
       <Form>frmCadastrarAluno</Form>
     </DCCReference>

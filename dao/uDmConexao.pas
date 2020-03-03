@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel, uFuncionarioModel,
-  DateUtils, StrUtils, Variants, Messages, Dialogs;
+  DateUtils, StrUtils, Variants, Messages, Dialogs, SimpleDS;
 
 type
   TdmConexao = class(TDataModule)
@@ -32,21 +32,17 @@ type
     cdsEscolaESCBAIRRO: TStringField;
     cdsEscolaESCCIDADE: TStringField;
     cdsEscolaESCEST: TStringField;
-    dsEscola: TDataSource;
     sqlInserirEscola: TSQLDataSet;
     sqlExcluirEscola: TSQLDataSet;
     sqlAlterarEscola: TSQLDataSet;
     dspEspecialidade: TDataSetProvider;
     cdsEspecialidade: TClientDataSet;
     sqlInserirEspecialidade: TSQLDataSet;
-    dsEspecialidade: TDataSource;
     cdsEspecialidadeESPCOD: TIntegerField;
     cdsEspecialidadeESPDES: TStringField;
-    sqlInserirFuncionario: TSQLDataSet;
-    dsFuncionario: TDataSource;
-    dspFuncionario: TDataSetProvider;
-    cdsFuncionario: TClientDataSet;
-    SQLQuery1: TSQLQuery;
+    sqlSelectEspecialidade: TSQLDataSet;
+    sqlSelectEspecialidadeESPCOD: TIntegerField;
+    sqlSelectEspecialidadeESPDES: TStringField;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
     procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
@@ -57,10 +53,8 @@ type
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
     function InserirEspecialidade(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
-    function InserirFuncionario(oFuncionario: TFuncionario; out sErro: string): Boolean;
 
   private
-    function GerarCODFuncionario: Integer;
 
    { Private declarations }
   public
@@ -105,7 +99,7 @@ begin
   sqlCargo := TSQLDataSet.Create(nil);
   try
     sqlCargo.SQLConnection := sqlConexao;
-    sqlCargo.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
+    sqlCargo.CommandText := 'select * from Especialidade where (ESPCOD ='+ IntToStr(iCodigo)+ ')';
     sqlCargo.Open;
     oEspecialidade.ESPCOD := sqlCargo.FieldByName('ESPCOD').AsInteger;
     oEspecialidade.ESPDES := sqlCargo.FieldByName('ESPDES').AsString;
@@ -195,7 +189,7 @@ begin
     Result := True;
   except on E: Exception do
     begin
-      sErro := 'Ocorreu um erro ao inserir cliente: ' + sLineBreak + E.Message;
+      sErro := 'Ocorreu um erro ao inserir Escola: ' + sLineBreak + E.Message;
       Result := False;
     end;
   end;
@@ -218,23 +212,6 @@ begin
   end;
 end;
 
-function TdmConexao.GerarCODFuncionario: Integer;
-var
-  sqlSequencia : TSQLDataSet;
-begin
-  sqlSequencia := TSQLDataSet.Create(nil);
-  try
-    sqlSequencia.SQLConnection := DmConexao.sqlConexao;
-    sqlSequencia.CommandText := 'select coalesce(max(FUNCOD), 0) + 1 as seq from Funcionario';
-    sqlSequencia.Open;
-    Result := sqlSequencia.FieldByName('seq').AsInteger;
-  finally
-    FreeAndNil(sqlSequencia);
-
-  end;
-end;
-
-
 function TdmConexao.InserirEspecialidade(oEspecialidade: TEspecialidade;
   out sErro: string): Boolean;
 begin
@@ -245,7 +222,7 @@ begin
     Result := True;
   except on E: Exception do
     begin
-      sErro := 'Ocorreu um erro ao inserir cargo: ' + sLineBreak + E.Message;
+      sErro := 'Ocorreu um erro ao inserir especialidade: ' + sLineBreak + E.Message;
       Result := False;
     end;
   end;
@@ -264,38 +241,6 @@ begin
   cdsEscola.First;
 end;
 
-function TdmConexao.InserirFuncionario(oFuncionario: TFuncionario; out sErro: string): Boolean;
-var
-  DiaNascimento : TDateTime;
-begin
-  //diaNascimento := StrToDate(FormatDateTime('YYYY/MM/DD', oFuncionario.FUNDATNAS));
-  sqlInserirFuncionario.Params.FindParam('FUNCOD').AsInteger := GerarCODFuncionario;
-  sqlInserirFuncionario.Params.FindParam('FUNNOM').AsString := oFuncionario.FUNNOM;
-  sqlInserirFuncionario.Params.FindParam('FUNDATNAS').AsString := FormatDateTime('DD/MM/YYYY', oFuncionario.FUNDATNAS);
-  //sqlInserirFuncionario.Params.FindParam('FUNDATEMP').AsDate := oFuncionario.FUNDATEMP;
-  sqlInserirFuncionario.Params.FindParam('FUNSEX').AsString := oFuncionario.FUNSEX;
-  sqlInserirFuncionario.Params.FindParam('FUNCPF').AsString := oFuncionario.FUNCPF;
-  sqlInserirFuncionario.Params.FindParam('FUNESC').AsInteger := oFuncionario.FUNESC;
-  sqlInserirFuncionario.Params.FindParam('FUNESP').AsInteger := oFuncionario.FUNESP;
-  sqlInserirFuncionario.Params.FindParam('FUNCEP').AsString := oFuncionario.FUNCEP;
-  sqlInserirFuncionario.Params.FindParam('FUNRUA').AsString := oFuncionario.FUNRUA;
-  sqlInserirFuncionario.Params.FindParam('FUNNUM').AsString := oFuncionario.FUNNUM;
-  sqlInserirFuncionario.Params.FindParam('FUNCOM').AsString := oFuncionario.FUNCOM;
-  sqlInserirFuncionario.Params.FindParam('FUNBAI').AsString := oFuncionario.FUNBAI;
-  sqlInserirFuncionario.Params.FindParam('FUNCID').AsString := oFuncionario.FUNCID;
-  sqlInserirFuncionario.Params.FindParam('FUNEST').AsString := oFuncionario.FUNEST;
-//  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
-
-  try
-    sqlInserirFuncionario.ExecSQL;
-    Result := True;
-  except on E: Exception do
-    begin
-      sErro := 'Ocorreu um erro ao inserir funcionario: ' + sLineBreak + E.Message;
-      Result := False;
-    end;
-  end;
-end;
 
 
 

@@ -4,11 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls;
+  Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, DBCtrls;
 
 type
   TfrmCadastrarAluno = class(TForm)
-    lblTopo: TLabel;
+    PageControl1: TPageControl;
+    tbPesquisar: TTabSheet;
+    tbDados: TTabSheet;
     Label1: TLabel;
     lblDataMatricula: TLabel;
     lblSexo: TLabel;
@@ -31,6 +33,9 @@ type
     lbledtCodigoEscola: TLabeledEdit;
     lbledtNomeMae: TLabeledEdit;
     lbledtNomePai: TLabeledEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    lbledtCodigo: TLabeledEdit;
+    Panel1: TPanel;
   private
     { Private declarations }
   public

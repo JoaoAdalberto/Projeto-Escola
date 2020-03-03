@@ -1,0 +1,29 @@
+unit uDmSerie;
+
+interface
+
+uses
+  SysUtils, Classes, FMTBcd, Provider, DBClient, DB, SqlExpr;
+
+type
+  TDataModule2 = class(TDataModule)
+    SQLDataSet1: TSQLDataSet;
+    SQLDataSet2: TSQLDataSet;
+    SQLDataSet3: TSQLDataSet;
+    SQLDataSet4: TSQLDataSet;
+    ClientDataSet1: TClientDataSet;
+    DataSetProvider1: TDataSetProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule2: TDataModule2;
+
+implementation
+
+{$R *.dfm}
+
+end.

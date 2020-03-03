@@ -15,7 +15,14 @@ uses
   uFuncionarioModel in 'model\uFuncionarioModel.pas',
   uFrmCadastrarAluno in 'view\uFrmCadastrarAluno.pas' {frmCadastrarAluno},
   uFrmCadastrarSerie in 'view\uFrmCadastrarSerie.pas' {frmCadastrarSerie},
-  uFuncionarioController in 'controller\uFuncionarioController.pas';
+  uFuncionarioController in 'controller\uFuncionarioController.pas',
+  uDmFuncionario in 'dao\uDmFuncionario.pas' {dmFuncionario: TDataModule},
+  uDmAluno in 'dao\uDmAluno.pas' {dmAluno: TDataModule},
+  uDmSerie in 'dao\uDmSerie.pas' {dmSerie: TDataModule},
+  uSerieModel in 'model\uSerieModel.pas',
+  uAlunoModel in 'model\uAlunoModel.pas',
+  uSerieController in 'controller\uSerieController.pas',
+  uAlunoController in 'controller\uAlunoController.pas';
 
 {$R *.res}
 
@@ -31,5 +38,8 @@ begin
   Application.CreateForm(TfrmCadastrarSerie, frmCadastrarSerie);
   Application.CreateForm(TfrmCadastrarEscola, frmCadastrarEscola);
   Application.CreateForm(TdmConexao, dmConexao);
+  Application.CreateForm(TdmFuncionario, dmFuncionario);
+  Application.CreateForm(TdmAluno, dmAluno);
+  Application.CreateForm(TdmSerie, dmSerie);
   Application.Run;
 end.

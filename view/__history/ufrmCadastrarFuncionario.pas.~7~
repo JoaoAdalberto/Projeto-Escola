@@ -1,0 +1,315 @@
+﻿unit ufrmCadastrarFuncionario;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, uFuncionarioModel, uFuncionarioController, uDmConexao, DBCtrls, DB, DBGrids,
+  Grids;
+
+type
+  TfrmCadastrarFuncionario = class(TForm)
+    pgcFuncionario: TPageControl;
+    tbPesquisar: TTabSheet;
+    pnlFiltro: TPanel;
+    edtPesquisar: TLabeledEdit;
+    btnPesquisar: TButton;
+    dbFuncionario: TDBGrid;
+    pnlBtnsPesq: TPanel;
+    btnNovo: TButton;
+    btnDetalhar: TButton;
+    btnExcluir: TButton;
+    tbDados: TTabSheet;
+    pnlBotoes: TPanel;
+    btnGravar: TButton;
+    btnCancelarCadastroo: TButton;
+    btnAlterar: TButton;
+    btnListar: TButton;
+    Label1: TLabel;
+    lblDataContratacao: TLabel;
+    lblSexo: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lblCargo: TLabel;
+    lbledtEstado: TLabeledEdit;
+    lbledtRua: TLabeledEdit;
+    lbledtNumero: TLabeledEdit;
+    lbledtComplemento: TLabeledEdit;
+    lbledtBairro: TLabeledEdit;
+    lbledtCidade: TLabeledEdit;
+    mskedtCep: TMaskEdit;
+    lbledtNome: TLabeledEdit;
+    dattimpickDataContratacao: TDateTimePicker;
+    cbxSexo: TComboBox;
+    dattimpckDataNascimento: TDateTimePicker;
+    mskedtCPF: TMaskEdit;
+    lbledtCodigoEscola: TLabeledEdit;
+    cbxEspecialidade: TComboBox;
+    lbledtCodigo: TLabeledEdit;
+    dsFuncionario: TDataSource;
+    procedure btnGravarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    procedure Inserir;
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnCancelarCadastroClick(Sender: TObject);
+    procedure btnConfirmarCadastroClick(Sender: TObject);
+    procedure btnDetalharClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnListarClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure CarregarEscola;
+    procedure dbEscolaCellClick(Column: TColumn);
+    procedure dbEscolaDblClick(Sender: TObject);
+    procedure Excluir;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastrarFuncionario: TfrmCadastrarFuncionario;
+
+implementation
+
+
+procedure TfrmCadastrarFuncionario.btnGravarClick(Sender: TObject);
+begin
+  Inserir;
+end;
+
+procedure TfrmCadastrarFuncionario.Inserir;
+var
+  oFuncionario : TFuncionario;
+  oFuncionarioController : TFuncionarioController;
+  sError : string;
+  cpfsemhifen : string;
+  cpfsemponto : string;
+begin
+  oFuncionario := TFuncionario.Create;
+  oFuncionarioController := TFuncionarioController.Create;
+  try
+    cpfsemhifen := StringReplace(mskedtCPF.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
+    oFuncionario.FUNNOM := lbledtNome.Text;
+    oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
+    oFuncionario.FUNSEX := cbxSexo.Text;
+    oFuncionario.FUNCPF := cpfsemponto;
+    oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
+    oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    oFuncionario.FUNRUA := lbledtRua.Text;
+    oFuncionario.FUNNUM := lbledtNumero.Text;
+    oFuncionario.FUNBAI := lbledtBairro.Text;
+    oFuncionario.FUNCOM := lbledtComplemento.Text;
+    oFuncionario.FUNCID := lbledtCidade.Text;
+    oFuncionario.FUNEST := lbledtEstado.Text;
+    if not oFuncionarioController.Inserir(oFuncionario, sError) then
+      raise Exception.Create(sError);
+  finally
+    FreeAndNil(oFuncionario);
+    FreeAndNil(oFuncionarioController);
+  end;
+end;
+
+
+{$R *.dfm}
+procedure ClearEdits(Owner: TfrmCadastrarFuncionario);
+var i: integer;
+begin
+  for i := 0 to Owner.ComponentCount - 1 do
+    if Owner.Components[i] is TLabeledEdit then
+    begin
+      TLabeledEdit(Owner.Components[i]).Clear;
+    end
+    else if Owner.Components[i] is TMaskEdit then
+    begin
+      TMaskEdit(Owner.Components[i]).Clear;
+    end
+end;
+
+
+
+
+//procedure tFrmCadastrarEscola.Novo1Click(Sender: TObject);
+//begin
+//  ClearEdits(Self);
+//end;
+
+
+procedure TfrmCadastrarFuncionario.btnAlterarClick(Sender: TObject);
+var
+  oFuncionario : TFuncionario;
+  oFuncionarioController : TFuncionarioController;
+  sError: String;
+begin
+  oFuncionario := TFuncionario.Create;
+  oFuncionarioController := TFuncionarioController.Create;
+  try
+    oFuncionario.FUNCOD := StrToInt(lbledtCodigo.Text);
+    oFuncionario.FUNNOM := lbledtNome.Text;
+    oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
+    oFuncionario.FUNSEX := cbxSexo.Text;
+    oFuncionario.FUNCPF := mskedtcpf.Text;;
+    oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
+    oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    oFuncionario.FUNRUA := lbledtRua.Text;
+    oFuncionario.FUNNUM := lbledtNumero.Text;
+    oFuncionario.FUNBAI := lbledtBairro.Text;
+    oFuncionario.FUNCOM := lbledtComplemento.Text;
+    oFuncionario.FUNCID := lbledtCidade.Text;
+    oFuncionario.FUNEST := lbledtEstado.Text;
+    if TFuncionarioController.Alterar(oFuncionario, sError) = False then
+      raise Exception.Create(sError);
+  finally
+    FreeAndNil(TFuncionarioController);
+    FreeAndNil(oFuncionario);
+    dsEscola.DataSet.Refresh;
+    pgcEscola.ActivePage := tbPesquisar;
+  end;
+end;
+
+procedure TfrmCadastrarFuncionario.btnCancelarCadastroClick(Sender: TObject);
+begin
+  tbDados.TabVisible := False;
+  pgcEscola.ActivePage := tbPesquisar;
+end;
+
+procedure TfrmCadastrarFuncionario.btnConfirmarCadastroClick(Sender: TObject);
+begin
+  Inserir;
+  if MessageDlg('Escola adicionada com sucesso.'+#13+#10+'Deseja adicionar outra?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+      ClearEdits(frmCadastrarEscola);
+      end
+  else
+    pgcEscola.ActivePage := tbPesquisar;
+end;
+
+procedure TfrmCadastrarFuncionario.btnDetalharClick(Sender: TObject);
+begin
+  pgcEscola.ActivePage := tbDados;
+  btnListar.Enabled := True;
+  btnAlterar.Enabled := True;
+  btnConfirmarCadastro.Enabled := False;
+  btnCancelarCadastro.Enabled := False;
+  lbledtCodigo.Text :=   dbEscola.Fields[(0)].Text;
+  lbledtNome.Text :=   dbEscola.Fields[(1)].Text;
+  lbledtDescricao.Text :=   dbEscola.Fields[(2)].Text;
+  mskedtCep.Text :=   dbEscola.Fields[(3)].Text;
+  lbledtRua.Text :=   dbEscola.Fields[(4)].Text;
+  lbledtComplemento.Text :=   dbEscola.Fields[(5)].Text;
+  lbledtNumero.Text :=   dbEscola.Fields[(6)].Text;
+  lbledtBairro.Text :=   dbEscola.Fields[(7)].Text;
+  lbledtCidade.Text :=   dbEscola.Fields[(8)].Text;
+  lbledtEstado.Text :=   dbEscola.Fields[(9)].Text;
+  end;
+
+procedure TfrmCadastrarFuncionario.btnExcluirClick(Sender: TObject);
+begin
+  Excluir;
+  MessageDlg('Escola excluída com sucesso.', mtInformation, [mbOk], 0);
+
+end;
+
+procedure TfrmCadastrarFuncionario.btnFecharClick(Sender: TObject);
+begin
+  frmCadastrarEscola.Close;
+end;
+
+procedure TfrmCadastrarFuncionario.btnListarClick(Sender: TObject);
+begin
+  pgcEscola.ActivePage := tbPesquisar;
+end;
+
+procedure TfrmCadastrarFuncionario.btnNovoClick(Sender: TObject);
+begin
+  pgcEscola.ActivePage := tbDados;
+  tbPesquisar.TabVisible := False;
+  btnListar.Enabled := False;
+  btnAlterar.Enabled := False;
+  btnConfirmarCadastro.Enabled := True;
+  btnCancelarCadastro.Enabled := True;
+  ClearEdits(Self);
+
+end;
+
+
+
+procedure TfrmCadastrarFuncionario.CarregarEscola;
+var
+  oEscola : TEscola;
+  oEscolaController: TEscolaController;
+begin
+  oEscola := TEscola.Create;
+  oEscolaController := TEscolaController.Create;
+  try
+    oEscolaController.CarregarEscola(oEscola, dsEscola.DataSet.FieldbyName('ESCCOD').AsInteger);
+    lbledtCodigo.Text := IntToStr(oEscola.ESCCOD);
+    lbledtNome.Text := oEscola.ESCNOM;
+    lbledtDescricao.Text := oEscola.ESCDES;
+    lbledtRua.Text := oEscola.ESCRUA;
+    lbledtNumero.Text := oEscola.ESCNUM;
+    lbledtBairro.Text := oEscola.ESCBAIRRO;
+    mskedtCep.Text := oEscola.ESCCEP;
+    lbledtEstado.Text := oEscola.ESCEST;
+    lbledtCidade.Text := oEscola.ESCCIDADE;
+    lbledtComplemento.Text := oEscola.ESCCOM;
+  finally
+    FreeAndNil(oEscola);
+    FreeAndNil(oEscolaController);
+  end;
+end;
+
+procedure TfrmCadastrarFuncionario.dbEscolaCellClick(Column: TColumn);
+begin
+  //CarregarEscola;
+end;
+
+procedure TfrmCadastrarFuncionario.dbEscolaDblClick(Sender: TObject);
+begin
+  CarregarEscola;
+  pgcEscola.ActivePage := tbDados;
+  tbPesquisar.TabVisible := False;
+
+
+end;
+
+procedure TfrmCadastrarFuncionario.Excluir;
+var
+  oEscolaController : TEscolaController;
+  sError: string;
+  CodigoEscolaExcluir : integer;
+begin
+  CodigoEscolaExcluir  := StrToInt(dbEscola.Fields[(0)].Text);
+  oEscolaController := TEscolaController.Create;
+  oEscolaController.Excluir(CodigoEscolaExcluir, sError);
+  dsEscola.DataSet.Refresh;
+end;
+
+procedure TfrmCadastrarFuncionario.btnPesquisarClick(Sender: TObject);
+var
+  oEscolaController : TEscolaController;
+begin
+  oEscolaController := TEscolaController.Create;
+    try
+      oEscolaController.Pesquisar(edtPesquisar.Text);
+      dsEscola.DataSet.Refresh;
+    finally
+      freeandnil(oEscolaController);
+
+    end;
+end;
+
+procedure TfrmCadastrarFuncionario.FormShow(Sender: TObject);
+begin
+  ClearEdits(Self);
+  tbPesquisar.TabVisible := False;
+  tbDados.TabVisible := False;
+  pgcEscola.ActivePage := tbPesquisar;
+end;
+
+end.

@@ -1,0 +1,39 @@
+object DataModule2: TDataModule2
+  OldCreateOrder = False
+  Height = 250
+  Width = 451
+  object SQLDataSet1: TSQLDataSet
+    DbxCommandType = 'Dbx.SQL'
+    Params = <>
+    Left = 72
+    Top = 160
+  end
+  object SQLDataSet2: TSQLDataSet
+    DbxCommandType = 'Dbx.SQL'
+    Params = <>
+    Left = 160
+    Top = 152
+  end
+  object SQLDataSet3: TSQLDataSet
+    DbxCommandType = 'Dbx.SQL'
+    Params = <>
+    Left = 240
+    Top = 152
+  end
+  object SQLDataSet4: TSQLDataSet
+    DbxCommandType = 'Dbx.SQL'
+    Params = <>
+    Left = 320
+    Top = 152
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 88
+    Top = 72
+  end
+  object DataSetProvider1: TDataSetProvider
+    Left = 256
+    Top = 72
+  end
+end
