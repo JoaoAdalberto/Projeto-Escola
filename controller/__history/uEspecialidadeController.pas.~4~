@@ -12,19 +12,13 @@ type
     destructor Destroy; override;
     procedure CarregarCargo(oEspecialidade: TEspecialidade; iCodigo: Integer);
     function InserirEspecialidade(oEspecialidade: TEspecialidade; var sError: String) : Boolean;
-    function Alterar(oEspecialidade: TEspecialidade; var sError: String) : Boolean;
+    //function Alterar(oEscola: TEscola; var sError: String) : Boolean;
     function Excluir(iCodigo: Integer; var sError: string) : Boolean;
 
 
   end;
 
 implementation
-
-function TEspecialidadeController.Alterar(oEspecialidade: TEspecialidade;
-  var sError: String): Boolean;
-begin
-  Result := dmConexao.AlterarEspecialidade(oEspecialidade, sError);
-end;
 
 procedure TEspecialidadeController.CarregarCargo(oEspecialidade: TEspecialidade;
   iCodigo: Integer);
@@ -46,7 +40,7 @@ end;
 function TEspecialidadeController.Excluir(iCodigo: Integer;
   var sError: string): Boolean;
 begin
-  Result := DmConexao.ExcluirEspecialidade(iCodigo, sError);
+  Result := DmConexao.Excluir(iCodigo, sError);
 end;
 
 function TEspecialidadeController.InserirEspecialidade(oEspecialidade: TEspecialidade;

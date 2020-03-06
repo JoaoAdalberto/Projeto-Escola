@@ -299,6 +299,7 @@ object dmConexao: TdmConexao
     Top = 40
   end
   object cdsEspecialidade: TClientDataSet
+    Active = True
     Aggregates = <>
     CommandText = 'SELECT ESPCOD, ESPDES FROM ESPECIALIDADE'
     Params = <>
@@ -348,8 +349,8 @@ object dmConexao: TdmConexao
     MaxBlobSize = -1
     Params = <>
     SQLConnection = sqlConexao
-    Left = 664
-    Top = 112
+    Left = 648
+    Top = 104
     object sqlSelectEspecialidadeESPCOD: TIntegerField
       FieldName = 'ESPCOD'
       Required = True
@@ -359,5 +360,42 @@ object dmConexao: TdmConexao
       Required = True
       Size = 100
     end
+  end
+  object sqlAlterarEspecialidade: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 
+      'update Especialidade'#13#10'set ESPDES = :ESPDES'#13#10'where (ESPCOD = :ESP' +
+      'COD)'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftString
+        Name = 'ESPDES'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ESPCOD'
+        ParamType = ptInput
+      end>
+    SQLConnection = sqlConexao
+    Left = 528
+    Top = 168
+  end
+  object sqlExcluirEspecialidade: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 'delete from Especialidade where (ESPCOD like :ESPCOD)'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ESPCOD'
+        ParamType = ptInput
+      end>
+    SQLConnection = sqlConexao
+    Left = 648
+    Top = 168
   end
 end

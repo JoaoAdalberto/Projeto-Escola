@@ -3,8 +3,8 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel,
-  DateUtils, StrUtils, Variants, Messages, Dialogs;
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel, uFuncionarioModel,
+  DateUtils, StrUtils, Variants, Messages, Dialogs, SimpleDS;
 
 type
   TdmConexao = class(TDataModule)
@@ -32,38 +32,31 @@ type
     cdsEscolaESCBAIRRO: TStringField;
     cdsEscolaESCCIDADE: TStringField;
     cdsEscolaESCEST: TStringField;
-    dsEscola: TDataSource;
     sqlInserirEscola: TSQLDataSet;
     sqlExcluirEscola: TSQLDataSet;
     sqlAlterarEscola: TSQLDataSet;
     dspEspecialidade: TDataSetProvider;
     cdsEspecialidade: TClientDataSet;
     sqlInserirEspecialidade: TSQLDataSet;
-    sqlInserirEspecialidadeESCCOD: TIntegerField;
-    sqlInserirEspecialidadeESCNOM: TStringField;
-    sqlInserirEspecialidadeESCDES: TStringField;
-    sqlInserirEspecialidadeESCCEP: TStringField;
-    sqlInserirEspecialidadeESCRUA: TStringField;
-    sqlInserirEspecialidadeESCNUM: TStringField;
-    sqlInserirEspecialidadeESCCOM: TStringField;
-    sqlInserirEspecialidadeESCBAIRRO: TStringField;
-    sqlInserirEspecialidadeESCCIDADE: TStringField;
-    sqlInserirEspecialidadeESCEST: TStringField;
-    dsEspecialidade: TDataSource;
+    cdsEspecialidadeESPCOD: TIntegerField;
+    cdsEspecialidadeESPDES: TStringField;
+    sqlSelectEspecialidade: TSQLDataSet;
+    sqlSelectEspecialidadeESPCOD: TIntegerField;
+    sqlSelectEspecialidadeESPDES: TStringField;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
     procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
     function GerarCOD: Integer;
-    function GerarCodCargo: Integer;
+    function GerarCodEspecialidade: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
     function Pesquisar(ANome: string): TDataSet;
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
-    function InserirCargo(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
+    function InserirEspecialidade(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
 
-
   private
-    { Private declarations }
+
+   { Private declarations }
   public
     { Public declarations }
   end;
@@ -106,7 +99,7 @@ begin
   sqlCargo := TSQLDataSet.Create(nil);
   try
     sqlCargo.SQLConnection := sqlConexao;
-    sqlCargo.CommandText := 'select * from usuarios where (ESCCOD ='+ IntToStr(iCodigo)+ ')';
+    sqlCargo.CommandText := 'select * from Especialidade where (ESPCOD ='+ IntToStr(iCodigo)+ ')';
     sqlCargo.Open;
     oEspecialidade.ESPCOD := sqlCargo.FieldByName('ESPCOD').AsInteger;
     oEspecialidade.ESPDES := sqlCargo.FieldByName('ESPDES').AsString;
@@ -196,21 +189,21 @@ begin
     Result := True;
   except on E: Exception do
     begin
-      sErro := 'Ocorreu um erro ao inserir cliente: ' + sLineBreak + E.Message;
+      sErro := 'Ocorreu um erro ao inserir Escola: ' + sLineBreak + E.Message;
       Result := False;
     end;
   end;
 end;
 
 
-function TdmConexao.GerarCODCargo: Integer;
+function TdmConexao.GerarCODEspecialidade: Integer;
 var
   sqlSequencia : TSQLDataSet;
 begin
   sqlSequencia := TSQLDataSet.Create(nil);
   try
     sqlSequencia.SQLConnection := DmConexao.sqlConexao;
-    sqlSequencia.CommandText := 'select coalesce(max(CARCOD), 0) + 1 as seq from Cargo';
+    sqlSequencia.CommandText := 'select coalesce(max(ESPCOD), 0) + 1 as seq from Especialidade';
     sqlSequencia.Open;
     Result := sqlSequencia.FieldByName('seq').AsInteger;
   finally
@@ -219,23 +212,21 @@ begin
   end;
 end;
 
-function TdmConexao.InserirCargo(oEspecialidade : TEspecialidade; out sErro: string):Boolean;
+function TdmConexao.InserirEspecialidade(oEspecialidade: TEspecialidade;
+  out sErro: string): Boolean;
 begin
-  sqlInserirEspecialidade.Params.FindParam('ESPCOD').AsInteger := GerarCODCargo;
+  sqlInserirEspecialidade.Params.FindParam('ESPCOD').AsInteger := GerarCODEspecialidade;
   sqlInserirEspecialidade.Params.FindParam('ESPDES').AsString := oEspecialidade.ESPDES;
   try
     sqlInserirEspecialidade.ExecSQL;
     Result := True;
   except on E: Exception do
     begin
-      sErro := 'Ocorreu um erro ao inserir cargo: ' + sLineBreak + E.Message;
+      sErro := 'Ocorreu um erro ao inserir especialidade: ' + sLineBreak + E.Message;
       Result := False;
     end;
   end;
 end;
-
-
-
 
 function TdmConexao.Pesquisar(ANome: string): TDataSet;
 begin
@@ -248,7 +239,9 @@ begin
 //  cdsEscola.Filtered := True;
   cdsEscola.Open;
   cdsEscola.First;
-
 end;
+
+
+
 
 end.

@@ -43,17 +43,20 @@ type
     sqlSelectEspecialidade: TSQLDataSet;
     sqlSelectEspecialidadeESPCOD: TIntegerField;
     sqlSelectEspecialidadeESPDES: TStringField;
+    sqlAlterarEspecialidade: TSQLDataSet;
+    sqlExcluirEspecialidade: TSQLDataSet;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
     procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
     function GerarCOD: Integer;
     function GerarCodEspecialidade: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
+    function ExcluirEspecialidade(iCodigo: Integer; out sErro: string): Boolean;
     function Pesquisar(ANome: string): TDataSet;
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
     function InserirEspecialidade(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
-
+    function AlterarEspecialidade(oEspecialidade :TEspecialidade; out sErro: string) : Boolean;
   private
 
    { Private declarations }
@@ -87,6 +90,21 @@ begin
   except on E: Exception do
     begin
       sErro := 'Ocorreu um erro ao alterar Escola: ' + sLineBreak + E.Message;
+      Result := False;
+    end;
+  end;
+end;
+
+function TdmConexao.AlterarEspecialidade(oEspecialidade: TEspecialidade;
+  out sErro: string): Boolean;
+begin
+  sqlAlterarEspecialidade.Params[0].AsString := oEspecialidade.ESPDES;
+  try
+    sqlAlterarEspecialidade.ExecSQL();
+    Result := True;
+  except on E: Exception do
+    begin
+      sErro := 'Ocorreu um erro ao alterar Especialidade: ' + sLineBreak + E.Message;
       Result := False;
     end;
   end;
@@ -169,6 +187,21 @@ begin
 end;
 
 
+
+function TdmConexao.ExcluirEspecialidade(iCodigo: Integer;
+  out sErro: string): Boolean;
+begin
+  sqlExcluirEspecialidade.Params[0].AsInteger := iCodigo;
+  try
+    sqlExcluirEspecialidade.ExecSQL();
+    Result := True;
+    except on E: Exception do
+      begin
+        sErro := 'Ocorreu um erro ao excluir a especialidade: ' + sLineBreak + E.Message;
+        Result := False;
+      end;
+  end;
+end;
 
 function TdmConexao.Inserir(oEscola: TEscola; out sErro: string): Boolean;
 begin

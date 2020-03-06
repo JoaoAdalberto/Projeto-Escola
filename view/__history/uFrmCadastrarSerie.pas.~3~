@@ -17,6 +17,7 @@ type
     Label1: TLabel;
     lblSexo: TLabel;
     lbledtNome: TLabeledEdit;
+    btnInserir: TButton;
     lbledtCodigoEscola: TLabeledEdit;
     memoProfessores: TMemo;
     cbxEscolherprofessores: TComboBox;
