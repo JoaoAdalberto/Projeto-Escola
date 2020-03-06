@@ -15,7 +15,7 @@ type
     FALUDATNAS: TDateTime;
     FALUCOD: Integer;
     FALURES: String;
-    FSERCOD: Integer;
+    FALUSER: String;
     FALURUA: String;
     FALUDATMAT: TDateTime;
     FALUEST: String;
@@ -44,7 +44,7 @@ type
     property ALUBAI: String read FALUBAI write FALUBAI;
     property ALUCID: String read FALUCID write SetCidade;
     property ALUEST: String read FALUEST write SetEstado;
-    property SERCOD: Integer read FSERCOD write FSERCOD;
+    property ALUSER: String read FALUSER write FALUSER;
     property ALURES: String read FALURES write FALURES;
   end;
 

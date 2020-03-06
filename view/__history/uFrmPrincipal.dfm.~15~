@@ -76,7 +76,6 @@ object unFrmPrincipal: TunFrmPrincipal
       end
       object Alunos1: TMenuItem
         Caption = 'Alunos'
-        OnClick = Alunos1Click
       end
       object Especialidades1: TMenuItem
         Caption = 'Especialidades'
@@ -84,7 +83,6 @@ object unFrmPrincipal: TunFrmPrincipal
       end
       object Series1: TMenuItem
         Caption = 'Series'
-        OnClick = Series1Click
       end
     end
   end

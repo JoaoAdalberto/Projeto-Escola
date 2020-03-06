@@ -95,7 +95,7 @@ begin
   sqlSequencia := TSQLDataSet.Create(nil);
   try
     sqlSequencia.SQLConnection := DmConexao.sqlConexao;
-    sqlSequencia.CommandText := 'select coalesce(max(SERCOD), 0) + 1 as seq from Serie';
+    sqlSequencia.CommandText := 'select coalesce(max(ESCCOD), 0) + 1 as seq from Serie';
     sqlSequencia.Open;
     Result := sqlSequencia.FieldByName('seq').AsInteger;
   finally

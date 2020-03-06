@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, StdCtrls, ExtCtrls, uFrmCadastrarEscola, Grids, DBGrids,
-  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarEspecialidades, uFrmCadastrarFuncionario, uFrmCadastrarAluno, uFrmCadastrarSerie;
+  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarEspecialidades, uFrmCadastrarFuncionario;
 
 type
   TunFrmPrincipal = class(TForm)
@@ -26,8 +26,6 @@ type
     procedure Escola1Click(Sender: TObject);
     procedure Especialidades1Click(Sender: TObject);
     procedure Funcionarios1Click(Sender: TObject);
-    procedure Alunos1Click(Sender: TObject);
-    procedure Series1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,17 +50,6 @@ begin
   FreeAndNil(frmCadastrarEspecialidades);
 
   end;
-end;
-
-procedure TunFrmPrincipal.Alunos1Click(Sender: TObject);
-begin
-  frmCadastrarAluno := TfrmCadastrarAluno.Create(nil);
-  try
-    frmCadastrarAluno.ShowModal;
-  finally
-  FreeAndNil(frmCadastrarAluno);
-  end;
-
 end;
 
 procedure TunFrmPrincipal.datetimeTimer(Sender: TObject);
@@ -107,16 +94,6 @@ frmCadastrarFuncionario := TfrmCadastrarFuncionario.Create(nil);
     frmCadastrarFuncionario.ShowModal;
   finally
   FreeAndNil(frmCadastrarFuncionario);
-  end;
-end;
-
-procedure TunFrmPrincipal.Series1Click(Sender: TObject);
-begin
-frmCadastrarSerie := TfrmCadastrarSerie.Create(nil);
-  try
-    frmCadastrarSerie.ShowModal;
-  finally
-  FreeAndNil(frmCadastrarSerie);
   end;
 end;
 
