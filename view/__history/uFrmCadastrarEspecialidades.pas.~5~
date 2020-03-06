@@ -37,10 +37,6 @@ type
     procedure btnDetalharClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure btnAlterarClick(Sender: TObject);
-    procedure btnListarClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
 
   private
     procedure InserirEspecialidade;
@@ -62,33 +58,6 @@ begin
     begin
       TLabeledEdit(Owner.Components[i]).Clear;
     end
-end;
-
-procedure TfrmCadastrarEspecialidades.btnAlterarClick(Sender: TObject);
-var
-  oEspecialidade : TEspecialidade;
-  oEspecialidadeController : TEspecialidadeController;
-  sError : string;
-begin
-  oEspecialidade := TEspecialidade.Create;
-  oEspecialidadeController := TEspecialidadeController.Create;
-  try
-    oEspecialidade.ESPDES:= lbledtEspecialidadeDes.Text;
-    oEspecialidade.ESPCOD := StrToInt(lbledtCodigo.Text);
-    if oEspecialidadeController.Alterar(oEspecialidade, sError) = False then
-      raise Exception.Create(sError);
-  finally
-    FreeAndNil(oEspecialidade);
-    FreeAndNil(oEspecialidadeController);
-    dsEspecialidade.DataSet.Refresh;
-    pgcEspecialidade.ActivePage := tbPesquisar;
-  end;
-end;
-
-procedure TfrmCadastrarEspecialidades.btnCancelarClick(Sender: TObject);
-begin
-  ClearEdits(Self);
-  pgcEspecialidade.ActivePage := tbPesquisar;
 end;
 
 procedure TfrmCadastrarEspecialidades.btnDetalharClick(Sender: TObject);
@@ -127,12 +96,7 @@ InserirEspecialidade;
       TLabeledEdit(lbledtEspecialidadeDes).Clear;
       end
   else
-    pgcEspecialidade.ActivePage := tbPesquisar;
-end;
-
-procedure TfrmCadastrarEspecialidades.btnListarClick(Sender: TObject);
-begin
-   pgcEspecialidade.ActivePage := tbPesquisar;
+    frmCadastrarEspecialidades.Close;
 end;
 
 procedure TfrmCadastrarEspecialidades.btnNovoClick(Sender: TObject);
@@ -144,12 +108,6 @@ begin
   btnGravar.Enabled := True;
   btnCancelar.Enabled := True;
   ClearEdits(Self);
-end;
-
-procedure TfrmCadastrarEspecialidades.FormShow(Sender: TObject);
-begin
-  dmConexao.cdsEspecialidade.Active := True;
-  pgcEspecialidade.ActivePage := tbPesquisar;
 end;
 
 procedure TfrmCadastrarEspecialidades.InserirEspecialidade;
@@ -168,11 +126,8 @@ begin
   finally
     FreeAndNil(oEspecialidade);
     FreeAndNil(oEspecialidadeController);
-    dsEspecialidade.DataSet.Refresh;
   end;
 end;
-
-
 
 
 

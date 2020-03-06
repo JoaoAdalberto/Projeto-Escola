@@ -166,7 +166,7 @@ object dmAluno: TdmAluno
     end
   end
   object dspAluno: TDataSetProvider
-    DataSet = sqlSelectAluno
+    DataSet = sqlAlterarAluno
     Options = [poCascadeDeletes, poCascadeUpdates, poAllowCommandText, poUseQuoteChar]
     Left = 232
     Top = 88

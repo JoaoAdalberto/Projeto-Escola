@@ -275,10 +275,7 @@ begin
   finally
     FreeAndNil(oAluno);
     FreeAndNil(oAlunoController);
-    dsAluno.DataSet.Open ;
     dsAluno.DataSet.Refresh;
-    dsAluno.DataSet.Close;
-
   end;
 end;
 

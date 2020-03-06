@@ -99,6 +99,7 @@ function TdmConexao.AlterarEspecialidade(oEspecialidade: TEspecialidade;
   out sErro: string): Boolean;
 begin
   sqlAlterarEspecialidade.Params[0].AsString := oEspecialidade.ESPDES;
+  sqlAlterarEspecialidade.Params[1].AsInteger := oEspecialidade.ESPCOD;
   try
     sqlAlterarEspecialidade.ExecSQL();
     Result := True;

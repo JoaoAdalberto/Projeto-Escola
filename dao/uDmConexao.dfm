@@ -295,26 +295,26 @@ object dmConexao: TdmConexao
   object dspEspecialidade: TDataSetProvider
     DataSet = sqlSelectEspecialidade
     Options = [poCascadeDeletes, poCascadeUpdates, poAllowCommandText, poUseQuoteChar]
-    Left = 592
-    Top = 40
+    Left = 640
+    Top = 56
   end
   object cdsEspecialidade: TClientDataSet
-    Active = True
     Aggregates = <>
     CommandText = 'SELECT ESPCOD, ESPDES FROM ESPECIALIDADE'
     Params = <>
     ProviderName = 'dspEspecialidade'
-    Left = 504
-    Top = 40
+    Left = 512
+    Top = 48
     object cdsEspecialidadeESPCOD: TIntegerField
       DisplayWidth = 3
       FieldName = 'ESPCOD'
-      ProviderFlags = [pfInUpdate, pfInKey]
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsEspecialidadeESPDES: TStringField
       DisplayWidth = 20
       FieldName = 'ESPDES'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 100
     end

@@ -159,7 +159,7 @@ end;
 function TdmAluno.Inserir(oAluno: TAluno; out sErro: string): Boolean;
 begin
   sqlInserirAluno.Params.FindParam('ALUCOD').AsInteger := GerarCod;
-  sqlInserirAluno.Params.FindParam('ALUESC').AsInteger := oAluno.ALUESC;
+  sqlInserirAluno.Params.FindParam('ALUESC').AsInteger := GerarCod;
   sqlInserirAluno.Params.FindParam('ALUNOM').AsString := oAluno.ALUNOM;
   sqlInserirAluno.Params.FindParam('ALUSEX').AsString := oAluno.ALUSEX;
   sqlInserirAluno.Params.FindParam('ALUDATNAS').AsString := FormatDateTime('DD/MM/YYYY', oAluno.ALUDATNAS);;
