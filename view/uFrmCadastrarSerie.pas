@@ -49,6 +49,7 @@ type
     procedure btnDetalharClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -169,6 +170,15 @@ begin
     finally
       freeandnil(oSerieController);
     end;
+end;
+
+procedure TfrmCadastrarSerie.FormShow(Sender: TObject);
+begin
+  ClearEdits(Self);
+  tbPesquisar.TabVisible := False;
+  tbDados.TabVisible := False;
+  dmSerie.cdsSerie.Active := True;
+  pgcSerie.ActivePage := tbPesquisar;
 end;
 
 procedure TfrmCadastrarSerie.Inserir;

@@ -11,6 +11,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -19,7 +20,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     Top = -2
     Width = 612
     Height = 274
-    ActivePage = tbDados
+    ActivePage = tbPesquisar
     Align = alBottom
     TabOrder = 0
     object tbPesquisar: TTabSheet
@@ -37,7 +38,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         object edtPesquisar: TLabeledEdit
           Left = 16
           Top = 16
-          Width = 369
+          Width = 470
           Height = 21
           EditLabel.Width = 104
           EditLabel.Height = 13
@@ -46,9 +47,9 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         end
         object btnPesquisar: TButton
           Left = 492
-          Top = 16
+          Top = 15
           Width = 75
-          Height = 25
+          Height = 24
           Caption = 'Pesquisar'
           TabOrder = 1
           OnClick = btnPesquisarClick

@@ -37,17 +37,11 @@ type
     property ESCBAIRRO: String read FESCBAIRRO write FESCBAIRRO;
     property ESCCIDADE: String read FESCCIDADE write SetCidade;
     property ESCEST: String read FESCEST write SetEstado;
-
-
-
   end;
-
 
 implementation
 
 { TEscola }
-
-
 
 procedure TEscola.SetEstado(const Value: String);
 begin

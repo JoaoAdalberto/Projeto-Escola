@@ -12,7 +12,6 @@ object unFrmPrincipal: TunFrmPrincipal
   Font.Style = []
   Menu = mainmenPrincipal
   OldCreateOrder = False
-  OnShow = FormShow
   DesignSize = (
     751
     376)

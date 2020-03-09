@@ -22,7 +22,6 @@ type
     lblDataHora: TLabel;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure Escola1Click(Sender: TObject);
     procedure Especialidades1Click(Sender: TObject);
     procedure Funcionarios1Click(Sender: TObject);
@@ -88,16 +87,9 @@ begin
   try
     frmCadastrarEscola.ShowModal;
     frmCadastrarEscola.tbDados.TabVisible := True;
-
   finally
     FreeAndNil(frmCadastrarEscola);
   end;
-end;
-
-
-procedure TunFrmPrincipal.FormShow(Sender: TObject);
-begin
-  uDmConexao.dmConexao.cdsEscola.active := True;
 end;
 
 procedure TunFrmPrincipal.Funcionarios1Click(Sender: TObject);

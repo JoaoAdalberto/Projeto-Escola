@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, DBCtrls, uAlunoController, uAlunoModel, DB, DBGrids, uDmAluno,
+  Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, DBCtrls, uAlunoController, uAlunoModel, DB, DBGrids, uDmAluno, uDmConexao,
   Grids;
 
 type
@@ -14,7 +14,6 @@ type
     tbDados: TTabSheet;
     Label1: TLabel;
     lblDataMatricula: TLabel;
-    lblSexo: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     lbledtEstado: TLabeledEdit;
@@ -26,12 +25,9 @@ type
     mskedtCep: TMaskEdit;
     lbledtNome: TLabeledEdit;
     dattimpickDataMatricula: TDateTimePicker;
-    cbxSexo: TComboBox;
     dattimpckDataNascimento: TDateTimePicker;
     mskedtCPF: TMaskEdit;
-    lbledtCodigoEscola: TLabeledEdit;
     lbledtNomeResponsavel: TLabeledEdit;
-    dblucbxSerie: TDBLookupComboBox;
     lbledtCodigo: TLabeledEdit;
     Panel1: TPanel;
     btnListar: TButton;
@@ -51,8 +47,11 @@ type
     btnPesquisar: TButton;
     dbAluno: TDBGrid;
     dsAluno: TDataSource;
-    lblSerie: TLabel;
-    lbledtSerie: TLabeledEdit;
+    dsEscola: TDataSource;
+    dblucbxEscola: TDBLookupComboBox;
+    Escola: TLabel;
+    lblSexo: TLabel;
+    cbxSexo: TComboBox;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnDetalharClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -112,7 +111,7 @@ begin
     cpfsemhifen := StringReplace(mskedtCPF.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
     oAluno.ALUCOD := StrToInt(lbledtCodigo.Text);
-    oAluno.ALUESC := StrToInt(lbledtCodigoEscola.Text);
+    //oAluno.ALUESC := StrToInt(lbledtCodigoEscola.Text);
     oAluno.ALUNOM := lbledtNome.Text;
     oAluno.ALUSEX := cbxSexo.Text;
     oAluno.ALUDATNAS := dattimpckDataNascimento.Date;
@@ -124,7 +123,7 @@ begin
     oAluno.ALUBAI := lbledtBairro.Text;
     oAluno.ALUCID := lbledtCidade.Text;
     oAluno.ALUEST := lbledtEstado.Text;
-    oAluno.SERCOD := strtoint(lbledtSerie.Text);
+    //oAluno.SERCOD := strtoint(lbledtSerie.Text);
     oAluno.ALURES := lbledtNomeResponsavel.Text;;
     if oAlunoController.Alterar(oAluno, sError) = False then
       raise Exception.Create(sError);
@@ -151,7 +150,7 @@ begin
   btnGravar.Enabled := False;
   btnCancelar.Enabled := False;
   lbledtCodigo.Text :=   dbAluno.Fields[(0)].Text;
-  lbledtCodigoEscola.Text :=   dbAluno.Fields[(1)].Text;
+  //lbledtCodigoEscola.Text :=   dbAluno.Fields[(1)].Text;
   lbledtNome.Text :=   dbAluno.Fields[(2)].Text;
   cbxSexo.Text := dbAluno.Fields[(3)].Text;
   mskedtCpf.Text := dbAluno.Fields[(7)].Text;
@@ -162,7 +161,7 @@ begin
   lbledtBairro.Text :=   dbAluno.Fields[(12)].Text;
   lbledtCidade.Text :=   dbAluno.Fields[(13)].Text;
   lbledtEstado.Text :=   dbAluno.Fields[(14)].Text;
-  lbledtSerie.Text := dbAluno.Fields[(15)].Text;
+  //lbledtSerie.Text := dbAluno.Fields[(15)].Text;
   lbledtNomeResponsavel.Text := dbAluno.Fields[(16)].Text;
 end;
 
@@ -240,6 +239,7 @@ begin
   ClearEdits(Self);
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
+  dmAluno.cdsAluno.Active := True;
   pgcAluno.ActivePage := tbPesquisar;
 end;
 
@@ -256,7 +256,8 @@ begin
   try
     cpfsemhifen := StringReplace(mskedtCPF.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
-    oAluno.ALUESC := StrToInt(lbledtCodigoEscola.Text);
+    //oAluno.ALUESC := StrToInt(lbledtCodigoEscola.Text);
+    oAluno.ALUESC := dblucbxEscola.KeyValue;
     oAluno.ALUNOM := lbledtNome.Text;
     oAluno.ALUSEX := cbxSexo.Text;
     oAluno.ALUDATNAS := dattimpckDataNascimento.Date;
@@ -268,16 +269,13 @@ begin
     oAluno.ALUBAI := lbledtBairro.Text;
     oAluno.ALUCID := lbledtCidade.Text;
     oAluno.ALUEST := lbledtEstado.Text;
-    oAluno.SERCOD := strtoint(lbledtSerie.Text);
+    //oAluno.SERCOD := strtoint(lbledtSerie.Text);
     oAluno.ALURES := lbledtNomeResponsavel.Text;;
     if oAlunoController.Inserir(oAluno, sError) = False then
       raise Exception.Create(sError);
   finally
     FreeAndNil(oAluno);
     FreeAndNil(oAlunoController);
-    dsAluno.DataSet.Open ;
-    dsAluno.DataSet.Refresh;
-    dsAluno.DataSet.Close;
 
   end;
 end;

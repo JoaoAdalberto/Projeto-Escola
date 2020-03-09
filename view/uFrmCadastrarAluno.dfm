@@ -19,7 +19,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
     Top = 1
     Width = 616
     Height = 376
-    ActivePage = tbPesquisar
+    ActivePage = tbDados
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
@@ -109,10 +109,11 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         end
       end
       object dbAluno: TDBGrid
-        Left = 0
-        Top = 49
-        Width = 608
-        Height = 222
+        AlignWithMargins = True
+        Left = 3
+        Top = 52
+        Width = 602
+        Height = 216
         Align = alClient
         DataSource = dsAluno
         TabOrder = 3
@@ -140,13 +141,6 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Height = 13
         Caption = 'Data da Matr'#237'cula'
       end
-      object lblSexo: TLabel
-        Left = 18
-        Top = 91
-        Width = 24
-        Height = 13
-        Caption = 'Sexo'
-      end
       object Label2: TLabel
         Left = 112
         Top = 91
@@ -161,12 +155,19 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Height = 13
         Caption = 'CPF'
       end
-      object lblSerie: TLabel
-        Left = 402
-        Top = 183
+      object Escola: TLabel
+        Left = 436
+        Top = 45
+        Width = 30
+        Height = 13
+        Caption = 'Escola'
+      end
+      object lblSexo: TLabel
+        Left = 18
+        Top = 91
         Width = 24
         Height = 13
-        Caption = 'Serie'
+        Caption = 'Sexo'
       end
       object lbledtEstado: TLabeledEdit
         Left = 305
@@ -241,7 +242,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
       object lbledtNome: TLabeledEdit
         Left = 18
         Top = 64
-        Width = 423
+        Width = 383
         Height = 21
         EditLabel.Width = 27
         EditLabel.Height = 13
@@ -257,17 +258,6 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Time = 43879.557137164350000000
         TabOrder = 5
       end
-      object cbxSexo: TComboBox
-        Left = 18
-        Top = 110
-        Width = 63
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 3
-        Items.Strings = (
-          'M'
-          'F')
-      end
       object dattimpckDataNascimento: TDateTimePicker
         Left = 282
         Top = 110
@@ -280,38 +270,21 @@ object frmCadastrarAluno: TfrmCadastrarAluno
       object mskedtCPF: TMaskEdit
         Left = 470
         Top = 110
-        Width = 89
+        Width = 87
         Height = 21
-        EditMask = '000\.000\.000\.-00;1;_'
-        MaxLength = 15
+        EditMask = '000\.000\.000\-00;1;_'
+        MaxLength = 14
         TabOrder = 6
-        Text = '   .   .   .-  '
-      end
-      object lbledtCodigoEscola: TLabeledEdit
-        Left = 470
-        Top = 64
-        Width = 89
-        Height = 21
-        EditLabel.Width = 81
-        EditLabel.Height = 13
-        EditLabel.Caption = 'C'#243'digo da Escola'
-        TabOrder = 2
+        Text = '   .   .   -  '
       end
       object lbledtNomeResponsavel: TLabeledEdit
         Left = 18
-        Top = 242
-        Width = 423
+        Top = 244
+        Width = 383
         Height = 21
         EditLabel.Width = 91
         EditLabel.Height = 13
         EditLabel.Caption = 'Nome Respons'#225'vel'
-        TabOrder = 16
-      end
-      object dblucbxSerie: TDBLookupComboBox
-        Left = 402
-        Top = 199
-        Width = 157
-        Height = 21
         TabOrder = 14
       end
       object lbledtCodigo: TLabeledEdit
@@ -322,6 +295,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         EditLabel.Width = 33
         EditLabel.Height = 13
         EditLabel.Caption = 'C'#243'digo'
+        Enabled = False
         TabOrder = 0
       end
       object Panel1: TPanel
@@ -332,7 +306,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Align = alBottom
         Color = clSilver
         ParentBackground = False
-        TabOrder = 18
+        TabOrder = 16
         object btnListar: TButton
           Left = 276
           Top = 10
@@ -377,7 +351,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Height = 36
         Align = alBottom
         BevelOuter = bvNone
-        TabOrder = 17
+        TabOrder = 15
         object Fechar: TButton
           Left = 456
           Top = 6
@@ -388,21 +362,40 @@ object frmCadastrarAluno: TfrmCadastrarAluno
           OnClick = FecharClick
         end
       end
-      object lbledtSerie: TLabeledEdit
-        Left = 470
-        Top = 244
+      object dblucbxEscola: TDBLookupComboBox
+        Left = 436
+        Top = 64
         Width = 121
         Height = 21
-        EditLabel.Width = 24
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Serie'
-        TabOrder = 15
+        DataField = 'ALUESC'
+        DataSource = dsAluno
+        KeyField = 'ESCCOD'
+        ListField = 'ESCNOM'
+        ListSource = dsEscola
+        TabOrder = 2
+      end
+      object cbxSexo: TComboBox
+        Left = 18
+        Top = 110
+        Width = 61
+        Height = 22
+        Style = csOwnerDrawFixed
+        ItemHeight = 16
+        TabOrder = 3
+        Items.Strings = (
+          'M'
+          'F')
       end
     end
   end
   object dsAluno: TDataSource
     DataSet = dmAluno.cdsAluno
-    Left = 512
-    Top = 184
+    Left = 264
+    Top = 32
+  end
+  object dsEscola: TDataSource
+    DataSet = dmConexao.cdsEscola
+    Left = 208
+    Top = 32
   end
 end

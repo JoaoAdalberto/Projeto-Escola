@@ -11,8 +11,6 @@ type
     dspAluno: TDataSetProvider;
     sqlInserirAluno: TSQLDataSet;
     sqlExcluirAluno: TSQLDataSet;
-    sqlSelectAluno: TSQLDataSet;
-    sqlAlterarAluno: TSQLDataSet;
     cdsAlunoALUCOD: TIntegerField;
     cdsAlunoALUESC: TIntegerField;
     cdsAlunoALUNOM: TStringField;
@@ -28,6 +26,9 @@ type
     cdsAlunoALUCID: TStringField;
     cdsAlunoALUEST: TStringField;
     cdsAlunoALURES: TStringField;
+    cdsAlunoSERCOD: TIntegerField;
+    sqlAlterarAluno: TSQLDataSet;
+    sqlSelectAluno: TSQLDataSet;
     sqlSelectAlunoALUCOD: TIntegerField;
     sqlSelectAlunoALUESC: TIntegerField;
     sqlSelectAlunoALUNOM: TStringField;
@@ -42,9 +43,8 @@ type
     sqlSelectAlunoALUBAI: TStringField;
     sqlSelectAlunoALUCID: TStringField;
     sqlSelectAlunoALUEST: TStringField;
-    sqlSelectAlunoALURES: TStringField;
     sqlSelectAlunoSERCOD: TIntegerField;
-    cdsAlunoSERCOD: TIntegerField;
+    sqlSelectAlunoALURES: TStringField;
     function GerarCOD: Integer;
     procedure CarregarAluno(oAluno : TAluno; iCodigo: Integer);
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
@@ -172,7 +172,7 @@ begin
   sqlInserirAluno.Params.FindParam('ALUBAI').AsString := oAluno.ALUCPF;
   sqlInserirAluno.Params.FindParam('ALUCID').AsString := oAluno.ALUCEP;
   sqlInserirAluno.Params.FindParam('ALUEST').AsString := oAluno.ALUEST;
-  sqlInserirAluno.Params.FindParam('SERCOD').AsInteger := oAluno.SERCOD;
+  //sqlInserirAluno.Params.FindParam('SERCOD').AsInteger := oAluno.SERCOD;
   sqlInserirAluno.Params.FindParam('ALURES').AsString := oAluno.ALURES;
 
 //  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);

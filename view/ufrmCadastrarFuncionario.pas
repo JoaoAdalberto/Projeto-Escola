@@ -43,14 +43,14 @@ type
     cbxSexo: TComboBox;
     dattimpckDataNascimento: TDateTimePicker;
     mskedtCPF: TMaskEdit;
-    lbledtCodigoEscola: TLabeledEdit;
     cbxEspecialidade: TComboBox;
     lbledtCodigo: TLabeledEdit;
     dsFuncionario: TDataSource;
     dsEspecialidade: TDataSource;
-    dblcbx1: TDBLookupComboBox;
+    dblcbxEscola: TDBLookupComboBox;
     dsEscola: TDataSource;
-    DBLookupComboBox2: TDBLookupComboBox;
+    dblucbxEspecialidade: TDBLookupComboBox;
+    Label4: TLabel;
     procedure btnGravarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dbFuncionarioDblClick(Sender: TObject);
@@ -104,8 +104,8 @@ begin
     oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
     oFuncionario.FUNSEX := cbxSexo.Text;
     oFuncionario.FUNCPF := cpfsemponto;
-    //oFuncionario.FUNESC := dblcbx1.ListFieldIndex;
-    oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    oFuncionario.FUNESC := dblcbxEscola.KeyValue;
+    //oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
     oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
     oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNRUA := lbledtRua.Text;
@@ -119,6 +119,7 @@ begin
   finally
     FreeAndNil(oFuncionario);
     FreeAndNil(oFuncionarioController);
+
     dsFuncionario.DataSet.Refresh;
   end;
 end;
@@ -159,7 +160,8 @@ begin
     oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
     oFuncionario.FUNSEX := cbxSexo.Text;
     oFuncionario.FUNCPF := StringReplace(StringReplace(mskedtcpf.Text, '.', '', [rfReplaceAll, rfIgnoreCase]), '-', '', [rfreplaceAll, rfignorecase]);
-    oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    //oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    oFuncionario.FUNESC := dblcbxEscola.KeyValue;
     oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
     oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNRUA := lbledtRua.Text;
@@ -210,7 +212,7 @@ begin
   //dattimpickDataContratacao.Date := StrToDate(dbFuncionario.Fields[(3)].Text);
   cbxSexo.Text := dbFuncionario.Fields[(4)].Text;
   mskedtCpf.Text := dbFuncionario.Fields[(5)].Text;
-  lbledtCodigoEscola.Text := dbFuncionario.Fields[(6)].Text;
+  //dblcbxEscola.Text := dbFuncionario.Fields[(6)].Text;
   cbxEspecialidade.Text := dbFuncionario.Fields[(7)].Text;
   mskedtCep.Text :=   dbFuncionario.Fields[(8)].Text;
   lbledtRua.Text :=   dbFuncionario.Fields[(9)].Text;
@@ -270,7 +272,7 @@ begin
     dattimpickDataContratacao.Date := oFuncionario.FUNDATEMP;
     cbxSexo.Text := oFuncionario.FUNSEX;
     mskedtCPF.Text := oFuncionario.FUNCPF;
-    lbledtCodigoEscola.Text := IntToStr(oFuncionario.FUNESC);
+    //lbledtCodigoEscola.Text := IntToStr(oFuncionario.FUNESC);
     cbxEspecialidade.Text := IntToStr(oFuncionario.FUNESP);
     mskedtCep.Text := oFuncionario.FUNCEP;
     lbledtRua.Text := oFuncionario.FUNRUA;

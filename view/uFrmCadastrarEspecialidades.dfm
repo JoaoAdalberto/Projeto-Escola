@@ -19,15 +19,11 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
     Top = 0
     Width = 585
     Height = 270
-    ActivePage = tbDados
+    ActivePage = tbPesquisar
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 724
-    ExplicitHeight = 452
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
-      ExplicitWidth = 716
-      ExplicitHeight = 424
       object Panel1: TPanel
         Left = 0
         Top = 206
@@ -36,8 +32,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitTop = 388
-        ExplicitWidth = 716
         object btnFechar1: TButton
           Left = 418
           Top = 6
@@ -45,6 +39,7 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
           Height = 25
           Caption = 'Fechar'
           TabOrder = 0
+          OnClick = btnFechar1Click
         end
       end
       object pnlPesquisar: TPanel
@@ -56,7 +51,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Color = clSilver
         ParentBackground = False
         TabOrder = 1
-        ExplicitWidth = 716
         object LabeledEdit1: TLabeledEdit
           Left = 8
           Top = 16
@@ -100,8 +94,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Color = clSilver
         ParentBackground = False
         TabOrder = 3
-        ExplicitLeft = 48
-        ExplicitTop = 175
         object btnDetalhar: TButton
           Left = 306
           Top = 5
@@ -134,8 +126,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
-      ExplicitWidth = 716
-      ExplicitHeight = 424
       object Panel2: TPanel
         Left = 0
         Top = 206
@@ -144,8 +134,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitTop = 388
-        ExplicitWidth = 716
         object btnFechar: TButton
           Left = 433
           Top = 6
@@ -174,6 +162,7 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         EditLabel.Width = 36
         EditLabel.Height = 13
         EditLabel.Caption = 'Codigo '
+        Enabled = False
         TabOrder = 2
       end
       object Panel3: TPanel
@@ -185,8 +174,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Color = clSilver
         ParentBackground = False
         TabOrder = 3
-        ExplicitTop = 347
-        ExplicitWidth = 716
         object btnListar: TButton
           Left = 207
           Top = 10

@@ -45,6 +45,7 @@ type
     sqlSelectEspecialidadeESPDES: TStringField;
     sqlAlterarEspecialidade: TSQLDataSet;
     sqlExcluirEspecialidade: TSQLDataSet;
+    tableteste: TSQLTable;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
     procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
@@ -52,7 +53,7 @@ type
     function GerarCodEspecialidade: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
     function ExcluirEspecialidade(iCodigo: Integer; out sErro: string): Boolean;
-    function Pesquisar(ANome: string): TDataSet;
+    procedure Pesquisar(ANome: string);
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
     function InserirEspecialidade(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
@@ -148,6 +149,7 @@ begin
     oEscola.ESCCIDADE := sqlEscola.FieldByName('ESCCIDADE').AsString;
     oEscola.ESCEST := sqlEscola.FieldByName('ESCEST').AsString;
   finally
+    FreeAndNil(sqlEscola);
   end;
 end;
 
@@ -167,12 +169,6 @@ begin
   end;
 end;
 
-
-//procedure TdmConexao.cdsEscolaNewRecord(DataSet: TDataSet);
-//begin
-//  cdsEscolaESCCOD.Value := cdsEscola.RecordCount+1;
-//end;
-
 function TdmConexao.Excluir(iCodigo: Integer; out sErro: string): Boolean;
 begin
   sqlExcluirEscola.Params[0].AsInteger := iCodigo;
@@ -186,8 +182,6 @@ begin
       end;
   end;
 end;
-
-
 
 function TdmConexao.ExcluirEspecialidade(iCodigo: Integer;
   out sErro: string): Boolean;
@@ -262,20 +256,11 @@ begin
   end;
 end;
 
-function TdmConexao.Pesquisar(ANome: string): TDataSet;
+procedure TdmConexao.Pesquisar(ANome: string);
 begin
-  ShowMessage(ANome);
-  if cdsEscola.Active then
-    cdsEscola.Close;
-  cdsEscola.CommandText := Format('select * from Escola where ESCNOM like %s',[ QuotedStr('%' + ANome + '%') ]);
-//  cdsEscola.Filtered := False;
-//  cdsEscola.Filter := 'ESCNOM = ' +QuotedStr('%' + ANome + '%');
-//  cdsEscola.Filtered := True;
-  cdsEscola.Open;
-  cdsEscola.First;
+  cdsEscola.Filtered := False;
+  cdsEscola.Filter := 'ESCNOM = ' + QuotedStr(ANome);
+  cdsEscola.Filtered := True;
 end;
-
-
-
 
 end.

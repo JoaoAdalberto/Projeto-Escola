@@ -3,7 +3,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
   Top = 0
   Caption = 'Cadastro de Funcion'#225'rios'
   ClientHeight = 459
-  ClientWidth = 615
+  ClientWidth = 686
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,27 +17,27 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
   object pgcFuncionario: TPageControl
     Left = 0
     Top = 0
-    Width = 615
+    Width = 686
     Height = 459
     ActivePage = tbDados
     Align = alClient
     TabOrder = 0
     OnChange = pgcFuncionarioChange
-    ExplicitWidth = 610
+    ExplicitWidth = 615
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
-      ExplicitWidth = 602
+      ExplicitWidth = 607
       object pnlFiltro: TPanel
         Left = 0
         Top = 0
-        Width = 607
+        Width = 678
         Height = 49
         Align = alTop
         BevelOuter = bvNone
         Color = clSilver
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 602
+        ExplicitWidth = 607
         object edtPesquisar: TLabeledEdit
           Left = 16
           Top = 16
@@ -61,7 +61,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         AlignWithMargins = True
         Left = 3
         Top = 52
-        Width = 601
+        Width = 672
         Height = 335
         Align = alClient
         DataSource = dsFuncionario
@@ -76,14 +76,14 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
       object pnlBtnsPesq: TPanel
         Left = 0
         Top = 390
-        Width = 607
+        Width = 678
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
         Color = clSilver
         ParentBackground = False
         TabOrder = 2
-        ExplicitWidth = 602
+        ExplicitWidth = 607
         object btnNovo: TButton
           Left = 435
           Top = 8
@@ -116,7 +116,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
-      ExplicitWidth = 602
+      ExplicitLeft = 8
+      ExplicitTop = 28
       object Label1: TLabel
         Left = 24
         Top = 134
@@ -159,16 +160,23 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         Height = 13
         Caption = 'Especialidade'
       end
+      object Label4: TLabel
+        Left = 408
+        Top = 42
+        Width = 30
+        Height = 13
+        Caption = 'Escola'
+      end
       object pnlBotoes: TPanel
         Left = 0
         Top = 393
-        Width = 607
+        Width = 678
         Height = 38
         Align = alBottom
         Color = clSilver
         ParentBackground = False
         TabOrder = 15
-        ExplicitWidth = 602
+        ExplicitWidth = 607
         object btnGravar: TButton
           Left = 446
           Top = 8
@@ -281,7 +289,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
       object lbledtNome: TLabeledEdit
         Left = 24
         Top = 61
-        Width = 424
+        Width = 353
         Height = 21
         EditLabel.Width = 27
         EditLabel.Height = 13
@@ -328,17 +336,6 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         TabOrder = 6
         Text = '   .   .   -  '
       end
-      object lbledtCodigoEscola: TLabeledEdit
-        Left = 466
-        Top = 61
-        Width = 89
-        Height = 21
-        EditLabel.Width = 81
-        EditLabel.Height = 13
-        EditLabel.Caption = 'C'#243'digo da Escola'
-        MaxLength = 3
-        TabOrder = 2
-      end
       object cbxEspecialidade: TComboBox
         Left = 276
         Top = 246
@@ -358,9 +355,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         Enabled = False
         TabOrder = 0
       end
-      object dblcbx1: TDBLookupComboBox
-        Left = 427
-        Top = 296
+      object dblcbxEscola: TDBLookupComboBox
+        Left = 408
+        Top = 61
         Width = 145
         Height = 21
         DataField = 'FUNESC'
@@ -368,17 +365,19 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         KeyField = 'ESCCOD'
         ListField = 'ESCNOM'
         ListSource = dsEscola
-        TabOrder = 16
+        TabOrder = 2
       end
-      object DBLookupComboBox2: TDBLookupComboBox
+      object dblucbxEspecialidade: TDBLookupComboBox
         Left = 252
         Top = 296
         Width = 145
         Height = 21
+        DataField = 'FUNESP'
+        DataSource = dsFuncionario
         KeyField = 'ESPCOD'
         ListField = 'ESPDES'
         ListSource = dsEspecialidade
-        TabOrder = 17
+        TabOrder = 16
       end
     end
   end

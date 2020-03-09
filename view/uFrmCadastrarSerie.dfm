@@ -2,8 +2,8 @@ object frmCadastrarSerie: TfrmCadastrarSerie
   Left = 0
   Top = 0
   Caption = 'Cadastrar Serie'
-  ClientHeight = 635
-  ClientWidth = 1052
+  ClientHeight = 375
+  ClientWidth = 705
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,11 +11,12 @@ object frmCadastrarSerie: TfrmCadastrarSerie
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pgcSerie: TPageControl
-    Left = 48
-    Top = 64
+    Left = 0
+    Top = 0
     Width = 705
     Height = 369
     ActivePage = tbDados
@@ -125,6 +126,8 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
+      ExplicitLeft = -12
+      ExplicitTop = 16
       object Label1: TLabel
         Left = 32
         Top = 200
@@ -207,6 +210,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         EditLabel.Width = 36
         EditLabel.Height = 13
         EditLabel.Caption = 'Codigo '
+        Enabled = False
         TabOrder = 6
       end
       object Panel1: TPanel

@@ -3,87 +3,10 @@ object dmAluno: TdmAluno
   Height = 533
   Width = 850
   object cdsAluno: TClientDataSet
+    Active = True
     Aggregates = <>
-    CommandText = 
-      'SELECT ALUCOD, ALUESC, ALUNOM, ALUSEX, ALUDATNAS, ALUDATMAT, ALU' +
-      'CPF, ALUCEP, ALURUA, ALUNUM, ALUCOM, ALUBAI, ALUCID, ALUEST, SER' +
-      'COD, ALURES FROM ALUNO'
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ALUNOM'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUDATNAS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUSEX'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUCPF'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUESC'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUCEP'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALURUA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUNUM'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUCOM'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUBAI'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FUNCID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FUNEST'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERCOD'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALURES'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ALUCOD'
-        ParamType = ptInput
-      end>
+    CommandText = 'select * from Aluno'
+    Params = <>
     ProviderName = 'dspAluno'
     Left = 136
     Top = 88
@@ -113,13 +36,13 @@ object dmAluno: TdmAluno
       DisplayWidth = 15
       FieldName = 'ALUDATNAS'
     end
-    object cdsAlunoALUDATMAT: TWideStringField
-      DisplayWidth = 15
-      FieldName = 'ALUDATMAT'
-    end
     object cdsAlunoALUCPF: TStringField
       FieldName = 'ALUCPF'
       Size = 11
+    end
+    object cdsAlunoALUDATMAT: TWideStringField
+      DisplayWidth = 15
+      FieldName = 'ALUDATMAT'
     end
     object cdsAlunoALUCEP: TStringField
       FieldName = 'ALUCEP'
@@ -176,9 +99,9 @@ object dmAluno: TdmAluno
     CommandText = 
       'insert into Aluno (ALUCOD , ALUESC, ALUNOM, ALUSEX, ALUDATNAS, A' +
       'LUDATMAT, ALUCPF, ALUCEP, ALURUA, ALUNUM, ALUCOM, ALUBAI, ALUCID' +
-      ', ALUEST, SERCOD, ALURES)'#13#10'values (:ALUCOD, :ALUESC, :ALUNOM, :A' +
-      'LUSEX, :ALUDATNAS, GETDATE(), :ALUCPF,  :ALUCEP, :ALURUA, :ALUNU' +
-      'M, :ALUCOM, :ALUBAI, :ALUCID, :ALUEST, :SERCOD, :ALURES)'
+      ', ALUEST,  ALURES)'#13#10'values (:ALUCOD, :ALUESC, :ALUNOM, :ALUSEX, ' +
+      ':ALUDATNAS, GETDATE(), :ALUCPF,  :ALUCEP, :ALURUA, :ALUNUM, :ALU' +
+      'COM, :ALUBAI, :ALUCID, :ALUEST,  :ALURES)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
@@ -248,11 +171,6 @@ object dmAluno: TdmAluno
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
-        Name = 'SERCOD'
-        ParamType = ptInput
-      end
-      item
         DataType = ftUnknown
         Name = 'ALURES'
         ParamType = ptInput
@@ -276,166 +194,75 @@ object dmAluno: TdmAluno
     Left = 192
     Top = 200
   end
-  object sqlSelectAluno: TSQLDataSet
-    SchemaName = 'sa'
-    CommandText = 
-      'SELECT ALUCOD, ALUESC, ALUNOM, ALUSEX, ALUDATNAS, ALUDATMAT, ALU' +
-      'CPF, ALUCEP, ALURUA, ALUNUM, ALUCOM, ALUBAI, ALUCID, ALUEST, SER' +
-      'COD, ALURES FROM ALUNO'
-    DbxCommandType = 'Dbx.SQL'
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = dmConexao.sqlConexao
-    Left = 296
-    Top = 200
-    object sqlSelectAlunoALUCOD: TIntegerField
-      DisplayWidth = 3
-      FieldName = 'ALUCOD'
-      Required = True
-    end
-    object sqlSelectAlunoALUESC: TIntegerField
-      DisplayWidth = 3
-      FieldName = 'ALUESC'
-      Required = True
-    end
-    object sqlSelectAlunoALUNOM: TStringField
-      DisplayWidth = 15
-      FieldName = 'ALUNOM'
-      Required = True
-      Size = 100
-    end
-    object sqlSelectAlunoALUSEX: TStringField
-      FieldName = 'ALUSEX'
-      Required = True
-      Size = 1
-    end
-    object sqlSelectAlunoALUDATNAS: TWideStringField
-      DisplayWidth = 15
-      FieldName = 'ALUDATNAS'
-    end
-    object sqlSelectAlunoALUDATMAT: TWideStringField
-      DisplayWidth = 15
-      FieldName = 'ALUDATMAT'
-    end
-    object sqlSelectAlunoALUCPF: TStringField
-      FieldName = 'ALUCPF'
-      Size = 11
-    end
-    object sqlSelectAlunoALUCEP: TStringField
-      FieldName = 'ALUCEP'
-      Size = 8
-    end
-    object sqlSelectAlunoALURUA: TStringField
-      DisplayWidth = 15
-      FieldName = 'ALURUA'
-      Size = 100
-    end
-    object sqlSelectAlunoALUNUM: TStringField
-      FieldName = 'ALUNUM'
-      Size = 5
-    end
-    object sqlSelectAlunoALUCOM: TStringField
-      DisplayWidth = 15
-      FieldName = 'ALUCOM'
-      Size = 100
-    end
-    object sqlSelectAlunoALUBAI: TStringField
-      DisplayWidth = 15
-      FieldName = 'ALUBAI'
-      Size = 30
-    end
-    object sqlSelectAlunoALUCID: TStringField
-      DisplayWidth = 15
-      FieldName = 'ALUCID'
-      Required = True
-      Size = 50
-    end
-    object sqlSelectAlunoALUEST: TStringField
-      FieldName = 'ALUEST'
-      Required = True
-      Size = 2
-    end
-    object sqlSelectAlunoALURES: TStringField
-      DisplayWidth = 15
-      FieldName = 'ALURES'
-      Size = 100
-    end
-    object sqlSelectAlunoSERCOD: TIntegerField
-      FieldName = 'SERCOD'
-    end
-  end
   object sqlAlterarAluno: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'SELECT ALUCOD, ALUESC, ALUNOM, ALUSEX, ALUDATNAS, ALUDATMAT, ALU' +
-      'CPF, ALUCEP, ALURUA, ALUNUM, ALUCOM, ALUBAI, ALUCID, ALUEST, SER' +
-      'COD, ALURES FROM ALUNO'
+      'update Aluno'#13#10'set ALUNOM = :ALUNOM, ALUSEX = :ALUSEX, ALUDATNAS ' +
+      '= :ALUDATNAS, ALUCPF = :ALUCPF, ALUCEP = :ALUCEP,'#13#10'ALURUA = :ALU' +
+      'RUA, ALUNUM = :ALUNUM, '#13#10'ALUCOM = :ALUCOM, ALUBAI = :ALUBAI, ALU' +
+      'CID =:ALUCID,'#13#10'ALUEST = :ALUEST, ALUSER = :ALUSER, ALURES = :ALU' +
+      'RES'#13#10'where (ALUCOD = :ALUCOD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALUNOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
-        Name = 'ALUDATNAS'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALUSEX'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftWideString
+        Name = 'ALUDATNAS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
         Name = 'ALUCPF'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
-        Name = 'ALUESC'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALUCEP'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALURUA'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALUNUM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALUCOM'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ALUBAI'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
-        Name = 'FUNCID'
+        DataType = ftString
+        Name = 'ALUCID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'ALUEST'
         ParamType = ptInput
       end
       item
         DataType = ftUnknown
-        Name = 'FUNEST'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERCOD'
+        Name = 'ALUSER'
         ParamType = ptInput
       end
       item
@@ -449,7 +276,82 @@ object dmAluno: TdmAluno
         ParamType = ptInput
       end>
     SQLConnection = dmConexao.sqlConexao
-    Left = 376
+    Left = 360
     Top = 200
+  end
+  object sqlSelectAluno: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 'select * from Aluno'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmConexao.sqlConexao
+    Left = 280
+    Top = 200
+    object sqlSelectAlunoALUCOD: TIntegerField
+      FieldName = 'ALUCOD'
+      Required = True
+    end
+    object sqlSelectAlunoALUESC: TIntegerField
+      FieldName = 'ALUESC'
+      Required = True
+    end
+    object sqlSelectAlunoALUNOM: TStringField
+      FieldName = 'ALUNOM'
+      Required = True
+      Size = 100
+    end
+    object sqlSelectAlunoALUSEX: TStringField
+      FieldName = 'ALUSEX'
+      Required = True
+      Size = 1
+    end
+    object sqlSelectAlunoALUDATNAS: TWideStringField
+      FieldName = 'ALUDATNAS'
+    end
+    object sqlSelectAlunoALUDATMAT: TWideStringField
+      FieldName = 'ALUDATMAT'
+    end
+    object sqlSelectAlunoALUCPF: TStringField
+      FieldName = 'ALUCPF'
+      Size = 11
+    end
+    object sqlSelectAlunoALUCEP: TStringField
+      FieldName = 'ALUCEP'
+      Size = 8
+    end
+    object sqlSelectAlunoALURUA: TStringField
+      FieldName = 'ALURUA'
+      Size = 100
+    end
+    object sqlSelectAlunoALUNUM: TStringField
+      FieldName = 'ALUNUM'
+      Size = 5
+    end
+    object sqlSelectAlunoALUCOM: TStringField
+      FieldName = 'ALUCOM'
+      Size = 100
+    end
+    object sqlSelectAlunoALUBAI: TStringField
+      FieldName = 'ALUBAI'
+      Size = 30
+    end
+    object sqlSelectAlunoALUCID: TStringField
+      FieldName = 'ALUCID'
+      Required = True
+      Size = 50
+    end
+    object sqlSelectAlunoALUEST: TStringField
+      FieldName = 'ALUEST'
+      Required = True
+      Size = 2
+    end
+    object sqlSelectAlunoSERCOD: TIntegerField
+      FieldName = 'SERCOD'
+    end
+    object sqlSelectAlunoALURES: TStringField
+      FieldName = 'ALURES'
+      Size = 100
+    end
   end
 end

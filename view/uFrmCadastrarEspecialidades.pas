@@ -41,6 +41,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure btnFechar1Click(Sender: TObject);
 
   private
     procedure InserirEspecialidade;
@@ -114,6 +115,11 @@ begin
   dsEspecialidade.DataSet.Refresh;
 end;
 
+procedure TfrmCadastrarEspecialidades.btnFechar1Click(Sender: TObject);
+begin
+  frmCadastrarEspecialidades.Close;
+end;
+
 procedure TfrmCadastrarEspecialidades.btnFecharClick(Sender: TObject);
 begin
    frmCadastrarEspecialidades.Close;
@@ -148,6 +154,9 @@ end;
 
 procedure TfrmCadastrarEspecialidades.FormShow(Sender: TObject);
 begin
+  ClearEdits(Self);
+  tbPesquisar.TabVisible := False;
+  tbDados.TabVisible := False;
   dmConexao.cdsEspecialidade.Active := True;
   pgcEspecialidade.ActivePage := tbPesquisar;
 end;

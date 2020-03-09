@@ -48,10 +48,10 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure dbEscolaDblClick(Sender: TObject);
     procedure btnDetalharClick(Sender: TObject);
-    procedure dbEscolaCellClick(Column: TColumn);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure Inserir;
     procedure CarregarEscola;
@@ -80,15 +80,6 @@ begin
       TMaskEdit(Owner.Components[i]).Clear;
     end
 end;
-
-
-
-
-//procedure tFrmCadastrarEscola.Novo1Click(Sender: TObject);
-//begin
-//  ClearEdits(Self);
-//end;
-
 
 procedure TfrmCadastrarEscola.btnAlterarClick(Sender: TObject);
 var
@@ -129,9 +120,7 @@ procedure TfrmCadastrarEscola.btnConfirmarCadastroClick(Sender: TObject);
 begin
   Inserir;
   if MessageDlg('Escola adicionada com sucesso.'+#13+#10+'Deseja adicionar outra?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      begin
-      ClearEdits(frmCadastrarEscola);
-      end
+    ClearEdits(frmCadastrarEscola)
   else
     pgcEscola.ActivePage := tbPesquisar;
 end;
@@ -159,7 +148,6 @@ procedure TfrmCadastrarEscola.btnExcluirClick(Sender: TObject);
 begin
   Excluir;
   MessageDlg('Escola excluída com sucesso.', mtInformation, [mbOk], 0);
-
 end;
 
 procedure TfrmCadastrarEscola.btnFecharClick(Sender: TObject);
@@ -181,10 +169,7 @@ begin
   btnConfirmarCadastro.Enabled := True;
   btnCancelarCadastro.Enabled := True;
   ClearEdits(Self);
-
 end;
-
-
 
 procedure TfrmCadastrarEscola.CarregarEscola;
 var
@@ -211,18 +196,11 @@ begin
   end;
 end;
 
-procedure TfrmCadastrarEscola.dbEscolaCellClick(Column: TColumn);
-begin
-//CarregarEscola;
-end;
-
 procedure TfrmCadastrarEscola.dbEscolaDblClick(Sender: TObject);
 begin
   CarregarEscola;
   pgcEscola.ActivePage := tbDados;
   tbPesquisar.TabVisible := False;
-
-
 end;
 
 procedure TfrmCadastrarEscola.Excluir;
@@ -234,7 +212,7 @@ begin
   CodigoEscolaExcluir  := StrToInt(dbEscola.Fields[(0)].Text);
   oEscolaController := TEscolaController.Create;
   oEscolaController.Excluir(CodigoEscolaExcluir, sError);
-  dsEscola.DataSet.Refresh;
+  dsEscola.DataSet.Refresh;                    
 end;
 
 procedure TfrmCadastrarEscola.btnPesquisarClick(Sender: TObject);
@@ -242,13 +220,22 @@ var
   oEscolaController : TEscolaController;
 begin
   oEscolaController := TEscolaController.Create;
-    try
-      oEscolaController.Pesquisar(edtPesquisar.Text);
-      dsEscola.DataSet.Refresh;
-    finally
-      freeandnil(oEscolaController);
+  try
+//    oEscolaController.Pesquisar(edtPesquisar.Text);
+    dsEscola.DataSet.Filtered := False;
+    dsEscola.DataSet.Filter := 'ESCNOM = ' + QuotedStr(edtPesquisar.Text);
+    dsEscola.DataSet.Filtered := True;
 
-    end;
+    dsEscola.DataSet.First;
+  finally
+    freeandnil(oEscolaController);
+  end;
+end;
+
+procedure TfrmCadastrarEscola.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  dsEscola.DataSet.Active := False;
 end;
 
 procedure TfrmCadastrarEscola.FormShow(Sender: TObject);
@@ -257,6 +244,7 @@ begin
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   pgcEscola.ActivePage := tbPesquisar;
+  dsEscola.DataSet.Active := True;
 end;
 
 procedure TfrmCadastrarEscola.Inserir;
