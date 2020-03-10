@@ -29,7 +29,6 @@ type
     Panel1: TPanel;
     btnFechar: TButton;
     pnlFiltro: TPanel;
-    edtPesquisar: TLabeledEdit;
     btnPesquisar: TButton;
     dbEscola: TDBGrid;
     pnlBtnsPesq: TPanel;
@@ -39,6 +38,9 @@ type
     lbledtCodigo: TLabeledEdit;
     btnAlterar: TButton;
     btnListar: TButton;
+    rgPesquisa: TRadioGroup;
+    edtPesquisar: TLabeledEdit;
+    Label2: TLabel;
 
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarCadastroClick(Sender: TObject);
@@ -51,10 +53,14 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure lbledtEstadoKeyPress(Sender: TObject; var Key: Char);
   private
     procedure Inserir;
     procedure CarregarEscola;
     procedure Excluir;
+    procedure ResetarGrid;
+
     { Private declarations }
   public
     { Public declarations }
@@ -64,7 +70,8 @@ var
   frmCadastrarEscola: TfrmCadastrarEscola;
 
 implementation
-
+uses
+  uFuncoesAuxiliares;
 {$R *.dfm}
 procedure ClearEdits(Owner: TfrmCadastrarEscola);
 var i: integer;
@@ -220,12 +227,35 @@ var
 begin
   oEscolaController := TEscolaController.Create;
   try
-    dsEscola.DataSet.Close;
-    oEscolaController.Pesquisar(edtPesquisar.Text);
+//    oEscolaController.Pesquisar(edtPesquisar.Text);
+    case rgPesquisa.ItemIndex of
+    0:
+    begin
+      dsEscola.DataSet.Filtered := False;
+      dsEscola.DataSet.Filter := 'ESCCOD = ' + QuotedStr(edtPesquisar.Text);
+      dsEscola.DataSet.Filtered := True;
+    end;
+    1:
+    begin
+      dsEscola.DataSet.Filtered := False;
+      dsEscola.DataSet.Filter := 'ESCDATCAD = ' + QuotedStr(edtPesquisar.Text);
+      dsEscola.DataSet.Filtered := True;
+    end;
+    2:
+    begin
+      ResetarGrid;
+    end;
+    end;
     dsEscola.DataSet.First;
   finally
     freeandnil(oEscolaController);
   end;
+end;
+
+procedure TfrmCadastrarEscola.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  dsEscola.DataSet.Active := False;
 end;
 
 procedure TfrmCadastrarEscola.FormShow(Sender: TObject);
@@ -234,6 +264,9 @@ begin
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   pgcEscola.ActivePage := tbPesquisar;
+  dsEscola.DataSet.Active := True;
+  ResetarGrid;
+
 end;
 
 procedure TfrmCadastrarEscola.Inserir;
@@ -255,7 +288,6 @@ begin
     oEscola.ESCCOM := lbledtComplemento.Text;
     oEscola.ESCCIDADE := lbledtCidade.Text;
     oEscola.ESCEST := lbledtEstado.Text;
-    //oEscola.ESCDATCAD := TDateTime(now);
     if oEscolaController.Inserir(oEscola, sError) = False then
       raise Exception.Create(sError);
   finally
@@ -263,6 +295,20 @@ begin
     FreeAndNil(oEscolaController);
     dsEscola.DataSet.Refresh;
   end;
+end;
+
+
+procedure TfrmCadastrarEscola.lbledtEstadoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := SoAceitaLetra(Key, lbledtEstado.Text);
+end;
+
+procedure TfrmCadastrarEscola.ResetarGrid;
+begin
+  dsEscola.DataSet.Filtered := False;
+  dsEscola.DataSet.Filter := 'ESCCOD <> NULL';
+  dsEscola.DataSet.Filtered := True;
 end;
 
 end.

@@ -3,6 +3,7 @@ object dmAluno: TdmAluno
   Height = 533
   Width = 850
   object cdsAluno: TClientDataSet
+    Active = True
     Aggregates = <>
     CommandText = 'select * from Aluno'
     Params = <>
@@ -199,8 +200,8 @@ object dmAluno: TdmAluno
       'update Aluno'#13#10'set ALUNOM = :ALUNOM, ALUSEX = :ALUSEX, ALUDATNAS ' +
       '= :ALUDATNAS, ALUCPF = :ALUCPF, ALUCEP = :ALUCEP,'#13#10'ALURUA = :ALU' +
       'RUA, ALUNUM = :ALUNUM, '#13#10'ALUCOM = :ALUCOM, ALUBAI = :ALUBAI, ALU' +
-      'CID =:ALUCID,'#13#10'ALUEST = :ALUEST, ALURES = :ALURES'#13#10'where (ALUCOD' +
-      ' = :ALUCOD)'
+      'CID =:ALUCID,'#13#10'ALUEST = :ALUEST, ALUSER = :ALUSER, ALURES = :ALU' +
+      'RES'#13#10'where (ALUCOD = :ALUCOD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
@@ -260,7 +261,12 @@ object dmAluno: TdmAluno
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
+        Name = 'ALUSER'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
         Name = 'ALURES'
         ParamType = ptInput
       end

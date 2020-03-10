@@ -19,7 +19,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
     Top = 1
     Width = 616
     Height = 376
-    ActivePage = tbDados
+    ActivePage = tbPesquisar
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'

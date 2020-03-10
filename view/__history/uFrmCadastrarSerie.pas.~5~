@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, uSerieModel, uSerieController, ComCtrls, uDmSerie, uDmAluno, uDmFuncionario, uDmConexao,
-  DB, Grids, DBGrids, FMTBcd, SqlExpr;
+  Dialogs, StdCtrls, ExtCtrls, uSerieModel, uSerieController, ComCtrls, uDmSerie,
+  DB, Grids, DBGrids;
 
 type
   TfrmCadastrarSerie = class(TForm)
@@ -39,8 +39,6 @@ type
     btnExcluir: TButton;
     dbSerie: TDBGrid;
     dsSerie: TDataSource;
-    sqlqryTeste: TSQLQuery;
-    dsAlunos: TDataSource;
     procedure btnFecharClick(Sender: TObject);
     procedure btnFechar2Click(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
@@ -53,7 +51,6 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    procedure CarregaCombobox;
     { Private declarations }
   public
     procedure Inserir;
@@ -70,8 +67,6 @@ implementation
 
 
 { TfrmCadastrarSerie }
-
-
 
 procedure TfrmCadastrarSerie.btnAlterarClick(Sender: TObject);
 var
@@ -177,18 +172,6 @@ begin
     end;
 end;
 
-
-procedure TfrmCadastrarSerie.CarregaCombobox;
-begin
-  sqlqryTeste.CommandText := 'select ALUNOM from Aluno';
-  sqlqryTeste.ExecSQL();
-    while not sqlqryTeste.Eof do
-      begin
-        cbxEscolherAlunos.Items.Add('Éhoje')
-      end;
-  cbxEscolherAlunos.Items.Add('Robesvaldo');
-end;
-
 procedure TfrmCadastrarSerie.FormShow(Sender: TObject);
 begin
   ClearEdits(Self);
@@ -196,7 +179,6 @@ begin
   tbDados.TabVisible := False;
   dmSerie.cdsSerie.Active := True;
   pgcSerie.ActivePage := tbPesquisar;
-  CarregaCombobox;
 end;
 
 procedure TfrmCadastrarSerie.Inserir;

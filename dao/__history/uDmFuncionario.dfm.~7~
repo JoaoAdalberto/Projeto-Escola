@@ -24,7 +24,7 @@ object dmFuncionario: TdmFuncionario
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'FUNDATNAS'
         ParamType = ptInput
       end
@@ -276,7 +276,12 @@ object dmFuncionario: TdmFuncionario
     Top = 192
   end
   object cdsFuncionario: TClientDataSet
+    Active = True
     Aggregates = <>
+    CommandText = 
+      'SELECT FUNCOD, FUNNOM, FUNDATNAS, FUNDATEMP, FUNSEX, FUNCPF, FUN' +
+      'ESC, FUNESP, FUNCEP, FUNRUA, FUNNUM, FUNCOM, FUNBAI, FUNCID, FUN' +
+      'EST FROM FUNCIONARIO'
     Params = <>
     ProviderName = 'dspFuncionario'
     Left = 40

@@ -2,8 +2,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   Left = 0
   Top = 0
   Caption = 'CRUD Escola'
-  ClientHeight = 302
-  ClientWidth = 612
+  ClientHeight = 293
+  ClientWidth = 741
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,9 +18,9 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   object pgcEscola: TPageControl
     Left = 0
     Top = -2
-    Width = 612
-    Height = 274
-    ActivePage = tbPesquisar
+    Width = 741
+    Height = 265
+    ActivePage = tbDados
     Align = alBottom
     TabOrder = 0
     object tbPesquisar: TTabSheet
@@ -28,42 +28,67 @@ object frmCadastrarEscola: TfrmCadastrarEscola
       object pnlFiltro: TPanel
         Left = 0
         Top = 0
-        Width = 604
-        Height = 49
+        Width = 733
+        Height = 73
         Align = alTop
         BevelOuter = bvNone
         Color = clSilver
         ParentBackground = False
         TabOrder = 0
-        object edtPesquisar: TLabeledEdit
-          Left = 16
-          Top = 16
-          Width = 470
-          Height = 21
-          EditLabel.Width = 104
-          EditLabel.Height = 13
-          EditLabel.Caption = 'Digite para pesquisar '
-          TabOrder = 0
+        object Label2: TLabel
+          Left = 224
+          Top = 49
+          Width = 135
+          Height = 11
+          Caption = 'Data no formato AAAA-MM-DD'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
         end
         object btnPesquisar: TButton
-          Left = 492
-          Top = 15
-          Width = 75
-          Height = 24
+          Left = 376
+          Top = 48
+          Width = 89
+          Height = 22
           Caption = 'Pesquisar'
-          TabOrder = 1
+          TabOrder = 2
           OnClick = btnPesquisarClick
+        end
+        object rgPesquisa: TRadioGroup
+          Left = 30
+          Top = 7
+          Width = 179
+          Height = 63
+          Caption = 'Escolha o metodo de pesquisa'
+          Items.Strings = (
+            'C'#243'digo'
+            'Data de Cadastro'
+            'Todos')
+          TabOrder = 0
+        end
+        object edtPesquisar: TLabeledEdit
+          Left = 224
+          Top = 19
+          Width = 241
+          Height = 21
+          EditLabel.Width = 144
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Digite o filtro para a pesquisa:'
+          TabOrder = 1
         end
       end
       object dbEscola: TDBGrid
         AlignWithMargins = True
         Left = 3
-        Top = 52
-        Width = 598
-        Height = 150
+        Top = 76
+        Width = 727
+        Height = 117
         Align = alClient
         DataSource = dsEscola
-        TabOrder = 1
+        TabOrder = 2
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -73,16 +98,16 @@ object frmCadastrarEscola: TfrmCadastrarEscola
       end
       object pnlBtnsPesq: TPanel
         Left = 0
-        Top = 205
-        Width = 604
+        Top = 196
+        Width = 733
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
         Color = clSilver
         ParentBackground = False
-        TabOrder = 2
+        TabOrder = 1
         object btnNovo: TButton
-          Left = 435
+          Left = 486
           Top = 8
           Width = 75
           Height = 25
@@ -91,7 +116,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnNovoClick
         end
         object btnDetalhar: TButton
-          Left = 354
+          Left = 567
           Top = 8
           Width = 75
           Height = 25
@@ -100,7 +125,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnDetalharClick
         end
         object btnExcluir: TButton
-          Left = 516
+          Left = 648
           Top = 8
           Width = 75
           Height = 25
@@ -148,6 +173,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Width = 19
         EditLabel.Height = 13
         EditLabel.Caption = 'Rua'
+        MaxLength = 25
         TabOrder = 3
       end
       object lbledtNumero: TLabeledEdit
@@ -160,6 +186,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Caption = 'N'#250'mero'
         MaxLength = 5
         TabOrder = 4
+        OnKeyPress = lbledtNumeroKeyPress
       end
       object lbledtBairro: TLabeledEdit
         Left = 324
@@ -169,6 +196,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Width = 28
         EditLabel.Height = 13
         EditLabel.Caption = 'Bairro'
+        MaxLength = 15
         TabOrder = 5
       end
       object mskedtCep: TMaskEdit
@@ -192,6 +220,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Caption = 'Estado'
         MaxLength = 2
         TabOrder = 8
+        OnKeyPress = lbledtEstadoKeyPress
       end
       object lbledtComplemento: TLabeledEdit
         Left = 20
@@ -201,6 +230,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Width = 65
         EditLabel.Height = 13
         EditLabel.Caption = 'Complemento'
+        MaxLength = 20
         TabOrder = 6
       end
       object lbledtCidade: TLabeledEdit
@@ -211,20 +241,22 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Width = 33
         EditLabel.Height = 13
         EditLabel.Caption = 'Cidade'
+        MaxLength = 25
         TabOrder = 7
+        OnKeyPress = lbledtCidadeKeyPress
       end
       object pnlBotoes: TPanel
         Left = 0
-        Top = 208
-        Width = 604
+        Top = 199
+        Width = 733
         Height = 38
         Align = alBottom
         Color = clSilver
         ParentBackground = False
         TabOrder = 9
         object btnConfirmarCadastro: TButton
-          Left = 446
-          Top = 8
+          Left = 315
+          Top = 9
           Width = 75
           Height = 25
           Caption = 'Gravar'
@@ -232,8 +264,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnConfirmarCadastroClick
         end
         object btnCancelarCadastro: TButton
-          Left = 527
-          Top = 8
+          Left = 396
+          Top = 9
           Width = 75
           Height = 25
           Caption = 'Cancelar'
@@ -241,8 +273,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnCancelarCadastroClick
         end
         object btnAlterar: TButton
-          Left = 365
-          Top = 8
+          Left = 234
+          Top = 9
           Width = 75
           Height = 25
           Caption = 'Alterar'
@@ -250,8 +282,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnAlterarClick
         end
         object btnListar: TButton
-          Left = 284
-          Top = 8
+          Left = 153
+          Top = 9
           Width = 75
           Height = 25
           Caption = 'Listar'
@@ -274,14 +306,14 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object Panel1: TPanel
     Left = 0
-    Top = 272
-    Width = 612
+    Top = 263
+    Width = 741
     Height = 30
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
     object btnFechar: TButton
-      Left = 481
+      Left = 603
       Top = 2
       Width = 124
       Height = 25
@@ -292,7 +324,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
   end
   object dsEscola: TDataSource
     DataSet = dmConexao.cdsEscola
-    Left = 520
-    Top = 80
+    Left = 560
+    Top = 264
   end
 end

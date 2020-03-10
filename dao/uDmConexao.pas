@@ -46,6 +46,8 @@ type
     sqlAlterarEspecialidade: TSQLDataSet;
     sqlExcluirEspecialidade: TSQLDataSet;
     tableteste: TSQLTable;
+    sqlSelectEscolaESCDATCAD: TWideStringField;
+    cdsEscolaESCDATCAD: TWideStringField;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
     procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
@@ -210,7 +212,7 @@ begin
   sqlInserirEscola.Params.FindParam('ESCBAIRRO').AsString := oEscola.ESCBAIRRO;
   sqlInserirEscola.Params.FindParam('ESCCIDADE').AsString := oEscola.ESCCIDADE;
   sqlInserirEscola.Params.FindParam('ESCEST').AsString := oEscola.ESCEST;
-//  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
+  //sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
 
   try
     sqlInserirEscola.ExecSQL;

@@ -81,9 +81,9 @@ begin
   sqlAlterarAluno.Params[8].AsString  := oAluno.ALUBAI;
   sqlAlterarAluno.Params[9].AsString  := oAluno.ALUCID;
   sqlAlterarAluno.Params[10].AsString  := oAluno.ALUEST;
-  //sqlAlterarAluno.Params[11].AsInteger  := oAluno.SERCOD;
-  sqlAlterarAluno.Params[11].AsString  := oAluno.ALURES;
-  sqlAlterarAluno.Params[12].AsInteger  := oAluno.ALUCOD;
+  sqlAlterarAluno.Params[11].AsInteger  := oAluno.SERCOD;
+  sqlAlterarAluno.Params[12].AsString  := oAluno.ALURES;
+  sqlAlterarAluno.Params[13].AsInteger  := oAluno.ALUCOD;
   try
     sqlAlterarAluno.ExecSQL();
     Result := True;

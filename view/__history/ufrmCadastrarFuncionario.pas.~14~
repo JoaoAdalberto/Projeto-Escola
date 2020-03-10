@@ -43,6 +43,7 @@ type
     cbxSexo: TComboBox;
     dattimpckDataNascimento: TDateTimePicker;
     mskedtCPF: TMaskEdit;
+    cbxEspecialidade: TComboBox;
     lbledtCodigo: TLabeledEdit;
     dsFuncionario: TDataSource;
     dsEspecialidade: TDataSource;
@@ -50,10 +51,6 @@ type
     dsEscola: TDataSource;
     dblucbxEspecialidade: TDBLookupComboBox;
     Label4: TLabel;
-    Panel1: TPanel;
-    btnFechar: TButton;
-    pnlRodape: TPanel;
-    btnFechar2: TButton;
     procedure btnGravarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dbFuncionarioDblClick(Sender: TObject);
@@ -68,14 +65,10 @@ type
     procedure btnListarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
+    procedure pgcFuncionarioChange(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
-    procedure lbledtEstadoKeyPress(Sender: TObject; var Key: Char);
-    procedure lbledtCidadeKeyPress(Sender: TObject; var Key: Char);
-    procedure lbledtNumeroKeyPress(Sender: TObject; var Key: Char);
-    procedure pgcFuncionarioEnter(Sender: TObject);
-    procedure btnFechar2Click(Sender: TObject);
   private
-    procedure ResetarGrid;
+
     { Private declarations }
   public
     { Public declarations }
@@ -86,7 +79,7 @@ var
 
 implementation
 
-uses uDmConexao, uFuncoesAuxiliares;
+uses uDmConexao;
 
 
 procedure TfrmCadastrarFuncionario.btnGravarClick(Sender: TObject);
@@ -113,7 +106,7 @@ begin
     oFuncionario.FUNCPF := cpfsemponto;
     oFuncionario.FUNESC := dblcbxEscola.KeyValue;
     //oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
-    oFuncionario.FUNESP := dblucbxEspecialidade.KeyValue;
+    oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
     oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNRUA := lbledtRua.Text;
     oFuncionario.FUNNUM := lbledtNumero.Text;
@@ -126,39 +119,15 @@ begin
   finally
     FreeAndNil(oFuncionario);
     FreeAndNil(oFuncionarioController);
+
     dsFuncionario.DataSet.Refresh;
   end;
 end;
 
 
-procedure TfrmCadastrarFuncionario.lbledtCidadeKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TfrmCadastrarFuncionario.pgcFuncionarioChange(Sender: TObject);
 begin
-  Key := SoAceitaLetra(Key, lbledtCidade.Text);
-end;
 
-procedure TfrmCadastrarFuncionario.lbledtEstadoKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-  Key := SoAceitaLetra(Key, lbledtEstado.Text);
-end;
-
-procedure TfrmCadastrarFuncionario.lbledtNumeroKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-  Key := SoAceitaNumeros(Key, lbledtNumero.Text);
-end;
-
-procedure TfrmCadastrarFuncionario.pgcFuncionarioEnter(Sender: TObject);
-begin
-  dsFuncionario.DataSet.Refresh;
-end;
-
-procedure TfrmCadastrarFuncionario.ResetarGrid;
-begin
-  dsFuncionario.DataSet.Filtered := False;
-  dsFuncionario.DataSet.Filter := 'FUNCOD <> NULL';
-  dsFuncionario.DataSet.Filtered := True;
 end;
 
 {$R *.dfm}
@@ -193,7 +162,7 @@ begin
     oFuncionario.FUNCPF := StringReplace(StringReplace(mskedtcpf.Text, '.', '', [rfReplaceAll, rfIgnoreCase]), '-', '', [rfreplaceAll, rfignorecase]);
     //oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
     oFuncionario.FUNESC := dblcbxEscola.KeyValue;
-    oFuncionario.FUNESP := dblucbxEspecialidade.KeyValue;
+    oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
     oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNRUA := lbledtRua.Text;
     oFuncionario.FUNNUM := lbledtNumero.Text;
@@ -244,7 +213,7 @@ begin
   cbxSexo.Text := dbFuncionario.Fields[(4)].Text;
   mskedtCpf.Text := dbFuncionario.Fields[(5)].Text;
   //dblcbxEscola.Text := dbFuncionario.Fields[(6)].Text;
-  //cbxEspecialidade.Text := dbFuncionario.Fields[(7)].Text;
+  cbxEspecialidade.Text := dbFuncionario.Fields[(7)].Text;
   mskedtCep.Text :=   dbFuncionario.Fields[(8)].Text;
   lbledtRua.Text :=   dbFuncionario.Fields[(9)].Text;
   lbledtNumero.Text :=   dbFuncionario.Fields[(10)].Text;
@@ -263,14 +232,9 @@ end;
 
 
 
-procedure TfrmCadastrarFuncionario.btnFechar2Click(Sender: TObject);
-begin
-   frmCadastrarFuncionario.Close;
-end;
-
 procedure TfrmCadastrarFuncionario.btnFecharClick(Sender: TObject);
 begin
-  frmCadastrarFuncionario.Close;
+ frmCadastrarFuncionario.Close;
 end;
 
 
@@ -309,7 +273,7 @@ begin
     cbxSexo.Text := oFuncionario.FUNSEX;
     mskedtCPF.Text := oFuncionario.FUNCPF;
     //lbledtCodigoEscola.Text := IntToStr(oFuncionario.FUNESC);
-    //cbxEspecialidade.Text := IntToStr(oFuncionario.FUNESP);
+    cbxEspecialidade.Text := IntToStr(oFuncionario.FUNESP);
     mskedtCep.Text := oFuncionario.FUNCEP;
     lbledtRua.Text := oFuncionario.FUNRUA;
     lbledtNumero.Text := oFuncionario.FUNNUM;
@@ -352,10 +316,6 @@ begin
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   pgcFuncionario.ActivePage := tbPesquisar;
-  dmFuncionario.cdsFuncionario.Active := True;
-  dmConexao.cdsEscola.Active := True;
-  dmConexao.cdsEspecialidade.Active := True;
-  ResetarGrid;
 end;
 
 
@@ -365,12 +325,8 @@ var
 begin
   oFuncionarioController := TFuncionarioController.Create;
     try
-      //oFuncionarioController.Pesquisar(edtPesquisar.Text);
-      dsFuncionario.DataSet.Filtered := False;
-      dsFuncionario.DataSet.Filter := 'FUNNOM = ' + QuotedStr(edtPesquisar.Text);
-      dsFuncionario.DataSet.Filtered := True;
-      if edtPesquisar.Text = '' then
-        ResetarGrid;
+      oFuncionarioController.Pesquisar(edtPesquisar.Text);
+      dsFuncionario.DataSet.Refresh;
     finally
       freeandnil(oFuncionarioController);
 

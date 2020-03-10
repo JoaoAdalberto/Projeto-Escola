@@ -89,12 +89,16 @@ object dmConexao: TdmConexao
       Required = True
       Size = 2
     end
+    object cdsEscolaESCDATCAD: TWideStringField
+      DisplayWidth = 11
+      FieldName = 'ESCDATCAD'
+    end
   end
   object sqlSelectEscola: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
       'SELECT ESCCOD, ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCCOM, ESCNUM, E' +
-      'SCBAIRRO, ESCCIDADE, ESCEST FROM ESCOLA'
+      'SCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD FROM ESCOLA'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -143,6 +147,10 @@ object dmConexao: TdmConexao
       FieldName = 'ESCEST'
       Required = True
       Size = 2
+    end
+    object sqlSelectEscolaESCDATCAD: TWideStringField
+      DisplayWidth = 12
+      FieldName = 'ESCDATCAD'
     end
   end
   object sqlInserirEscola: TSQLDataSet

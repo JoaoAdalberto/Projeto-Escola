@@ -24,7 +24,7 @@ type
     btnGravar: TButton;
     btnCancelar: TButton;
     pnlPesquisar: TPanel;
-    lbledtPesquisar: TLabeledEdit;
+    LabeledEdit1: TLabeledEdit;
     btnPesquisar: TButton;
     dbEspecialidade: TDBGrid;
     dsEspecialidade: TDataSource;
@@ -42,11 +42,9 @@ type
     procedure btnListarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnFechar1Click(Sender: TObject);
-    procedure btnPesquisarClick(Sender: TObject);
 
   private
     procedure InserirEspecialidade;
-    procedure ResetarGrid;
     public
     { Public declarations }
   end;
@@ -154,15 +152,6 @@ begin
   ClearEdits(Self);
 end;
 
-procedure TfrmCadastrarEspecialidades.btnPesquisarClick(Sender: TObject);
-begin
-  dsEspecialidade.DataSet.Filtered := False;
-  dsEspecialidade.DataSet.Filter := 'ESPDES = ' + QuotedStr(lbledtPesquisar.Text);
-  dsEspecialidade.DataSet.Filtered := True;
-  if lbledtPesquisar.Text = '' then
-    ResetarGrid;
-end;
-
 procedure TfrmCadastrarEspecialidades.FormShow(Sender: TObject);
 begin
   ClearEdits(Self);
@@ -170,7 +159,6 @@ begin
   tbDados.TabVisible := False;
   dmConexao.cdsEspecialidade.Active := True;
   pgcEspecialidade.ActivePage := tbPesquisar;
-  ResetarGrid;
 end;
 
 procedure TfrmCadastrarEspecialidades.InserirEspecialidade;
@@ -196,13 +184,6 @@ end;
 
 
 
-
-procedure TfrmCadastrarEspecialidades.ResetarGrid;
-begin
-  dsEspecialidade.DataSet.Filtered := False;
-  dsEspecialidade.DataSet.Filter := 'ESPCOD <> NULL';
-  dsEspecialidade.DataSet.Filtered := True;
-end;
 
 {$R *.dfm}
 

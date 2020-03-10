@@ -126,6 +126,8 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
+      ExplicitLeft = -12
+      ExplicitTop = 16
       object Label1: TLabel
         Left = 32
         Top = 200
@@ -170,7 +172,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         TabOrder = 2
       end
       object cbxEscolherprofessores: TComboBox
-        Left = 31
+        Left = 32
         Top = 219
         Width = 273
         Height = 21
@@ -281,19 +283,5 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     DataSet = dmSerie.cdsSerie
     Left = 632
     Top = 344
-  end
-  object sqlqryTeste: TSQLQuery
-    SchemaName = 'sa'
-    DataSource = dsAlunos
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = dmConexao.sqlConexao
-    Left = 640
-    Top = 24
-  end
-  object dsAlunos: TDataSource
-    DataSet = dmAluno.cdsAluno
-    Left = 416
-    Top = 336
   end
 end

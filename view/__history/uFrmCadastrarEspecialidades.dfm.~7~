@@ -51,14 +51,14 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Color = clSilver
         ParentBackground = False
         TabOrder = 1
-        object lbledtPesquisar: TLabeledEdit
+        object LabeledEdit1: TLabeledEdit
           Left = 8
           Top = 16
           Width = 241
           Height = 21
-          EditLabel.Width = 139
+          EditLabel.Width = 137
           EditLabel.Height = 13
-          EditLabel.Caption = 'Digite o nome para pesquisar'
+          EditLabel.Caption = 'Digite o ### para pesquisar'
           TabOrder = 0
         end
         object btnPesquisar: TButton
@@ -68,7 +68,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
           Height = 25
           Caption = 'Pesquisar'
           TabOrder = 1
-          OnClick = btnPesquisarClick
         end
       end
       object dbEspecialidade: TDBGrid

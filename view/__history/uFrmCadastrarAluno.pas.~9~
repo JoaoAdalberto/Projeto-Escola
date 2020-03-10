@@ -158,16 +158,16 @@ begin
   //lbledtCodigoEscola.Text :=   dbAluno.Fields[(1)].Text;
   lbledtNome.Text :=   dbAluno.Fields[(2)].Text;
   cbxSex.Text := dbAluno.Fields[(3)].Text;
-  mskedtCpf.Text := dbAluno.Fields[(5)].Text;
-  mskedtCep.Text :=   dbAluno.Fields[(7)].Text;
-  lbledtRua.Text :=   dbAluno.Fields[(8)].Text;
-  lbledtNumero.Text :=   dbAluno.Fields[(9)].Text;
-  lbledtComplemento.Text :=   dbAluno.Fields[(10)].Text;
-  lbledtBairro.Text :=   dbAluno.Fields[(11)].Text;
-  lbledtCidade.Text :=   dbAluno.Fields[(12)].Text;
-  lbledtEstado.Text :=   dbAluno.Fields[(13)].Text;
+  mskedtCpf.Text := dbAluno.Fields[(7)].Text;
+  mskedtCep.Text :=   dbAluno.Fields[(8)].Text;
+  lbledtRua.Text :=   dbAluno.Fields[(9)].Text;
+  lbledtNumero.Text :=   dbAluno.Fields[(10)].Text;
+  lbledtComplemento.Text :=   dbAluno.Fields[(11)].Text;
+  lbledtBairro.Text :=   dbAluno.Fields[(12)].Text;
+  lbledtCidade.Text :=   dbAluno.Fields[(13)].Text;
+  lbledtEstado.Text :=   dbAluno.Fields[(14)].Text;
   //lbledtSerie.Text := dbAluno.Fields[(15)].Text;
-  lbledtNomeResponsavel.Text := dbAluno.Fields[(14)].Text;
+  lbledtNomeResponsavel.Text := dbAluno.Fields[(16)].Text;
 end;
 
 procedure TfrmCadastrarAluno.btnExcluirClick(Sender: TObject);

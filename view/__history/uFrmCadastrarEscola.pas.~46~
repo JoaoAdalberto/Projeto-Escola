@@ -51,6 +51,7 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure Inserir;
     procedure CarregarEscola;
@@ -220,12 +221,21 @@ var
 begin
   oEscolaController := TEscolaController.Create;
   try
-    dsEscola.DataSet.Close;
-    oEscolaController.Pesquisar(edtPesquisar.Text);
+//    oEscolaController.Pesquisar(edtPesquisar.Text);
+    dsEscola.DataSet.Filtered := False;
+    dsEscola.DataSet.Filter := 'ESCNOM = ' + QuotedStr(edtPesquisar.Text);
+    dsEscola.DataSet.Filtered := True;
+
     dsEscola.DataSet.First;
   finally
     freeandnil(oEscolaController);
   end;
+end;
+
+procedure TfrmCadastrarEscola.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  dsEscola.DataSet.Active := False;
 end;
 
 procedure TfrmCadastrarEscola.FormShow(Sender: TObject);
@@ -234,7 +244,7 @@ begin
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   pgcEscola.ActivePage := tbPesquisar;
-  dmConexao.cdsEscola.Active := True;
+  dsEscola.DataSet.Active := True;
 end;
 
 procedure TfrmCadastrarEscola.Inserir;

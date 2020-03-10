@@ -283,11 +283,8 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     Top = 344
   end
   object sqlqryTeste: TSQLQuery
-    SchemaName = 'sa'
     DataSource = dsAlunos
-    MaxBlobSize = -1
     Params = <>
-    SQLConnection = dmConexao.sqlConexao
     Left = 640
     Top = 24
   end

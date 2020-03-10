@@ -56,5 +56,6 @@
     <Transaction>2020/03/03 10:55:01.913.pas,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.pas=D:\Joao\Documents\GitHub\Projeto-Escola\model\uAlunoModel.pas</Transaction>
     <Transaction>2020/03/03 13:06:43.088.pas,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.pas=D:\Joao\Documents\GitHub\Projeto-Escola\controller\uSerieController.pas</Transaction>
     <Transaction>2020/03/03 13:17:48.295.pas,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.pas=D:\Joao\Documents\GitHub\Projeto-Escola\controller\uAlunoController.pas</Transaction>
+    <Transaction>2020/03/10 10:36:14.389.pas,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.pas=D:\Joao\Documents\GitHub\Projeto-Escola\view\uFuncoesAuxiliares.pas</Transaction>
   </Transactions>
 </BorlandProject>

@@ -355,7 +355,6 @@ begin
   dmFuncionario.cdsFuncionario.Active := True;
   dmConexao.cdsEscola.Active := True;
   dmConexao.cdsEspecialidade.Active := True;
-  ResetarGrid;
 end;
 
 
