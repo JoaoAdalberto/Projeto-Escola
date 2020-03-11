@@ -162,21 +162,18 @@ begin
   sqlInserirAluno.Params.FindParam('ALUESC').AsInteger := oAluno.ALUESC;
   sqlInserirAluno.Params.FindParam('ALUNOM').AsString := oAluno.ALUNOM;
   sqlInserirAluno.Params.FindParam('ALUSEX').AsString := oAluno.ALUSEX;
-  sqlInserirAluno.Params.FindParam('ALUDATNAS').AsString := FormatDateTime('DD/MM/YYYY', oAluno.ALUDATNAS);;
-  //sqlInserirAluno.Params.FindParam('ALUDATMAT').AsString := oAluno.ALUDATMAT;
+  sqlInserirAluno.Params.FindParam('ALUDATNAS').AsString := FormatDateTime('DD/MM/YYYY', oAluno.ALUDATNAS);
+  sqlInserirAluno.Params.FindParam('ALUDATMAT').AsString := FormatDateTime('DD/MM/YYYY', oAluno.ALUDATMAT);
   sqlInserirAluno.Params.FindParam('ALUCPF').AsString := oAluno.ALUCPF;
   sqlInserirAluno.Params.FindParam('ALUCEP').AsString := oAluno.ALUCEP;
   sqlInserirAluno.Params.FindParam('ALURUA').AsString := oAluno.ALURUA;
   sqlInserirAluno.Params.FindParam('ALUNUM').AsString := oAluno.ALUNUM;
   sqlInserirAluno.Params.FindParam('ALUCOM').AsString := oAluno.ALUCOM;
-  sqlInserirAluno.Params.FindParam('ALUBAI').AsString := oAluno.ALUCPF;
-  sqlInserirAluno.Params.FindParam('ALUCID').AsString := oAluno.ALUCEP;
+  sqlInserirAluno.Params.FindParam('ALUBAI').AsString := oAluno.ALUBAI;
+  sqlInserirAluno.Params.FindParam('ALUCID').AsString := oAluno.ALUCID;
   sqlInserirAluno.Params.FindParam('ALUEST').AsString := oAluno.ALUEST;
   //sqlInserirAluno.Params.FindParam('SERCOD').AsInteger := oAluno.SERCOD;
   sqlInserirAluno.Params.FindParam('ALURES').AsString := oAluno.ALURES;
-
-//  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
-
   try
     sqlInserirAluno.ExecSQL;
     Result := True;

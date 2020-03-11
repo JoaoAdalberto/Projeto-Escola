@@ -120,11 +120,13 @@ end;
 procedure TfrmCadastrarEspecialidades.btnFechar1Click(Sender: TObject);
 begin
   frmCadastrarEspecialidades.Close;
+  dsEspecialidade.DataSet.Active := False;
 end;
 
 procedure TfrmCadastrarEspecialidades.btnFecharClick(Sender: TObject);
 begin
    frmCadastrarEspecialidades.Close;
+   dsEspecialidade.DataSet.Active := False;
 end;
 
 procedure TfrmCadastrarEspecialidades.btnGravarClick(Sender: TObject);
@@ -168,7 +170,7 @@ begin
   ClearEdits(Self);
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
-  dmConexao.cdsEspecialidade.Active := True;
+  dsEspecialidade.DataSet.Active := True;
   pgcEspecialidade.ActivePage := tbPesquisar;
   ResetarGrid;
 end;

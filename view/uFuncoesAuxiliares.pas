@@ -11,7 +11,7 @@ implementation
 
 function SoAceitaLetra(Key: Char; Texto: String):Char;
 begin
-  if not (Key in['A'..'Z', Chr(8)]) and not (Key in['a'..'z', Chr(8)]) then
+  if not (Key in['A'..'Z', #8]) and not (Key in['a'..'z', #8]) then
     Key := #0;
   Result := Key;
 end;

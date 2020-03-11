@@ -7,9 +7,9 @@ object dmFuncionario: TdmFuncionario
     CommandText = 
       'insert into Funcionario (FUNCOD ,FUNNOM, FUNDATNAS, FUNDATEMP, F' +
       'UNSEX, FUNCPF, FUNESC, FUNESP, FUNCEP, FUNRUA, FUNNUM, FUNCOM, F' +
-      'UNBAI, FUNCID, FUNEST)'#13#10'values (:FUNCOD, :FUNNOM, :FUNDATNAS, GE' +
-      'TDATE(), :FUNSEX, :FUNCPF, :FUNESC , :FUNESP, :FUNCEP, :FUNRUA, ' +
-      ':FUNNUM, :FUNCOM, :FUNBAI, :FUNCID, :FUNEST)'
+      'UNBAI, FUNCID, FUNEST)'#13#10'values (:FUNCOD, :FUNNOM, :FUNDATNAS, :F' +
+      'UNDATEMP, :FUNSEX, :FUNCPF, :FUNESC , :FUNESP, :FUNCEP, :FUNRUA,' +
+      ' :FUNNUM, :FUNCOM, :FUNBAI, :FUNCID, :FUNEST)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
@@ -24,8 +24,13 @@ object dmFuncionario: TdmFuncionario
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'FUNDATNAS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FUNDATEMP'
         ParamType = ptInput
       end
       item
@@ -120,71 +125,65 @@ object dmFuncionario: TdmFuncionario
     SQLConnection = dmConexao.sqlConexao
     Left = 40
     Top = 192
-    object sqlSelectFuncionarioFUNCOD: TIntegerField
-      DisplayWidth = 3
+    object intgrfldSelectFuncionarioFUNCOD: TIntegerField
       FieldName = 'FUNCOD'
       Required = True
     end
-    object sqlSelectFuncionarioFUNNOM: TStringField
-      DisplayWidth = 20
+    object strngfldSelectFuncionarioFUNNOM: TStringField
       FieldName = 'FUNNOM'
       Required = True
       Size = 100
     end
-    object sqlSelectFuncionarioFUNDATNAS: TSQLTimeStampField
+    object sqlSelectFuncionarioFUNDATNAS: TWideStringField
       FieldName = 'FUNDATNAS'
     end
     object sqlSelectFuncionarioFUNDATEMP: TWideStringField
       FieldName = 'FUNDATEMP'
     end
-    object sqlSelectFuncionarioFUNSEX: TStringField
+    object strngfldSelectFuncionarioFUNSEX: TStringField
       FieldName = 'FUNSEX'
       Required = True
       Size = 1
     end
-    object sqlSelectFuncionarioFUNCPF: TStringField
+    object strngfldSelectFuncionarioFUNCPF: TStringField
       FieldName = 'FUNCPF'
       Required = True
       Size = 11
     end
-    object sqlSelectFuncionarioFUNESC: TIntegerField
+    object intgrfldSelectFuncionarioFUNESC: TIntegerField
       FieldName = 'FUNESC'
       Required = True
     end
-    object sqlSelectFuncionarioFUNESP: TIntegerField
+    object intgrfldSelectFuncionarioFUNESP: TIntegerField
       FieldName = 'FUNESP'
       Required = True
     end
-    object sqlSelectFuncionarioFUNCEP: TStringField
+    object strngfldSelectFuncionarioFUNCEP: TStringField
       FieldName = 'FUNCEP'
       Size = 8
     end
-    object sqlSelectFuncionarioFUNRUA: TStringField
-      DisplayWidth = 20
+    object strngfldSelectFuncionarioFUNRUA: TStringField
       FieldName = 'FUNRUA'
       Size = 100
     end
-    object sqlSelectFuncionarioFUNNUM: TStringField
+    object strngfldSelectFuncionarioFUNNUM: TStringField
       FieldName = 'FUNNUM'
       Size = 5
     end
-    object sqlSelectFuncionarioFUNCOM: TStringField
-      DisplayWidth = 15
+    object strngfldSelectFuncionarioFUNCOM: TStringField
       FieldName = 'FUNCOM'
       Size = 100
     end
-    object sqlSelectFuncionarioFUNBAI: TStringField
-      DisplayWidth = 15
+    object strngfldSelectFuncionarioFUNBAI: TStringField
       FieldName = 'FUNBAI'
       Size = 30
     end
-    object sqlSelectFuncionarioFUNCID: TStringField
-      DisplayWidth = 15
+    object strngfldSelectFuncionarioFUNCID: TStringField
       FieldName = 'FUNCID'
       Required = True
       Size = 50
     end
-    object sqlSelectFuncionarioFUNEST: TStringField
+    object strngfldSelectFuncionarioFUNEST: TStringField
       FieldName = 'FUNEST'
       Required = True
       Size = 2
@@ -279,77 +278,93 @@ object dmFuncionario: TdmFuncionario
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFuncionario'
-    Left = 40
+    Left = 48
     Top = 48
-    object cdsFuncionarioFUNCOD: TIntegerField
-      DisplayWidth = 5
+    object intgrfldFuncionarioFUNCOD: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'C'#243'digo'
+      DisplayWidth = 3
       FieldName = 'FUNCOD'
       Required = True
     end
-    object cdsFuncionarioFUNNOM: TStringField
+    object strngfldFuncionarioFUNNOM: TStringField
+      DisplayLabel = 'Nome'
       DisplayWidth = 20
       FieldName = 'FUNNOM'
       Required = True
       Size = 100
     end
-    object cdsFuncionarioFUNDATNAS: TSQLTimeStampField
-      DisplayWidth = 12
+    object cdsFuncionarioFUNDATNAS: TWideStringField
+      DisplayLabel = 'Data de Nascimento'
+      DisplayWidth = 11
       FieldName = 'FUNDATNAS'
     end
     object cdsFuncionarioFUNDATEMP: TWideStringField
-      DisplayWidth = 12
+      DisplayLabel = 'Data de Contrata'#231#227'o'
+      DisplayWidth = 11
       FieldName = 'FUNDATEMP'
     end
-    object cdsFuncionarioFUNSEX: TStringField
+    object strngfldFuncionarioFUNSEX: TStringField
+      DisplayLabel = 'Sexo'
       FieldName = 'FUNSEX'
       Required = True
       Size = 1
     end
-    object cdsFuncionarioFUNCPF: TStringField
+    object strngfldFuncionarioFUNCPF: TStringField
+      DisplayLabel = 'CPF'
       FieldName = 'FUNCPF'
       Required = True
       Size = 11
     end
-    object cdsFuncionarioFUNESC: TIntegerField
-      DisplayWidth = 5
+    object intgrfldFuncionarioFUNESC: TIntegerField
+      DisplayLabel = 'C'#243'digo Escola'
+      DisplayWidth = 3
       FieldName = 'FUNESC'
       Required = True
     end
-    object cdsFuncionarioFUNESP: TIntegerField
-      DisplayWidth = 5
+    object intgrfldFuncionarioFUNESP: TIntegerField
+      DisplayLabel = 'C'#243'digo Especialidade'
+      DisplayWidth = 3
       FieldName = 'FUNESP'
       Required = True
     end
-    object cdsFuncionarioFUNCEP: TStringField
+    object strngfldFuncionarioFUNCEP: TStringField
+      DisplayLabel = 'CEP'
       FieldName = 'FUNCEP'
       Size = 8
     end
-    object cdsFuncionarioFUNRUA: TStringField
+    object strngfldFuncionarioFUNRUA: TStringField
+      DisplayLabel = 'Rua'
       DisplayWidth = 15
       FieldName = 'FUNRUA'
       Size = 100
     end
-    object cdsFuncionarioFUNNUM: TStringField
+    object strngfldFuncionarioFUNNUM: TStringField
+      DisplayLabel = 'N'#250'mero'
       FieldName = 'FUNNUM'
       Size = 5
     end
-    object cdsFuncionarioFUNCOM: TStringField
-      DisplayWidth = 10
+    object strngfldFuncionarioFUNCOM: TStringField
+      DisplayLabel = 'Complemento'
+      DisplayWidth = 15
       FieldName = 'FUNCOM'
       Size = 100
     end
-    object cdsFuncionarioFUNBAI: TStringField
+    object strngfldFuncionarioFUNBAI: TStringField
+      DisplayLabel = 'Bairro'
       DisplayWidth = 15
       FieldName = 'FUNBAI'
       Size = 30
     end
-    object cdsFuncionarioFUNCID: TStringField
+    object strngfldFuncionarioFUNCID: TStringField
+      DisplayLabel = 'Cidade'
       DisplayWidth = 15
       FieldName = 'FUNCID'
       Required = True
       Size = 50
     end
-    object cdsFuncionarioFUNEST: TStringField
+    object strngfldFuncionarioFUNEST: TStringField
+      DisplayLabel = 'Estado'
       FieldName = 'FUNEST'
       Required = True
       Size = 2

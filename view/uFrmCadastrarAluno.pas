@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, DBCtrls, uAlunoController, uAlunoModel, DB, DBGrids, uDmAluno, uDmConexao,
-  Grids;
+  Grids,  uFuncoesAuxiliares;
+
 
 type
   TfrmCadastrarAluno = class(TForm)
@@ -13,7 +14,6 @@ type
     tbPesquisar: TTabSheet;
     tbDados: TTabSheet;
     Label1: TLabel;
-    lblDataMatricula: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     lbledtEstado: TLabeledEdit;
@@ -25,7 +25,6 @@ type
     mskedtCep: TMaskEdit;
     lbledtNome: TLabeledEdit;
     dattimpickDataNascimento: TDateTimePicker;
-    dattimpckDataMatricula: TDateTimePicker;
     mskedtCPF: TMaskEdit;
     lbledtNomeResponsavel: TLabeledEdit;
     lbledtCodigo: TLabeledEdit;
@@ -52,6 +51,8 @@ type
     Escola: TLabel;
     lblSexo: TLabel;
     cbxSex: TComboBox;
+    dattimpickDataMatricula: TDateTimePicker;
+    lblDatadeMatricula: TLabel;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnDetalharClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
@@ -79,8 +80,6 @@ var
   frmCadastrarAluno: TfrmCadastrarAluno;
 
 implementation
-uses
-  uFuncoesAuxiliares;
 {$R *.dfm}
 
 procedure ClearEdits(Owner: TfrmCadastrarAluno);
@@ -249,7 +248,7 @@ begin
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   dsAluno.DataSet.Active := True;
-  dmConexao.cdsEscola.Active := True;
+  dsEscola.DataSet.Active := True;
   pgcAluno.ActivePage := tbPesquisar;
   ResetarGrid;
 end;
@@ -272,6 +271,7 @@ begin
     oAluno.ALUNOM := lbledtNome.Text;
     oAluno.ALUSEX := cbxSex.Text;
     oAluno.ALUDATNAS := dattimpickDataNascimento.Date;
+    oAluno.ALUDATMAT := dattimpickDataMatricula.Date;
     oAluno.ALUCPF := cpfsemponto;
     oAluno.ALUCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oAluno.ALURUA := lbledtRua.Text;
@@ -287,7 +287,7 @@ begin
   finally
     FreeAndNil(oAluno);
     FreeAndNil(oAlunoController);
-
+    dsAluno.DataSet.Refresh;
   end;
 end;
 

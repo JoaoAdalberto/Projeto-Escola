@@ -4,85 +4,100 @@ object dmAluno: TdmAluno
   Width = 850
   object cdsAluno: TClientDataSet
     Aggregates = <>
-    CommandText = 'select * from Aluno'
     Params = <>
     ProviderName = 'dspAluno'
     Left = 136
     Top = 88
     object cdsAlunoALUCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo'
       DisplayWidth = 3
       FieldName = 'ALUCOD'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
     object cdsAlunoALUESC: TIntegerField
+      DisplayLabel = 'C'#243'digo da Escola'#13#10
       DisplayWidth = 3
       FieldName = 'ALUESC'
       Required = True
     end
     object cdsAlunoALUNOM: TStringField
+      DisplayLabel = 'Nome'
       DisplayWidth = 20
       FieldName = 'ALUNOM'
       Required = True
       Size = 100
     end
     object cdsAlunoALUSEX: TStringField
+      DisplayLabel = 'Sexo'#13#10
       FieldName = 'ALUSEX'
       Required = True
       Size = 1
     end
     object cdsAlunoALUDATNAS: TWideStringField
+      DisplayLabel = 'Data de Nascimento'
       DisplayWidth = 15
       FieldName = 'ALUDATNAS'
     end
     object cdsAlunoALUCPF: TStringField
+      DisplayLabel = 'CPF'
       FieldName = 'ALUCPF'
       Size = 11
     end
-    object cdsAlunoALUDATMAT: TWideStringField
-      DisplayWidth = 15
-      FieldName = 'ALUDATMAT'
-    end
     object cdsAlunoALUCEP: TStringField
+      DisplayLabel = 'CEP'
       FieldName = 'ALUCEP'
       Size = 8
     end
+    object cdsAlunoALUDATMAT: TWideStringField
+      DisplayLabel = 'Data de Matr'#237'cula'#13#10
+      DisplayWidth = 15
+      FieldName = 'ALUDATMAT'
+    end
     object cdsAlunoALURUA: TStringField
+      DisplayLabel = 'Rua'
       DisplayWidth = 15
       FieldName = 'ALURUA'
       Size = 100
     end
     object cdsAlunoALUNUM: TStringField
+      DisplayLabel = 'N'#250'mero'
       FieldName = 'ALUNUM'
       Size = 5
     end
     object cdsAlunoALUCOM: TStringField
+      DisplayLabel = 'Complemento'
       DisplayWidth = 15
       FieldName = 'ALUCOM'
       Size = 100
     end
     object cdsAlunoALUBAI: TStringField
+      DisplayLabel = 'Bairro'
       DisplayWidth = 15
       FieldName = 'ALUBAI'
       Size = 30
     end
     object cdsAlunoALUCID: TStringField
+      DisplayLabel = 'Cidade'
       DisplayWidth = 15
       FieldName = 'ALUCID'
       Required = True
       Size = 50
     end
     object cdsAlunoALUEST: TStringField
+      DisplayLabel = 'Estado'
       FieldName = 'ALUEST'
       Required = True
       Size = 2
     end
     object cdsAlunoALURES: TStringField
+      DisplayLabel = 'Respons'#225'vel'
       DisplayWidth = 15
       FieldName = 'ALURES'
       Size = 100
     end
     object cdsAlunoSERCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo da S'#233'rie'
       DisplayWidth = 3
       FieldName = 'SERCOD'
     end
@@ -99,8 +114,8 @@ object dmAluno: TdmAluno
       'insert into Aluno (ALUCOD , ALUESC, ALUNOM, ALUSEX, ALUDATNAS, A' +
       'LUDATMAT, ALUCPF, ALUCEP, ALURUA, ALUNUM, ALUCOM, ALUBAI, ALUCID' +
       ', ALUEST,  ALURES)'#13#10'values (:ALUCOD, :ALUESC, :ALUNOM, :ALUSEX, ' +
-      ':ALUDATNAS, GETDATE(), :ALUCPF,  :ALUCEP, :ALURUA, :ALUNUM, :ALU' +
-      'COM, :ALUBAI, :ALUCID, :ALUEST,  :ALURES)'
+      ':ALUDATNAS, :ALUDATMAT, :ALUCPF,  :ALUCEP, :ALURUA, :ALUNUM, :AL' +
+      'UCOM, :ALUBAI, :ALUCID, :ALUEST,  :ALURES)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
@@ -127,6 +142,11 @@ object dmAluno: TdmAluno
       item
         DataType = ftUnknown
         Name = 'ALUDATNAS'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ALUDATMAT'
         ParamType = ptInput
       end
       item
@@ -314,13 +334,13 @@ object dmAluno: TdmAluno
       FieldName = 'ALUCEP'
       Size = 8
     end
-    object sqlSelectAlunoALURUA: TStringField
-      FieldName = 'ALURUA'
-      Size = 100
-    end
     object sqlSelectAlunoALUNUM: TStringField
       FieldName = 'ALUNUM'
       Size = 5
+    end
+    object sqlSelectAlunoALURUA: TStringField
+      FieldName = 'ALURUA'
+      Size = 100
     end
     object sqlSelectAlunoALUCOM: TStringField
       FieldName = 'ALUCOM'

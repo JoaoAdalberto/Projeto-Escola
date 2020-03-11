@@ -41,6 +41,8 @@ type
     rgPesquisa: TRadioGroup;
     edtPesquisar: TLabeledEdit;
     Label2: TLabel;
+    dtpDataCadastro: TDateTimePicker;
+    lblDataCadastro: TLabel;
 
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarCadastroClick(Sender: TObject);
@@ -290,6 +292,7 @@ begin
     oEscola.ESCCOM := lbledtComplemento.Text;
     oEscola.ESCCIDADE := lbledtCidade.Text;
     oEscola.ESCEST := lbledtEstado.Text;
+    oEscola.ESCDATCAD := dtpDataCadastro.Date;
     if oEscolaController.Inserir(oEscola, sError) = False then
       raise Exception.Create(sError);
   finally
@@ -324,5 +327,20 @@ begin
   dsEscola.DataSet.Filter := 'ESCCOD <> NULL';
   dsEscola.DataSet.Filtered := True;
 end;
+
+//Procedure TF_Cliente.EditCodExit(Sender: TObject);
+//begin
+//   qryPesq.Close;
+//   qryPesq.SQL.Clear;
+//   qryPesq.SQL.Add('Select Codigo from Clientes where Codigo = ' + EditCod.Text ) ;
+//   qryPesq.Open;
+//
+//   if qryPesq.RecordCount <> 0 then
+//      begin
+//         MessageDlg('Código já Cadastrado!!!',mtWarning,[mbOK],0);
+//         EditCod.SetFocus;
+//      end;
+//end;
+
 
 end.

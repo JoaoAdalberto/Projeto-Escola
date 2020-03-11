@@ -11,6 +11,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -19,10 +20,24 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     Top = 0
     Width = 705
     Height = 369
-    ActivePage = tbDados
+    ActivePage = tbParticipantes
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
+      object lblSexo: TLabel
+        Left = 32
+        Top = 154
+        Width = 74
+        Height = 13
+        Caption = 'Escolher alunos'
+      end
+      object Label1: TLabel
+        Left = 32
+        Top = 200
+        Width = 100
+        Height = 13
+        Caption = 'Escolher professores'
+      end
       object Panel2: TPanel
         Left = 0
         Top = 305
@@ -126,20 +141,6 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
-      object Label1: TLabel
-        Left = 32
-        Top = 200
-        Width = 100
-        Height = 13
-        Caption = 'Escolher professores'
-      end
-      object lblSexo: TLabel
-        Left = 32
-        Top = 154
-        Width = 74
-        Height = 13
-        Caption = 'Escolher alunos'
-      end
       object lbledtNome: TLabeledEdit
         Left = 32
         Top = 69
@@ -160,46 +161,6 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         EditLabel.Caption = 'Codigo Escola'
         TabOrder = 1
       end
-      object memoProfessores: TMemo
-        Left = 488
-        Top = 41
-        Width = 185
-        Height = 204
-        Lines.Strings = (
-          'memoProfessores')
-        TabOrder = 2
-      end
-      object cbxEscolherprofessores: TComboBox
-        Left = 31
-        Top = 219
-        Width = 273
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 3
-        Items.Strings = (
-          'M'
-          'F')
-      end
-      object memoAlunos: TMemo
-        Left = 336
-        Top = 41
-        Width = 193
-        Height = 204
-        Lines.Strings = (
-          'memoAlunos')
-        TabOrder = 4
-      end
-      object cbxEscolherAlunos: TComboBox
-        Left = 32
-        Top = 173
-        Width = 273
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 5
-        Items.Strings = (
-          'M'
-          'F')
-      end
       object lbledtCodigoSerie: TLabeledEdit
         Left = 31
         Top = 24
@@ -209,7 +170,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         EditLabel.Height = 13
         EditLabel.Caption = 'Codigo '
         Enabled = False
-        TabOrder = 6
+        TabOrder = 2
       end
       object Panel1: TPanel
         Left = 0
@@ -218,7 +179,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         Height = 36
         Align = alBottom
         BevelOuter = bvNone
-        TabOrder = 7
+        TabOrder = 3
         object btnFechar2: TButton
           Left = 536
           Top = 6
@@ -237,7 +198,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         Align = alBottom
         Color = clSilver
         ParentBackground = False
-        TabOrder = 8
+        TabOrder = 4
         object btnListar: TButton
           Left = 357
           Top = 10
@@ -276,13 +237,82 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         end
       end
     end
+    object tbParticipantes: TTabSheet
+      Caption = 'tbParticipantes'
+      ImageIndex = 2
+      ExplicitLeft = 8
+      ExplicitTop = 28
+      object Label2: TLabel
+        Left = 32
+        Top = 34
+        Width = 74
+        Height = 13
+        Caption = 'Escolher alunos'
+      end
+      object Label3: TLabel
+        Left = 335
+        Top = 34
+        Width = 100
+        Height = 13
+        Caption = 'Escolher professores'
+      end
+      object cbxEscolherAlunos: TComboBox
+        Left = 32
+        Top = 53
+        Width = 273
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 0
+        OnSelect = cbxEscolherAlunosSelect
+      end
+      object cbxEscolherprofessores: TComboBox
+        Left = 335
+        Top = 53
+        Width = 273
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 1
+      end
+      object memoAlunos: TMemo
+        Left = 32
+        Top = 91
+        Width = 193
+        Height = 204
+        TabOrder = 2
+      end
+      object memoProfessores: TMemo
+        Left = 335
+        Top = 91
+        Width = 185
+        Height = 204
+        TabOrder = 3
+      end
+      object btnConfirmar: TButton
+        Left = 584
+        Top = 224
+        Width = 75
+        Height = 25
+        Caption = 'Confirmar'
+        TabOrder = 4
+        OnClick = btnConfirmarClick
+      end
+      object btnCancelarTudo: TButton
+        Left = 584
+        Top = 255
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        TabOrder = 5
+        OnClick = btnCancelarTudoClick
+      end
+    end
   end
   object dsSerie: TDataSource
     DataSet = dmSerie.cdsSerie
-    Left = 632
-    Top = 344
+    Left = 640
+    Top = 312
   end
-  object sqlqryTeste: TSQLQuery
+  object sqlqryAlunos: TSQLQuery
     SchemaName = 'sa'
     DataSource = dsAlunos
     MaxBlobSize = -1
@@ -293,7 +323,21 @@ object frmCadastrarSerie: TfrmCadastrarSerie
   end
   object dsAlunos: TDataSource
     DataSet = dmAluno.cdsAluno
-    Left = 416
+    Left = 496
     Top = 336
+  end
+  object dsProfessores: TDataSource
+    DataSet = dmFuncionario.cdsFuncionario
+    Left = 400
+    Top = 344
+  end
+  object sqlqryProfessores: TSQLQuery
+    SchemaName = 'sa'
+    DataSource = dsProfessores
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmConexao.sqlConexao
+    Left = 560
+    Top = 24
   end
 end

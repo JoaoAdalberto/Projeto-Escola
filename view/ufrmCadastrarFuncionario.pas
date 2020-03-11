@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, uFuncionarioModel, uFuncionarioController, uDmFuncionario, DBCtrls, DB, DBGrids,
-  Grids;
+  Grids , uDmConexao, uFuncoesAuxiliares;
 
 type
   TfrmCadastrarFuncionario = class(TForm)
@@ -86,7 +86,7 @@ var
 
 implementation
 
-uses uDmConexao, uFuncoesAuxiliares;
+
 
 
 procedure TfrmCadastrarFuncionario.btnGravarClick(Sender: TObject);
@@ -109,6 +109,7 @@ begin
     cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNNOM := lbledtNome.Text;
     oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
+    oFuncionario.FUNDATEMP := dattimpickDataContratacao.Date;
     oFuncionario.FUNSEX := cbxSexo.Text;
     oFuncionario.FUNCPF := cpfsemponto;
     oFuncionario.FUNESC := dblcbxEscola.KeyValue;

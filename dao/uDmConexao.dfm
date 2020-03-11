@@ -39,57 +39,68 @@ object dmConexao: TdmConexao
     Left = 136
     Top = 48
     object cdsEscolaESCCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo'
       DisplayWidth = 3
       FieldName = 'ESCCOD'
       ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
     object cdsEscolaESCNOM: TStringField
+      DisplayLabel = 'Nome'
       DisplayWidth = 25
       FieldName = 'ESCNOM'
       Required = True
       Size = 100
     end
     object cdsEscolaESCDES: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
       DisplayWidth = 25
       FieldName = 'ESCDES'
       Size = 100
     end
     object cdsEscolaESCCEP: TStringField
+      DisplayLabel = 'CEP'
       FieldName = 'ESCCEP'
       Size = 8
     end
     object cdsEscolaESCRUA: TStringField
+      DisplayLabel = 'Rua'
       DisplayWidth = 25
       FieldName = 'ESCRUA'
       Size = 100
     end
     object cdsEscolaESCCOM: TStringField
+      DisplayLabel = 'Complemento'
       DisplayWidth = 25
       FieldName = 'ESCCOM'
       Size = 100
     end
     object cdsEscolaESCNUM: TStringField
+      DisplayLabel = 'N'#250'mero'
       FieldName = 'ESCNUM'
       Size = 5
     end
     object cdsEscolaESCBAIRRO: TStringField
+      DisplayLabel = 'Bairro'
       DisplayWidth = 25
       FieldName = 'ESCBAIRRO'
       Size = 30
     end
     object cdsEscolaESCCIDADE: TStringField
+      DisplayLabel = 'Cidade'
       DisplayWidth = 25
       FieldName = 'ESCCIDADE'
       Required = True
       Size = 50
     end
     object cdsEscolaESCEST: TStringField
+      DisplayLabel = 'Estado'
       FieldName = 'ESCEST'
       Required = True
       Size = 2
     end
     object cdsEscolaESCDATCAD: TWideStringField
+      DisplayLabel = 'Data de Cadastro'
       DisplayWidth = 11
       FieldName = 'ESCDATCAD'
     end
@@ -130,13 +141,13 @@ object dmConexao: TdmConexao
       FieldName = 'ESCNUM'
       Size = 5
     end
-    object sqlSelectEscolaESCCOM: TStringField
-      FieldName = 'ESCCOM'
-      Size = 100
-    end
     object sqlSelectEscolaESCBAIRRO: TStringField
       FieldName = 'ESCBAIRRO'
       Size = 30
+    end
+    object sqlSelectEscolaESCCOM: TStringField
+      FieldName = 'ESCCOM'
+      Size = 100
     end
     object sqlSelectEscolaESCCIDADE: TStringField
       FieldName = 'ESCCIDADE'
@@ -159,7 +170,7 @@ object dmConexao: TdmConexao
       'insert into Escola (ESCCOD ,ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCN' +
       'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD)'#13#10'values (:E' +
       'SCCOD, :ESCNOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ES' +
-      'CBAIRRO, :ESCCIDADE, :ESCEST, GETDATE())'
+      'CBAIRRO, :ESCCIDADE, :ESCEST, :ESCDATCAD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
@@ -211,6 +222,11 @@ object dmConexao: TdmConexao
       item
         DataType = ftUnknown
         Name = 'ESCEST'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ESCDATCAD'
         ParamType = ptInput
       end>
     SQLConnection = sqlConexao
@@ -311,12 +327,14 @@ object dmConexao: TdmConexao
     Left = 512
     Top = 48
     object cdsEspecialidadeESPCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo'#13#10#13#10
       DisplayWidth = 3
       FieldName = 'ESPCOD'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsEspecialidadeESPDES: TStringField
+      DisplayLabel = 'Especialidade'
       DisplayWidth = 20
       FieldName = 'ESPDES'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]

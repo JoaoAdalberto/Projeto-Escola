@@ -212,8 +212,7 @@ begin
   sqlInserirEscola.Params.FindParam('ESCBAIRRO').AsString := oEscola.ESCBAIRRO;
   sqlInserirEscola.Params.FindParam('ESCCIDADE').AsString := oEscola.ESCCIDADE;
   sqlInserirEscola.Params.FindParam('ESCEST').AsString := oEscola.ESCEST;
-  //sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
-
+  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('DD/MM/YYYY',oEscola.ESCDATCAD);
   try
     sqlInserirEscola.ExecSQL;
     Result := True;

@@ -1,0 +1,321 @@
+unit uFrmCadastrarAluno;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, DBCtrls, uAlunoController, uAlunoModel, DB, DBGrids, uDmAluno, uDmConexao,
+  Grids;
+
+type
+  TfrmCadastrarAluno = class(TForm)
+    pgcAluno: TPageControl;
+    tbPesquisar: TTabSheet;
+    tbDados: TTabSheet;
+    Label1: TLabel;
+    lblDataMatricula: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    lbledtEstado: TLabeledEdit;
+    lbledtRua: TLabeledEdit;
+    lbledtNumero: TLabeledEdit;
+    lbledtComplemento: TLabeledEdit;
+    lbledtBairro: TLabeledEdit;
+    lbledtCidade: TLabeledEdit;
+    mskedtCep: TMaskEdit;
+    lbledtNome: TLabeledEdit;
+    dattimpickDataNascimento: TDateTimePicker;
+    dattimpckDataMatricula: TDateTimePicker;
+    mskedtCPF: TMaskEdit;
+    lbledtNomeResponsavel: TLabeledEdit;
+    lbledtCodigo: TLabeledEdit;
+    Panel1: TPanel;
+    btnListar: TButton;
+    btnAlterar: TButton;
+    btnCancelar: TButton;
+    btnGravar: TButton;
+    pnlRodape: TPanel;
+    Fechar: TButton;
+    Panel2: TPanel;
+    btnFechar: TButton;
+    pnlBtnsPesq: TPanel;
+    btnNovo: TButton;
+    btnDetalhar: TButton;
+    btnExcluir: TButton;
+    pnlFiltro: TPanel;
+    lbledtPesquisar: TLabeledEdit;
+    btnPesquisar: TButton;
+    dbAluno: TDBGrid;
+    dsAluno: TDataSource;
+    dsEscola: TDataSource;
+    dblucbxEscola: TDBLookupComboBox;
+    Escola: TLabel;
+    lblSexo: TLabel;
+    cbxSex: TComboBox;
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure btnDetalharClick(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnListarClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure FecharClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure lbledtNumeroKeyPress(Sender: TObject; var Key: Char);
+    procedure lbledtCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure lbledtEstadoKeyPress(Sender: TObject; var Key: Char);
+  private
+    procedure Excluir;
+    procedure ResetarGrid;
+    procedure Inserir;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadastrarAluno: TfrmCadastrarAluno;
+
+implementation
+uses
+  uFuncoesAuxiliares;
+{$R *.dfm}
+
+procedure ClearEdits(Owner: TfrmCadastrarAluno);
+var i: integer;
+begin
+  for i := 0 to Owner.ComponentCount - 1 do
+    if Owner.Components[i] is TLabeledEdit then
+    begin
+      TLabeledEdit(Owner.Components[i]).Clear;
+    end
+    else if Owner.Components[i] is TMaskEdit then
+    begin
+      TMaskEdit(Owner.Components[i]).Clear;
+    end
+    else if Owner.Components[i] is TComboBox then
+    begin
+      TComboBox(Owner.Components[i]).Clear;
+    end
+end;
+
+
+procedure TfrmCadastrarAluno.btnAlterarClick(Sender: TObject);
+var
+  oAluno : TAluno;
+  oAlunoController : TAlunoController;
+  sError : string;
+  cpfsemhifen : string;
+  cpfsemponto : string;
+begin
+  oAluno := TAluno.Create;
+  oAlunoController := TAlunoController.Create;
+  try
+    cpfsemhifen := StringReplace(mskedtCPF.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
+    oAluno.ALUCOD := StrToInt(lbledtCodigo.Text);
+    //oAluno.ALUESC := StrToInt(lbledtCodigoEscola.Text);
+    oAluno.ALUNOM := lbledtNome.Text;
+    oAluno.ALUSEX := cbxSex.Text;
+    oAluno.ALUDATNAS := dattimpickDataNascimento.Date;
+    oAluno.ALUCPF := cpfsemponto;
+    oAluno.ALUCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    oAluno.ALURUA := lbledtRua.Text;
+    oAluno.ALUNUM := lbledtNumero.Text;
+    oAluno.ALUCOM := lbledtComplemento.Text;
+    oAluno.ALUBAI := lbledtBairro.Text;
+    oAluno.ALUCID := lbledtCidade.Text;
+    oAluno.ALUEST := lbledtEstado.Text;
+    //oAluno.SERCOD := strtoint(lbledtSerie.Text);
+    oAluno.ALURES := lbledtNomeResponsavel.Text;;
+    if oAlunoController.Alterar(oAluno, sError) = False then
+      raise Exception.Create(sError);
+  finally
+    FreeAndNil(oAluno);
+    FreeAndNil(oAlunoController);
+    dsAluno.DataSet.Refresh;
+    pgcAluno.ActivePage := tbPesquisar;
+  end;
+
+end;
+
+procedure TfrmCadastrarAluno.btnCancelarClick(Sender: TObject);
+begin
+  tbDados.TabVisible := False;
+  pgcAluno.ActivePage := tbPesquisar;
+end;
+
+procedure TfrmCadastrarAluno.btnDetalharClick(Sender: TObject);
+begin
+  pgcAluno.ActivePage := tbDados;
+  btnListar.Enabled := True;
+  btnAlterar.Enabled := True;
+  btnGravar.Enabled := False;
+  btnCancelar.Enabled := False;
+  lbledtCodigo.Text :=   dbAluno.Fields[(0)].Text;
+  //lbledtCodigoEscola.Text :=   dbAluno.Fields[(1)].Text;
+  lbledtNome.Text :=   dbAluno.Fields[(2)].Text;
+  cbxSex.Text := dbAluno.Fields[(3)].Text;
+  mskedtCpf.Text := dbAluno.Fields[(5)].Text;
+  mskedtCep.Text :=   dbAluno.Fields[(7)].Text;
+  lbledtRua.Text :=   dbAluno.Fields[(8)].Text;
+  lbledtNumero.Text :=   dbAluno.Fields[(9)].Text;
+  lbledtComplemento.Text :=   dbAluno.Fields[(10)].Text;
+  lbledtBairro.Text :=   dbAluno.Fields[(11)].Text;
+  lbledtCidade.Text :=   dbAluno.Fields[(12)].Text;
+  lbledtEstado.Text :=   dbAluno.Fields[(13)].Text;
+  //lbledtSerie.Text := dbAluno.Fields[(15)].Text;
+  lbledtNomeResponsavel.Text := dbAluno.Fields[(14)].Text;
+end;
+
+procedure TfrmCadastrarAluno.btnExcluirClick(Sender: TObject);
+begin
+  Excluir;
+  MessageDlg('Aluno excluído com sucesso.', mtInformation, [mbOk], 0);
+end;
+
+procedure TfrmCadastrarAluno.btnFecharClick(Sender: TObject);
+begin
+ frmCadastrarAluno.Close;
+end;
+
+procedure TfrmCadastrarAluno.btnGravarClick(Sender: TObject);
+begin
+  Inserir;
+  if MessageDlg('Aluno adicionado com sucesso.'+#13+#10+'Deseja adicionar outro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+      ClearEdits(frmCadastrarAluno);
+      end
+  else
+    dsAluno.DataSet.Refresh;
+    pgcAluno.ActivePage := tbPesquisar;
+end;
+
+procedure TfrmCadastrarAluno.btnListarClick(Sender: TObject);
+begin
+  pgcAluno.ActivePage := tbPesquisar;
+end;
+
+procedure TfrmCadastrarAluno.btnNovoClick(Sender: TObject);
+begin
+  pgcAluno.ActivePage := tbDados;
+  tbPesquisar.TabVisible := False;
+  btnListar.Enabled := False;
+  btnAlterar.Enabled := False;
+  btnGravar.Enabled := True;
+  btnCancelar.Enabled := True;
+  ClearEdits(Self);
+end;
+
+procedure TfrmCadastrarAluno.btnPesquisarClick(Sender: TObject);
+var
+  oAlunoController : TAlunoController;
+begin
+  oAlunoController := TAlunoController.Create;
+    try
+      //oAlunoController.Pesquisar(lbledtPesquisar.Text);
+      dsAluno.DataSet.Filtered := False;
+      dsAluno.DataSet.Filter := 'ALUNOM = ' + QuotedStr(lbledtPesquisar.Text);
+      dsAluno.DataSet.Filtered := True;
+      if lbledtPesquisar.Text = '' then
+        ResetarGrid;
+    finally
+      freeandnil(oAlunoController);
+
+    end;
+end;
+
+procedure TfrmCadastrarAluno.Excluir;
+var
+  oAlunoController : TAlunoController;
+  sError: string;
+  CodigoAlunoExcluir : integer;
+begin
+  CodigoAlunoExcluir  := StrToInt(dbAluno.Fields[(0)].Text);
+  oAlunoController := TAlunoController.Create;
+  oAlunoController.Excluir(CodigoAlunoExcluir, sError);
+  dsAluno.DataSet.Refresh;
+end;
+
+procedure TfrmCadastrarAluno.FecharClick(Sender: TObject);
+begin
+  frmCadastrarAluno.Close;
+end;
+
+procedure TfrmCadastrarAluno.FormShow(Sender: TObject);
+begin
+  ClearEdits(Self);
+  tbPesquisar.TabVisible := False;
+  tbDados.TabVisible := False;
+  dsAluno.DataSet.Active := True;
+  dmConexao.cdsEscola.Active := True;
+  pgcAluno.ActivePage := tbPesquisar;
+  ResetarGrid;
+end;
+
+procedure TfrmCadastrarAluno.Inserir;
+var
+  oAluno : TAluno;
+  oAlunoController : TAlunoController;
+  sError : string;
+  cpfsemhifen : string;
+  cpfsemponto : string;
+begin
+  oAluno := TAluno.Create;
+  oAlunoController := TAlunoController.Create;
+  try
+    cpfsemhifen := StringReplace(mskedtCPF.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
+    //oAluno.ALUESC := StrToInt(lbledtCodigoEscola.Text);
+    oAluno.ALUESC := dblucbxEscola.KeyValue;
+    oAluno.ALUNOM := lbledtNome.Text;
+    oAluno.ALUSEX := cbxSex.Text;
+    oAluno.ALUDATNAS := dattimpickDataNascimento.Date;
+    oAluno.ALUCPF := cpfsemponto;
+    oAluno.ALUCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
+    oAluno.ALURUA := lbledtRua.Text;
+    oAluno.ALUNUM := lbledtNumero.Text;
+    oAluno.ALUCOM := lbledtComplemento.Text;
+    oAluno.ALUBAI := lbledtBairro.Text;
+    oAluno.ALUCID := lbledtCidade.Text;
+    oAluno.ALUEST := lbledtEstado.Text;
+    //oAluno.SERCOD := strtoint(lbledtSerie.Text);
+    oAluno.ALURES := lbledtNomeResponsavel.Text;;
+    if oAlunoController.Inserir(oAluno, sError) = False then
+      raise Exception.Create(sError);
+  finally
+    FreeAndNil(oAluno);
+    FreeAndNil(oAlunoController);
+
+  end;
+end;
+
+
+procedure TfrmCadastrarAluno.lbledtCidadeKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := SoAceitaLetra(Key, lbledtCidade.Text);
+end;
+
+procedure TfrmCadastrarAluno.lbledtEstadoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := SoAceitaLetra(Key, lbledtEstado.Text);
+end;
+
+procedure TfrmCadastrarAluno.lbledtNumeroKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := SoAceitaNumeros ( Key, lbledtNumero.Text );
+end;
+
+procedure TfrmCadastrarAluno.ResetarGrid;
+begin
+  dsAluno.DataSet.Filtered := False;
+  dsAluno.DataSet.Filter := 'ALUCOD <> NULL';
+  dsAluno.DataSet.Filtered := True;
+end;
+
+end.

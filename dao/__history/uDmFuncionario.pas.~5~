@@ -1,0 +1,198 @@
+unit uDmFuncionario;
+
+interface
+
+uses
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uFuncionarioModel,
+  DateUtils, StrUtils, Variants, Messages, Dialogs, uDmConexao;
+
+type
+  TdmFuncionario = class(TDataModule)
+    sqlInserirFuncionario: TSQLDataSet;
+    dspFuncionario: TDataSetProvider;
+    sqlExcluirFuncionario: TSQLDataSet;
+    sqlSelectFuncionario: TSQLDataSet;
+    sqlAlterarFuncionario: TSQLDataSet;
+    sqlSelectFuncionarioFUNCOD: TIntegerField;
+    sqlSelectFuncionarioFUNNOM: TStringField;
+    sqlSelectFuncionarioFUNDATNAS: TSQLTimeStampField;
+    sqlSelectFuncionarioFUNDATEMP: TWideStringField;
+    sqlSelectFuncionarioFUNSEX: TStringField;
+    sqlSelectFuncionarioFUNCPF: TStringField;
+    sqlSelectFuncionarioFUNESC: TIntegerField;
+    sqlSelectFuncionarioFUNESP: TIntegerField;
+    sqlSelectFuncionarioFUNCEP: TStringField;
+    sqlSelectFuncionarioFUNRUA: TStringField;
+    sqlSelectFuncionarioFUNNUM: TStringField;
+    sqlSelectFuncionarioFUNCOM: TStringField;
+    sqlSelectFuncionarioFUNBAI: TStringField;
+    sqlSelectFuncionarioFUNCID: TStringField;
+    sqlSelectFuncionarioFUNEST: TStringField;
+    cdsFuncionario: TClientDataSet;
+    cdsFuncionarioFUNCOD: TIntegerField;
+    cdsFuncionarioFUNNOM: TStringField;
+    cdsFuncionarioFUNDATNAS: TSQLTimeStampField;
+    cdsFuncionarioFUNDATEMP: TWideStringField;
+    cdsFuncionarioFUNSEX: TStringField;
+    cdsFuncionarioFUNCPF: TStringField;
+    cdsFuncionarioFUNESC: TIntegerField;
+    cdsFuncionarioFUNESP: TIntegerField;
+    cdsFuncionarioFUNCEP: TStringField;
+    cdsFuncionarioFUNRUA: TStringField;
+    cdsFuncionarioFUNNUM: TStringField;
+    cdsFuncionarioFUNCOM: TStringField;
+    cdsFuncionarioFUNBAI: TStringField;
+    cdsFuncionarioFUNCID: TStringField;
+    cdsFuncionarioFUNEST: TStringField;
+    procedure CarregarFuncionario(oFuncionario : TFuncionario; iCodigo: Integer);
+    function Excluir(iCodigo: Integer; out sErro: string): Boolean;
+    function InserirFuncionario(oFuncionario: TFuncionario;
+      out sErro: string): Boolean;
+    function Pesquisar(ANome: string): TDataSet;
+    function Alterar(oFuncionario :TFuncionario; out sErro: string) : Boolean;
+  private
+    function GerarCODFuncionario: Integer;
+  public
+      end;
+
+var
+  dmFuncionario: TdmFuncionario;
+
+implementation
+
+{$R *.dfm}
+
+function TdmFuncionario.Excluir(iCodigo: Integer; out sErro: string): Boolean;
+begin
+  sqlExcluirFuncionario.Params[0].AsInteger := iCodigo;
+  try
+    sqlExcluirFuncionario.ExecSQL();
+    Result := True;
+    except on E: Exception do
+      begin
+        sErro := 'Ocorreu um erro ao excluir Funcionario: ' + sLineBreak + E.Message;
+        Result := False;
+      end;
+  end;
+end;
+
+function TdmFuncionario.GerarCODFuncionario: Integer;
+var
+  sqlSequencia : TSQLDataSet;
+begin
+  sqlSequencia := TSQLDataSet.Create(nil);
+  try
+    sqlSequencia.SQLConnection := DmConexao.sqlConexao;
+    sqlSequencia.CommandText := 'select coalesce(max(FUNCOD), 0) + 1 as seq from Funcionario';
+    sqlSequencia.Open;
+    Result := sqlSequencia.FieldByName('seq').AsInteger;
+  finally
+    FreeAndNil(sqlSequencia);
+
+  end;
+end;
+
+function TdmFuncionario.InserirFuncionario(oFuncionario: TFuncionario; out sErro: string): Boolean;
+begin
+  sqlInserirFuncionario.Params.FindParam('FUNCOD').AsInteger := GerarCODFuncionario;
+  sqlInserirFuncionario.Params.FindParam('FUNNOM').AsString := oFuncionario.FUNNOM;
+  sqlInserirFuncionario.Params.FindParam('FUNDATNAS').AsString := FormatDateTime('DD/MM/YYYY', oFuncionario.FUNDATNAS);
+  //sqlInserirFuncionario.Params.FindParam('FUNDATEMP').AsDate := oFuncionario.FUNDATEMP;
+  sqlInserirFuncionario.Params.FindParam('FUNSEX').AsString := oFuncionario.FUNSEX;
+  sqlInserirFuncionario.Params.FindParam('FUNCPF').AsString := oFuncionario.FUNCPF;
+  sqlInserirFuncionario.Params.FindParam('FUNESC').AsInteger := oFuncionario.FUNESC;
+  sqlInserirFuncionario.Params.FindParam('FUNESP').AsInteger := oFuncionario.FUNESP;
+  sqlInserirFuncionario.Params.FindParam('FUNCEP').AsString := oFuncionario.FUNCEP;
+  sqlInserirFuncionario.Params.FindParam('FUNRUA').AsString := oFuncionario.FUNRUA;
+  sqlInserirFuncionario.Params.FindParam('FUNNUM').AsString := oFuncionario.FUNNUM;
+  sqlInserirFuncionario.Params.FindParam('FUNCOM').AsString := oFuncionario.FUNCOM;
+  sqlInserirFuncionario.Params.FindParam('FUNBAI').AsString := oFuncionario.FUNBAI;
+  sqlInserirFuncionario.Params.FindParam('FUNCID').AsString := oFuncionario.FUNCID;
+  sqlInserirFuncionario.Params.FindParam('FUNEST').AsString := oFuncionario.FUNEST;
+//  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
+
+  try
+    sqlInserirFuncionario.ExecSQL;
+    Result := True;
+  except on E: Exception do
+    begin
+      sErro := 'Ocorreu um erro ao inserir funcionario: ' + sLineBreak + E.Message;
+      Result := False;
+    end;
+  end;
+end;
+
+function TdmFuncionario.Pesquisar(ANome: string): TDataSet;
+begin
+ShowMessage(ANome);
+  if cdsFuncionario.Active then
+    cdsFuncionario.Close;
+  cdsFuncionario.CommandText := Format('select * from Funcionario where ESCNOM like %s',[ QuotedStr('%' + ANome + '%') ]);
+//  cdsEscola.Filtered := False;
+//  cdsEscola.Filter := 'ESCNOM = ' +QuotedStr('%' + ANome + '%');
+//  cdsEscola.Filtered := True;
+  cdsFuncionario.Open;
+  cdsFuncionario.First;
+end;
+
+function TdmFuncionario.Alterar(oFuncionario: TFuncionario;
+  out sErro: string): Boolean;
+begin
+  sqlAlterarFuncionario.Params[0].AsString := oFuncionario.FUNNOM;
+  sqlAlterarFuncionario.Params[1].AsString  := FormatDateTime('DD/MM/YYYY', oFuncionario.FUNDATNAS);
+  //sqlAlterarFuncionario.Params[2].AsDateTime  := oFuncionario.FUNDATEMP;
+  sqlAlterarFuncionario.Params[2].AsString  := oFuncionario.FUNSEX;
+  sqlAlterarFuncionario.Params[3].AsString  := oFuncionario.FUNCPF;
+  sqlAlterarFuncionario.Params[4].AsInteger := oFuncionario.FUNESC;
+  sqlAlterarFuncionario.Params[5].AsInteger  := oFuncionario.FUNESP;
+  //sqlAlterarFuncionario.Params[6].AsString  := oFuncionario.FUNCEP;
+  sqlAlterarFuncionario.Params[6].AsString := StringReplace(oFuncionario.FUNCEP, '-', '', [rfReplaceAll, rfIgnoreCase]);
+  sqlAlterarFuncionario.Params[7].AsString  := oFuncionario.FUNRUA;
+  sqlAlterarFuncionario.Params[8].AsString  := oFuncionario.FUNNUM;
+  sqlAlterarFuncionario.Params[9].AsString  := oFuncionario.FUNCOM;
+  sqlAlterarFuncionario.Params[10].AsString  := oFuncionario.FUNBAI;
+  sqlAlterarFuncionario.Params[11].AsString  := oFuncionario.FUNCID;
+  sqlAlterarFuncionario.Params[12].AsString  := oFuncionario.FUNEST;
+  sqlAlterarFuncionario.Params[13].AsInteger  := oFuncionario.FUNCOD;
+  try
+    sqlAlterarFuncionario.ExecSQL();
+    Result := True;
+  except on E: Exception do
+    begin
+      sErro := 'Ocorreu um erro ao alterar Funcionario: ' + sLineBreak + E.Message;
+      Result := False;
+    end;
+  end;
+end;
+
+procedure TdmFuncionario.CarregarFuncionario(oFuncionario: TFuncionario; iCodigo: Integer);
+var
+  sqlFuncionario : TSQLDataSet;
+begin
+  sqlFuncionario := TSQLDataSet.Create(nil);
+  try
+    sqlFuncionario.SQLConnection := DmConexao.sqlConexao;
+    sqlFuncionario.CommandText := 'select * from Funcionario where (FUNCOD ='+ IntToStr(iCodigo)+ ')';
+    sqlFuncionario.Open;
+    oFuncionario.FUNCOD := sqlFuncionario.FieldByName('FUNCOD').AsInteger;
+    oFuncionario.FUNNOM := sqlFuncionario.FieldByName('FUNNOM').AsString;
+    oFuncionario.FUNDATNAS := sqlFuncionario.FieldByName('FUNDATNAS').AsDateTime;
+    oFuncionario.FUNDATEMP := sqlFuncionario.FieldByName('FUNDATEMP').AsDateTime;
+    oFuncionario.FUNSEX := sqlFuncionario.FieldByName('FUNSEX').AsString;
+    oFuncionario.FUNCPF := sqlFuncionario.FieldByName('FUNCPF').AsString;
+    oFuncionario.FUNESC := sqlFuncionario.FieldByName('FUNESC').AsInteger;
+    oFuncionario.FUNESP := sqlFuncionario.FieldByName('FUNESP').AsInteger;
+    oFuncionario.FUNCEP := sqlFuncionario.FieldByName('FUNCEP').AsString;
+    oFuncionario.FUNRUA := sqlFuncionario.FieldByName('FUNRUA').AsString;
+    oFuncionario.FUNNUM := sqlFuncionario.FieldByName('FUNNUM').AsString;
+    oFuncionario.FUNCOM := sqlFuncionario.FieldByName('FUNCOM').AsString;
+    oFuncionario.FUNBAI := sqlFuncionario.FieldByName('FUNBAI').AsString;
+    oFuncionario.FUNCID := sqlFuncionario.FieldByName('FUNCID').AsString;
+    oFuncionario.FUNEST := sqlFuncionario.FieldByName('FUNEST').AsString;
+  finally
+  end;
+end;
+
+
+
+end.

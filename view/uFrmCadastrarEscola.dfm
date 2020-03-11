@@ -25,6 +25,10 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnlFiltro: TPanel
         Left = 0
         Top = 0
@@ -145,6 +149,13 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         Height = 13
         Caption = 'CEP'
       end
+      object lblDataCadastro: TLabel
+        Left = 254
+        Top = 0
+        Width = 85
+        Height = 13
+        Caption = 'Data de Cadastro'
+      end
       object lbledtNome: TLabeledEdit
         Left = 20
         Top = 59
@@ -255,8 +266,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         ParentBackground = False
         TabOrder = 9
         object btnConfirmarCadastro: TButton
-          Left = 315
-          Top = 9
+          Left = 568
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Gravar'
@@ -264,8 +275,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnConfirmarCadastroClick
         end
         object btnCancelarCadastro: TButton
-          Left = 396
-          Top = 9
+          Left = 649
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Cancelar'
@@ -273,8 +284,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnCancelarCadastroClick
         end
         object btnAlterar: TButton
-          Left = 234
-          Top = 9
+          Left = 487
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Alterar'
@@ -282,8 +293,8 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnAlterarClick
         end
         object btnListar: TButton
-          Left = 153
-          Top = 9
+          Left = 406
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Listar'
@@ -301,6 +312,15 @@ object frmCadastrarEscola: TfrmCadastrarEscola
         EditLabel.Caption = 'C'#243'digo'
         Enabled = False
         TabOrder = 10
+      end
+      object dtpDataCadastro: TDateTimePicker
+        Left = 254
+        Top = 16
+        Width = 186
+        Height = 21
+        Date = 43901.368002453700000000
+        Time = 43901.368002453700000000
+        TabOrder = 11
       end
     end
   end

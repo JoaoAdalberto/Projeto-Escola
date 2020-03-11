@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, StdCtrls, ExtCtrls, uFrmCadastrarEscola, Grids, DBGrids,
-  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarEspecialidades, uFrmCadastrarFuncionario, uFrmCadastrarAluno, uFrmCadastrarSerie;
+  DBCtrls, Mask, uFrmExcluirEscola, uFrmCadastrarEspecialidades, uFrmCadastrarFuncionario,
+  uFrmCadastrarAluno, uFrmCadastrarSerie;
 
 type
   TunFrmPrincipal = class(TForm)

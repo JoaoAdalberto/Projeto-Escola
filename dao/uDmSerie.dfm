@@ -98,7 +98,6 @@ object dmSerie: TdmSerie
     end
   end
   object cdsSerie: TClientDataSet
-    Active = True
     Aggregates = <>
     CommandText = 'SELECT SERCOD, SERNOM, SERESC FROM SERIE'
     Params = <>
@@ -106,18 +105,21 @@ object dmSerie: TdmSerie
     Left = 88
     Top = 72
     object cdsSerieSERCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo'
       DisplayWidth = 8
       FieldName = 'SERCOD'
       Required = True
     end
     object cdsSerieSERNOM: TStringField
-      DisplayWidth = 102
+      DisplayLabel = 'S'#233'rie'
+      DisplayWidth = 25
       FieldName = 'SERNOM'
       Required = True
       Size = 100
     end
     object cdsSerieSERESC: TIntegerField
-      DisplayWidth = 9
+      DisplayLabel = 'C'#243'digo Escola'
+      DisplayWidth = 3
       FieldName = 'SERESC'
       Required = True
     end
