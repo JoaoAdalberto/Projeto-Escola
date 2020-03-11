@@ -55,7 +55,7 @@ end;
 function TAlunoController.InserirSerie(ASerie: Integer; ANome: string;
   var sError: string): Boolean;
 begin
-  //Result := DmAluno.InserirSerie(ASerie, ANome, sError);
+  Result := DmAluno.InserirSerie(ASerie, ANome, sError);
 end;
 
 procedure TAlunoController.Pesquisar(sNome: String);

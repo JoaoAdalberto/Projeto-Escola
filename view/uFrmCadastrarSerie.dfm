@@ -272,6 +272,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         Height = 21
         ItemHeight = 13
         TabOrder = 1
+        OnSelect = cbxEscolherprofessoresSelect
       end
       object memoAlunos: TMemo
         Left = 32
@@ -338,6 +339,28 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     Params = <>
     SQLConnection = dmConexao.sqlConexao
     Left = 560
+    Top = 24
+  end
+  object SQLDataSet1: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 
+      'insert into Aluno (SERCOD)'#13#10'values (:SERCOD) where (ALUCOD = :AL' +
+      'UCOD)'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'SERCOD'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ALUCOD'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmConexao.sqlConexao
+    Left = 488
     Top = 24
   end
 end

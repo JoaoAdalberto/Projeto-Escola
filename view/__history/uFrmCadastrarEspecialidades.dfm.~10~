@@ -19,7 +19,7 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
     Top = 0
     Width = 585
     Height = 270
-    ActivePage = tbPesquisar
+    ActivePage = tbDados
     Align = alClient
     TabOrder = 0
     object tbPesquisar: TTabSheet

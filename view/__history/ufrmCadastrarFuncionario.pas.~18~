@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Mask, ExtCtrls, uFuncionarioModel, uFuncionarioController, uDmFuncionario, DBCtrls, DB, DBGrids,
-  Grids;
+  Grids , uDmConexao, uFuncoesAuxiliares;
 
 type
   TfrmCadastrarFuncionario = class(TForm)
@@ -43,10 +43,17 @@ type
     cbxSexo: TComboBox;
     dattimpckDataNascimento: TDateTimePicker;
     mskedtCPF: TMaskEdit;
-    lbledtCodigoEscola: TLabeledEdit;
-    cbxEspecialidade: TComboBox;
     lbledtCodigo: TLabeledEdit;
     dsFuncionario: TDataSource;
+    dsEspecialidade: TDataSource;
+    dblcbxEscola: TDBLookupComboBox;
+    dsEscola: TDataSource;
+    dblucbxEspecialidade: TDBLookupComboBox;
+    Label4: TLabel;
+    Panel1: TPanel;
+    btnFechar: TButton;
+    pnlRodape: TPanel;
+    btnFechar2: TButton;
     procedure btnGravarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dbFuncionarioDblClick(Sender: TObject);
@@ -58,13 +65,18 @@ type
     procedure btnConfirmarCadastroClick(Sender: TObject);
     procedure btnDetalharClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure btnFecharClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
-    procedure pgcFuncionarioChange(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure lbledtEstadoKeyPress(Sender: TObject; var Key: Char);
+    procedure lbledtCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure lbledtNumeroKeyPress(Sender: TObject; var Key: Char);
+    procedure pgcFuncionarioEnter(Sender: TObject);
+    procedure btnFechar2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-
+    procedure ResetarGrid;
     { Private declarations }
   public
     { Public declarations }
@@ -74,6 +86,8 @@ var
   frmCadastrarFuncionario: TfrmCadastrarFuncionario;
 
 implementation
+
+
 
 
 procedure TfrmCadastrarFuncionario.btnGravarClick(Sender: TObject);
@@ -96,10 +110,12 @@ begin
     cpfsemponto := StringReplace(cpfsemhifen, '.', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNNOM := lbledtNome.Text;
     oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
+    oFuncionario.FUNDATEMP := dattimpickDataContratacao.Date;
     oFuncionario.FUNSEX := cbxSexo.Text;
     oFuncionario.FUNCPF := cpfsemponto;
-    oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
-    oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
+    oFuncionario.FUNESC := dblcbxEscola.KeyValue;
+    //oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    oFuncionario.FUNESP := dblucbxEspecialidade.KeyValue;
     oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNRUA := lbledtRua.Text;
     oFuncionario.FUNNUM := lbledtNumero.Text;
@@ -112,13 +128,39 @@ begin
   finally
     FreeAndNil(oFuncionario);
     FreeAndNil(oFuncionarioController);
+    dsFuncionario.DataSet.Refresh;
   end;
 end;
 
 
-procedure TfrmCadastrarFuncionario.pgcFuncionarioChange(Sender: TObject);
+procedure TfrmCadastrarFuncionario.lbledtCidadeKeyPress(Sender: TObject;
+  var Key: Char);
 begin
+  Key := SoAceitaLetra(Key, lbledtCidade.Text);
+end;
 
+procedure TfrmCadastrarFuncionario.lbledtEstadoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := SoAceitaLetra(Key, lbledtEstado.Text);
+end;
+
+procedure TfrmCadastrarFuncionario.lbledtNumeroKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  Key := SoAceitaNumeros(Key, lbledtNumero.Text);
+end;
+
+procedure TfrmCadastrarFuncionario.pgcFuncionarioEnter(Sender: TObject);
+begin
+  dsFuncionario.DataSet.Refresh;
+end;
+
+procedure TfrmCadastrarFuncionario.ResetarGrid;
+begin
+  dsFuncionario.DataSet.Filtered := False;
+  dsFuncionario.DataSet.Filter := 'FUNCOD <> NULL';
+  dsFuncionario.DataSet.Filtered := True;
 end;
 
 {$R *.dfm}
@@ -151,8 +193,9 @@ begin
     oFuncionario.FUNDATNAS := dattimpckDataNascimento.Date;
     oFuncionario.FUNSEX := cbxSexo.Text;
     oFuncionario.FUNCPF := StringReplace(StringReplace(mskedtcpf.Text, '.', '', [rfReplaceAll, rfIgnoreCase]), '-', '', [rfreplaceAll, rfignorecase]);
-    oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
-    oFuncionario.FUNESP := strtoint(cbxEspecialidade.Text);
+    //oFuncionario.FUNESC := StrToInt(lbledtCodigoEscola.Text);
+    oFuncionario.FUNESC := dblcbxEscola.KeyValue;
+    oFuncionario.FUNESP := dblucbxEspecialidade.KeyValue;
     oFuncionario.FUNCEP := StringReplace(mskedtCep.Text, '-', '', [rfReplaceAll, rfIgnoreCase]);
     oFuncionario.FUNRUA := lbledtRua.Text;
     oFuncionario.FUNNUM := lbledtNumero.Text;
@@ -180,7 +223,7 @@ end;
 procedure TfrmCadastrarFuncionario.btnConfirmarCadastroClick(Sender: TObject);
 begin
   Inserir;
-  if MessageDlg('Escola adicionada com sucesso.'+#13+#10+'Deseja adicionar outra?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if MessageDlg('Funcionario adicionada com sucesso.'+#13+#10+'Deseja adicionar outra?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       begin
       ClearEdits(frmCadastrarFuncionario);
       end
@@ -202,8 +245,8 @@ begin
   //dattimpickDataContratacao.Date := StrToDate(dbFuncionario.Fields[(3)].Text);
   cbxSexo.Text := dbFuncionario.Fields[(4)].Text;
   mskedtCpf.Text := dbFuncionario.Fields[(5)].Text;
-  lbledtCodigoEscola.Text := dbFuncionario.Fields[(6)].Text;
-  cbxEspecialidade.Text := dbFuncionario.Fields[(7)].Text;
+  //dblcbxEscola.Text := dbFuncionario.Fields[(6)].Text;
+  //cbxEspecialidade.Text := dbFuncionario.Fields[(7)].Text;
   mskedtCep.Text :=   dbFuncionario.Fields[(8)].Text;
   lbledtRua.Text :=   dbFuncionario.Fields[(9)].Text;
   lbledtNumero.Text :=   dbFuncionario.Fields[(10)].Text;
@@ -216,14 +259,22 @@ begin
 procedure TfrmCadastrarFuncionario.btnExcluirClick(Sender: TObject);
 begin
   Excluir;
-  MessageDlg('Escola excluída com sucesso.', mtInformation, [mbOk], 0);
+  MessageDlg('Funcionario excluído com sucesso.', mtInformation, [mbOk], 0);
 
+end;
+
+
+
+procedure TfrmCadastrarFuncionario.btnFechar2Click(Sender: TObject);
+begin
+   frmCadastrarFuncionario.Close;
 end;
 
 procedure TfrmCadastrarFuncionario.btnFecharClick(Sender: TObject);
 begin
   frmCadastrarFuncionario.Close;
 end;
+
 
 procedure TfrmCadastrarFuncionario.btnListarClick(Sender: TObject);
 begin
@@ -259,8 +310,8 @@ begin
     dattimpickDataContratacao.Date := oFuncionario.FUNDATEMP;
     cbxSexo.Text := oFuncionario.FUNSEX;
     mskedtCPF.Text := oFuncionario.FUNCPF;
-    lbledtCodigoEscola.Text := IntToStr(oFuncionario.FUNESC);
-    cbxEspecialidade.Text := IntToStr(oFuncionario.FUNESP);
+    //lbledtCodigoEscola.Text := IntToStr(oFuncionario.FUNESC);
+    //cbxEspecialidade.Text := IntToStr(oFuncionario.FUNESP);
     mskedtCep.Text := oFuncionario.FUNCEP;
     lbledtRua.Text := oFuncionario.FUNRUA;
     lbledtNumero.Text := oFuncionario.FUNNUM;
@@ -297,12 +348,24 @@ begin
   dsFuncionario.DataSet.Refresh;
 end;
 
+procedure TfrmCadastrarFuncionario.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  dsFuncionario.DataSet.Active := False;
+  dsEscola.DataSet.Active := False;
+  dsEspecialidade.DataSet.Active := False;
+end;
+
 procedure TfrmCadastrarFuncionario.FormShow(Sender: TObject);
 begin
   ClearEdits(Self);
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   pgcFuncionario.ActivePage := tbPesquisar;
+  dsFuncionario.DataSet.Active := True;
+  dsEscola.DataSet.Active := True;
+  dsEspecialidade.DataSet.Active := True;
+  ResetarGrid;
 end;
 
 
@@ -312,8 +375,12 @@ var
 begin
   oFuncionarioController := TFuncionarioController.Create;
     try
-      oFuncionarioController.Pesquisar(edtPesquisar.Text);
-      dsFuncionario.DataSet.Refresh;
+      //oFuncionarioController.Pesquisar(edtPesquisar.Text);
+      dsFuncionario.DataSet.Filtered := False;
+      dsFuncionario.DataSet.Filter := 'FUNNOM = ' + QuotedStr(edtPesquisar.Text);
+      dsFuncionario.DataSet.Filtered := True;
+      if edtPesquisar.Text = '' then
+        ResetarGrid;
     finally
       freeandnil(oFuncionarioController);
 

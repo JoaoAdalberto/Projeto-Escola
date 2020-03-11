@@ -52,7 +52,7 @@ type
     function Pesquisar(ANome: string): TDataSet;
     function Inserir(oAluno : TAluno; out sErro: string): Boolean;
     function Alterar(oAluno :TAluno; out sErro: string) : Boolean;
-   // function InserirSerie(ASerie : Integer; ANome:string; out sErro: string) : Boolean;
+    function InserirSerie(ASerie : Integer; ANome:string; out sErro: string) : Boolean;
   private
     { Private declarations }
   public
@@ -186,20 +186,20 @@ begin
   end;
 end;
 
-//function TdmAluno.InserirSerie(ASerie: Integer; ANome: string; out sErro: string): Boolean;
-//begin
-//  sqlInserirSerie.Params.FindParam('SERCOD').AsInteger := ASerie;
-//  sqlInserirSerie.Params.FindParam('ALUNOM').AsString := ANome;
-//  try
-//    sqlInserirSerie.ExecSQL();
-//    Result := True;
-//  except on E: Exception do
-//    begin
-//      sErro := 'Ocorreu um erro ao inserir Série: ' + sLineBreak + E.Message;
-//      Result := False;
-//    end;
-//  end;
-//end;
+function TdmAluno.InserirSerie(ASerie: Integer; ANome: string; out sErro: string): Boolean;
+begin
+  sqlInserirSerie.Params.FindParam('SERCOD').AsInteger := ASerie;
+  sqlInserirSerie.Params.FindParam('ALUNOM').AsString := ANome;
+  try
+    sqlInserirSerie.ExecSQL();
+    Result := True;
+  except on E: Exception do
+    begin
+      sErro := 'Ocorreu um erro ao inserir Série: ' + sLineBreak + E.Message;
+      Result := False;
+    end;
+  end;
+end;
 
 function TdmAluno.Pesquisar(ANome: string): TDataSet;
 begin

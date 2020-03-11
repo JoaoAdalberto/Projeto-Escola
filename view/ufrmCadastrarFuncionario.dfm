@@ -11,6 +11,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -19,7 +20,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     Top = 0
     Width = 593
     Height = 417
-    ActivePage = tbPesquisar
+    ActivePage = tbDados
     Align = alClient
     TabOrder = 0
     OnEnter = pgcFuncionarioEnter

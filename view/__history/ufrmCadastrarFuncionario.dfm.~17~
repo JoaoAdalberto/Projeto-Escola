@@ -2,8 +2,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
   Left = 0
   Top = 0
   Caption = 'Cadastro de Funcion'#225'rios'
-  ClientHeight = 540
-  ClientWidth = 610
+  ClientHeight = 417
+  ClientWidth = 593
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,26 +11,25 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pgcFuncionario: TPageControl
     Left = 0
     Top = 0
-    Width = 610
-    Height = 540
-    ActivePage = tbDados
+    Width = 593
+    Height = 417
+    ActivePage = tbPesquisar
     Align = alClient
     TabOrder = 0
-    OnChange = pgcFuncionarioChange
-    ExplicitHeight = 350
+    OnEnter = pgcFuncionarioEnter
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
-      ExplicitHeight = 322
       object pnlFiltro: TPanel
         Left = 0
         Top = 0
-        Width = 602
+        Width = 585
         Height = 49
         Align = alTop
         BevelOuter = bvNone
@@ -54,16 +53,17 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
           Height = 25
           Caption = 'Pesquisar'
           TabOrder = 1
+          OnClick = btnPesquisarClick
         end
       end
       object dbFuncionario: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 52
-        Width = 596
-        Height = 416
+        Width = 579
+        Height = 252
         Align = alClient
-        DataSource = dmFuncionario.dsFuncionario
+        DataSource = dsFuncionario
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -74,18 +74,17 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
       end
       object pnlBtnsPesq: TPanel
         Left = 0
-        Top = 471
-        Width = 602
+        Top = 307
+        Width = 585
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
         Color = clSilver
         ParentBackground = False
         TabOrder = 2
-        ExplicitTop = 281
         object btnNovo: TButton
-          Left = 435
-          Top = 8
+          Left = 323
+          Top = 10
           Width = 75
           Height = 25
           Caption = 'Novo'
@@ -93,8 +92,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
           OnClick = btnNovoClick
         end
         object btnDetalhar: TButton
-          Left = 354
-          Top = 8
+          Left = 411
+          Top = 10
           Width = 75
           Height = 25
           Caption = 'Detalhar'
@@ -102,8 +101,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
           OnClick = btnDetalharClick
         end
         object btnExcluir: TButton
-          Left = 516
-          Top = 8
+          Left = 492
+          Top = 10
           Width = 75
           Height = 25
           Caption = 'Excluir'
@@ -111,12 +110,31 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
           OnClick = btnExcluirClick
         end
       end
+      object pnlRodape: TPanel
+        Left = 0
+        Top = 348
+        Width = 585
+        Height = 41
+        Align = alBottom
+        TabOrder = 3
+        object btnFechar2: TButton
+          Left = 454
+          Top = 8
+          Width = 113
+          Height = 25
+          Caption = 'Fechar'
+          TabOrder = 0
+          OnClick = btnFechar2Click
+        end
+      end
     end
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
       ExplicitLeft = 0
-      ExplicitTop = 28
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 24
         Top = 134
@@ -159,28 +177,34 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         Height = 13
         Caption = 'Especialidade'
       end
+      object Label4: TLabel
+        Left = 408
+        Top = 42
+        Width = 30
+        Height = 13
+        Caption = 'Escola'
+      end
       object pnlBotoes: TPanel
         Left = 0
-        Top = 474
-        Width = 602
+        Top = 310
+        Width = 585
         Height = 38
         Align = alBottom
         Color = clSilver
         ParentBackground = False
         TabOrder = 15
-        ExplicitTop = 284
         object btnGravar: TButton
-          Left = 446
-          Top = 8
+          Left = 411
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Gravar'
           TabOrder = 2
-          OnClick = btnGravarClick
+          OnClick = btnConfirmarCadastroClick
         end
         object btnCancelarCadastroo: TButton
-          Left = 527
-          Top = 8
+          Left = 492
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Cancelar'
@@ -188,8 +212,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
           OnClick = btnCancelarCadastroClick
         end
         object btnAlterar: TButton
-          Left = 365
-          Top = 8
+          Left = 330
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Alterar'
@@ -197,8 +221,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
           OnClick = btnAlterarClick
         end
         object btnListar: TButton
-          Left = 284
-          Top = 8
+          Left = 249
+          Top = 7
           Width = 75
           Height = 25
           Caption = 'Listar'
@@ -217,6 +241,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         EditLabel.Caption = 'Estado'
         MaxLength = 2
         TabOrder = 13
+        OnKeyPress = lbledtEstadoKeyPress
       end
       object lbledtRua: TLabeledEdit
         Left = 119
@@ -226,6 +251,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         EditLabel.Width = 19
         EditLabel.Height = 13
         EditLabel.Caption = 'Rua'
+        MaxLength = 25
         TabOrder = 8
       end
       object lbledtNumero: TLabeledEdit
@@ -236,7 +262,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         EditLabel.Width = 37
         EditLabel.Height = 13
         EditLabel.Caption = 'N'#250'mero'
+        MaxLength = 5
         TabOrder = 9
+        OnKeyPress = lbledtNumeroKeyPress
       end
       object lbledtComplemento: TLabeledEdit
         Left = 212
@@ -246,6 +274,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         EditLabel.Width = 65
         EditLabel.Height = 13
         EditLabel.Caption = 'Complemento'
+        MaxLength = 25
         TabOrder = 11
       end
       object lbledtBairro: TLabeledEdit
@@ -256,6 +285,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         EditLabel.Width = 28
         EditLabel.Height = 13
         EditLabel.Caption = 'Bairro'
+        MaxLength = 15
         TabOrder = 10
       end
       object lbledtCidade: TLabeledEdit
@@ -266,7 +296,9 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         EditLabel.Width = 33
         EditLabel.Height = 13
         EditLabel.Caption = 'Cidade'
+        MaxLength = 25
         TabOrder = 12
+        OnKeyPress = lbledtCidadeKeyPress
       end
       object mskedtCep: TMaskEdit
         Left = 24
@@ -281,7 +313,7 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
       object lbledtNome: TLabeledEdit
         Left = 24
         Top = 61
-        Width = 424
+        Width = 353
         Height = 21
         EditLabel.Width = 27
         EditLabel.Height = 13
@@ -301,8 +333,8 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         Left = 24
         Top = 107
         Width = 64
-        Height = 21
-        Style = csDropDownList
+        Height = 19
+        Style = csOwnerDrawFixed
         ItemHeight = 13
         TabOrder = 3
         Items.Strings = (
@@ -321,31 +353,12 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
       object mskedtCPF: TMaskEdit
         Left = 466
         Top = 107
-        Width = 87
+        Width = 85
         Height = 21
-        EditMask = '000\.000\.000\-00;1;_'
+        EditMask = '000.000.000-00;1;_'
         MaxLength = 14
         TabOrder = 6
         Text = '   .   .   -  '
-      end
-      object lbledtCodigoEscola: TLabeledEdit
-        Left = 466
-        Top = 61
-        Width = 89
-        Height = 21
-        EditLabel.Width = 81
-        EditLabel.Height = 13
-        EditLabel.Caption = 'C'#243'digo da Escola'
-        MaxLength = 3
-        TabOrder = 2
-      end
-      object cbxEspecialidade: TComboBox
-        Left = 276
-        Top = 246
-        Width = 277
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 14
       end
       object lbledtCodigo: TLabeledEdit
         Left = 24
@@ -358,19 +371,62 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
         Enabled = False
         TabOrder = 0
       end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 280
-        Top = 304
+      object dblcbxEscola: TDBLookupComboBox
+        Left = 408
+        Top = 61
         Width = 145
         Height = 21
-        ListSource = dsFuncionario
+        DataField = 'FUNESC'
+        DataSource = dsFuncionario
+        KeyField = 'ESCCOD'
+        ListField = 'ESCNOM'
+        ListSource = dsEscola
+        TabOrder = 2
+      end
+      object dblucbxEspecialidade: TDBLookupComboBox
+        Left = 276
+        Top = 246
+        Width = 145
+        Height = 21
+        DataField = 'FUNESP'
+        DataSource = dsFuncionario
+        KeyField = 'ESPCOD'
+        ListField = 'ESPDES'
+        ListSource = dsEspecialidade
+        TabOrder = 14
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 348
+        Width = 585
+        Height = 41
+        Align = alBottom
         TabOrder = 16
+        object btnFechar: TButton
+          Left = 446
+          Top = 6
+          Width = 129
+          Height = 25
+          Caption = 'Fechar'
+          TabOrder = 0
+          OnClick = btnFechar2Click
+        end
       end
     end
   end
   object dsFuncionario: TDataSource
     DataSet = dmFuncionario.cdsFuncionario
-    Left = 304
-    Top = 40
+    Left = 240
+    Top = 344
+  end
+  object dsEspecialidade: TDataSource
+    DataSet = dmConexao.cdsEspecialidade
+    Left = 200
+    Top = 328
+  end
+  object dsEscola: TDataSource
+    DataSet = dmConexao.cdsEscola
+    Left = 128
+    Top = 344
   end
 end

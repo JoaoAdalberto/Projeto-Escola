@@ -368,24 +368,4 @@ object dmAluno: TdmAluno
       Size = 100
     end
   end
-  object sqlInserirSerie: TSQLDataSet
-    SchemaName = 'sa'
-    CommandText = 'update Aluno'#13#10'set ALUSER = :ALUSER'#13#10'where (ALUNOM = :ALUNOM)'
-    DbxCommandType = 'Dbx.SQL'
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ALUSER'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftString
-        Name = 'ALUNOM'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmConexao.sqlConexao
-    Left = 448
-    Top = 200
-  end
 end

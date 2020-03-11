@@ -74,7 +74,6 @@ type
     procedure lbledtNumeroKeyPress(Sender: TObject; var Key: Char);
     procedure pgcFuncionarioEnter(Sender: TObject);
     procedure btnFechar2Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure ResetarGrid;
     { Private declarations }
@@ -128,7 +127,6 @@ begin
   finally
     FreeAndNil(oFuncionario);
     FreeAndNil(oFuncionarioController);
-    dsFuncionario.DataSet.Active := True;
     dsFuncionario.DataSet.Refresh;
   end;
 end;
@@ -349,23 +347,15 @@ begin
   dsFuncionario.DataSet.Refresh;
 end;
 
-procedure TfrmCadastrarFuncionario.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-  dsFuncionario.DataSet.Active := False;
-  dsEscola.DataSet.Active := False;
-  dsEspecialidade.DataSet.Active := False;
-end;
-
 procedure TfrmCadastrarFuncionario.FormShow(Sender: TObject);
 begin
   ClearEdits(Self);
   tbPesquisar.TabVisible := False;
   tbDados.TabVisible := False;
   pgcFuncionario.ActivePage := tbPesquisar;
-  dsFuncionario.DataSet.Active := True;
-  dsEscola.DataSet.Active := True;
-  dsEspecialidade.DataSet.Active := True;
+  dmFuncionario.cdsFuncionario.Active := True;
+  dmConexao.cdsEscola.Active := True;
+  dmConexao.cdsEspecialidade.Active := True;
   ResetarGrid;
 end;
 
