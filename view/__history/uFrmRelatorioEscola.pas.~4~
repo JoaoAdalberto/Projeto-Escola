@@ -4,11 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, RLReport;
+  Dialogs;
 
 type
   TfrmRelatorioEscola = class(TForm)
-    RLReport1: TRLReport;
   private
     { Private declarations }
   public
