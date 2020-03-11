@@ -21,6 +21,8 @@ type
     Especialidades1: TMenuItem;
     datetime: TTimer;
     lblDataHora: TLabel;
+    Relatorios: TMenuItem;
+    Escola1: TMenuItem;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
     procedure Escola1Click(Sender: TObject);
@@ -74,11 +76,11 @@ end;
 
 procedure TunFrmPrincipal.Escola1Click(Sender: TObject);
 begin
-  frmExcluirEscola := TfrmExcluirEscola.Create(nil);
+  frmRelatorioEscola := TfrmRelatorioEscola.Create(nil);
   try
-    frmExcluirEscola.ShowModal;
+    frmRelatorioEscola.ShowModal;
   finally
-  FreeAndNil(frmExcluirEscola);
+  FreeAndNil(frmRelatorioEscola);
   end;
 end;
 

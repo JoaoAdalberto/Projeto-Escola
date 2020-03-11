@@ -1,9 +1,9 @@
 object unFrmPrincipal: TunFrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'CRUD Completo Escola'
-  ClientHeight = 375
-  ClientWidth = 804
+  Caption = 'Projeto Scefa'
+  ClientHeight = 376
+  ClientWidth = 751
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +12,9 @@ object unFrmPrincipal: TunFrmPrincipal
   Font.Style = []
   Menu = mainmenPrincipal
   OldCreateOrder = False
-  OnShow = FormShow
+  DesignSize = (
+    751
+    376)
   PixelsPerInch = 96
   TextHeight = 13
   object lblSCEFA: TLabel
@@ -43,17 +45,20 @@ object unFrmPrincipal: TunFrmPrincipal
     ParentFont = False
   end
   object lblDataHora: TLabel
-    Left = 645
-    Top = 350
+    Left = 592
+    Top = 351
     Width = 5
     Height = 19
     Alignment = taCenter
+    Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    ExplicitLeft = 645
+    ExplicitTop = 350
   end
   object mainmenPrincipal: TMainMenu
     Left = 104
@@ -64,28 +69,21 @@ object unFrmPrincipal: TunFrmPrincipal
         Caption = 'Escolas'
         OnClick = Escolas1Click
       end
-      object Funcionrios1: TMenuItem
+      object Funcionarios1: TMenuItem
         Caption = 'Funcionarios'
+        OnClick = Funcionarios1Click
       end
       object Alunos1: TMenuItem
         Caption = 'Alunos'
+        OnClick = Alunos1Click
       end
-      object Cargos1: TMenuItem
-        Caption = 'Cargos'
-        OnClick = Cargos1Click
+      object Especialidades1: TMenuItem
+        Caption = 'Especialidades'
+        OnClick = Especialidades1Click
       end
       object Series1: TMenuItem
         Caption = 'Series'
-      end
-      object Disciplinas1: TMenuItem
-        Caption = 'Disciplinas'
-      end
-    end
-    object Excluir1: TMenuItem
-      Caption = 'Excluir'
-      object Escola1: TMenuItem
-        Caption = 'Escola'
-        OnClick = Escola1Click
+        OnClick = Series1Click
       end
     end
   end

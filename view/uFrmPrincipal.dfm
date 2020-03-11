@@ -86,6 +86,13 @@ object unFrmPrincipal: TunFrmPrincipal
         OnClick = Series1Click
       end
     end
+    object Relatorios: TMenuItem
+      Caption = 'Relat'#243'rios'
+      object Escola1: TMenuItem
+        Caption = 'Escola'
+        OnClick = Escola1Click
+      end
+    end
   end
   object datetime: TTimer
     OnTimer = datetimeTimer

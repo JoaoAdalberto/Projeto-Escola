@@ -26,6 +26,10 @@ object frmCadastrarFuncionario: TfrmCadastrarFuncionario
     OnEnter = pgcFuncionarioEnter
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnlFiltro: TPanel
         Left = 0
         Top = 0

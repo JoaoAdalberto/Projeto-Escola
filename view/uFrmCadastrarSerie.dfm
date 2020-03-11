@@ -240,8 +240,6 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     object tbParticipantes: TTabSheet
       Caption = 'tbParticipantes'
       ImageIndex = 2
-      ExplicitLeft = 8
-      ExplicitTop = 28
       object Label2: TLabel
         Left = 32
         Top = 34
