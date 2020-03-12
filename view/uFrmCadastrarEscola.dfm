@@ -23,12 +23,10 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     ActivePage = tbDados
     Align = alBottom
     TabOrder = 0
+    ExplicitLeft = -8
+    ExplicitTop = -8
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlFiltro: TPanel
         Left = 0
         Top = 0
@@ -62,7 +60,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           OnClick = btnPesquisarClick
         end
         object rgPesquisa: TRadioGroup
-          Left = 30
+          Left = 23
           Top = 7
           Width = 179
           Height = 63
@@ -70,7 +68,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           Items.Strings = (
             'C'#243'digo'
             'Data de Cadastro'
-            'Todos')
+            'Mostrar Todos')
           TabOrder = 0
         end
         object edtPesquisar: TLabeledEdit
@@ -136,6 +134,16 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           Caption = 'Excluir'
           TabOrder = 2
           OnClick = btnExcluirClick
+        end
+        object btnGerarRelatorios: TButton
+          Left = 392
+          Top = 3
+          Width = 88
+          Height = 25
+          Caption = 'Gerar Relat'#243'rio'
+          TabOrder = 3
+          Visible = False
+          OnClick = btnGerarRelatoriosClick
         end
       end
     end
@@ -301,6 +309,16 @@ object frmCadastrarEscola: TfrmCadastrarEscola
           TabOrder = 0
           OnClick = btnListarClick
         end
+        object btnGerarRelatorio: TButton
+          Left = 310
+          Top = 7
+          Width = 90
+          Height = 25
+          Caption = 'Gerar Relat'#243'rio'
+          TabOrder = 4
+          Visible = False
+          OnClick = btnGerarRelatorioClick
+        end
       end
       object lbledtCodigo: TLabeledEdit
         Left = 20
@@ -332,6 +350,7 @@ object frmCadastrarEscola: TfrmCadastrarEscola
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 265
     object btnFechar: TButton
       Left = 603
       Top = 2

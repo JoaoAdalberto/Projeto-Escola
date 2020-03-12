@@ -60,5 +60,7 @@
     <Transaction>2020/03/11 08:00:16.866.pas,D:\Joao\Downloads\FortesReport\FortesReport\RLReport.pas=</Transaction>
     <Transaction>2020/03/11 14:07:12.819.pas,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.pas=D:\Joao\Documents\GitHub\Projeto-Escola\view\uFrmRelatorioEscola.pas</Transaction>
     <Transaction>2020/03/11 14:07:12.819.dfm,D:\Joao\Documents\GitHub\Projeto-Escola\Unit1.dfm=D:\Joao\Documents\GitHub\Projeto-Escola\view\uFrmRelatorioEscola.dfm</Transaction>
+    <Transaction>2020/03/11 20:59:30.911.pas,C:\Users\T-Gamer\Documents\GitHub\Projeto-Escola\Unit1.pas=C:\Users\T-Gamer\Documents\GitHub\Projeto-Escola\view\uFrmEscolherRelatorio.pas</Transaction>
+    <Transaction>2020/03/11 20:59:30.911.dfm,C:\Users\T-Gamer\Documents\GitHub\Projeto-Escola\Unit1.dfm=C:\Users\T-Gamer\Documents\GitHub\Projeto-Escola\view\uFrmEscolherRelatorio.dfm</Transaction>
   </Transactions>
 </BorlandProject>

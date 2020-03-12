@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, ExtCtrls, DBCtrls, DB, DBGrids, uEscolaController, uEscolaModel, uDmConexao,
-  ComCtrls, Grids;
+  ComCtrls, Grids, ufrmRelatorioEscola;
 
 type
   TfrmCadastrarEscola = class(TForm)
@@ -43,6 +43,8 @@ type
     Label2: TLabel;
     dtpDataCadastro: TDateTimePicker;
     lblDataCadastro: TLabel;
+    btnGerarRelatorio: TButton;
+    btnGerarRelatorios: TButton;
 
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarCadastroClick(Sender: TObject);
@@ -59,6 +61,8 @@ type
     procedure lbledtEstadoKeyPress(Sender: TObject; var Key: Char);
     procedure lbledtNumeroKeyPress(Sender: TObject; var Key: Char);
     procedure lbledtCidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure btnGerarRelatorioClick(Sender: TObject);
+    procedure btnGerarRelatoriosClick(Sender: TObject);
   private
     procedure Inserir;
     procedure CarregarEscola;
@@ -163,6 +167,16 @@ end;
 procedure TfrmCadastrarEscola.btnFecharClick(Sender: TObject);
 begin
   frmCadastrarEscola.Close;
+end;
+
+procedure TfrmCadastrarEscola.btnGerarRelatorioClick(Sender: TObject);
+begin
+  frmRelatorioEscola.RLReport1.Print;
+end;
+
+procedure TfrmCadastrarEscola.btnGerarRelatoriosClick(Sender: TObject);
+begin
+  frmRelatorioEscola.RLReport1.Preview;
 end;
 
 procedure TfrmCadastrarEscola.btnListarClick(Sender: TObject);

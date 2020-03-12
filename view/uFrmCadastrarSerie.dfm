@@ -20,7 +20,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     Top = 0
     Width = 705
     Height = 369
-    ActivePage = tbParticipantes
+    ActivePage = tbDados
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
@@ -141,6 +141,15 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
+      ExplicitLeft = 8
+      ExplicitTop = 28
+      object Label4: TLabel
+        Left = 32
+        Top = 146
+        Width = 30
+        Height = 13
+        Caption = 'Escola'
+      end
       object lbledtNome: TLabeledEdit
         Left = 32
         Top = 69
@@ -235,6 +244,18 @@ object frmCadastrarSerie: TfrmCadastrarSerie
           TabOrder = 3
           OnClick = btnCancelarClick
         end
+      end
+      object dblupcbxEscola: TDBLookupComboBox
+        Left = 32
+        Top = 165
+        Width = 121
+        Height = 21
+        DataField = 'SERESC'
+        DataSource = dsSerie
+        KeyField = 'ESCCOD'
+        ListField = 'ESCNOM'
+        ListSource = dsEscola
+        TabOrder = 5
       end
     end
     object tbParticipantes: TTabSheet
@@ -360,5 +381,10 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     SQLConnection = dmConexao.sqlConexao
     Left = 488
     Top = 24
+  end
+  object dsEscola: TDataSource
+    DataSet = dmConexao.cdsEscola
+    Left = 328
+    Top = 336
   end
 end

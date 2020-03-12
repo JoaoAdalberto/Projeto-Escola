@@ -11,7 +11,7 @@ object dmConexao: TdmConexao
     Params.Strings = (
       'SchemaOverride=sa.dbo'
       'DriverName=MSSQL'
-      'HostName=PSDEVD14\MSSQLSERVER01'
+      'HostName=DESKTOP-U26BJ62'
       'DataBase=ProjEscola'
       'User_Name='
       'Password='
@@ -420,12 +420,5 @@ object dmConexao: TdmConexao
     SQLConnection = sqlConexao
     Left = 648
     Top = 168
-  end
-  object tableteste: TSQLTable
-    SchemaName = 'sa'
-    MaxBlobSize = -1
-    SQLConnection = sqlConexao
-    Left = 144
-    Top = 176
   end
 end

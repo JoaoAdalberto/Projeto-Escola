@@ -71,6 +71,9 @@
     <DCCReference Include="view\uFrmCadastrarSerie.pas">
       <Form>frmCadastrarSerie</Form>
     </DCCReference>
+    <DCCReference Include="view\uFrmEscolherRelatorio.pas">
+      <Form>frmEscolherRelatorio</Form>
+    </DCCReference>
     <DCCReference Include="view\uFrmExcluirEscola.pas">
       <Form>frmExcluirEscola</Form>
     </DCCReference>

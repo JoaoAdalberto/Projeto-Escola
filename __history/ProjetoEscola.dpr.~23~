@@ -24,8 +24,7 @@ uses
   uSerieController in 'controller\uSerieController.pas',
   uAlunoController in 'controller\uAlunoController.pas',
   uFuncoesAuxiliares in 'view\uFuncoesAuxiliares.pas',
-  uFrmRelatorioEscola in 'view\uFrmRelatorioEscola.pas' {frmRelatorioEscola},
-  uFrmEscolherRelatorio in 'view\uFrmEscolherRelatorio.pas' {frmEscolherRelatorio};
+  uFrmRelatorioEscola in 'view\uFrmRelatorioEscola.pas' {frmRelatorioEscola};
 
 {$R *.res}
 
@@ -33,7 +32,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TunFrmPrincipal, unFrmPrincipal);
-  //Application.CreateForm(TfrmRelatorioEscola, frmRelatorioEscola);
+  Application.CreateForm(TfrmRelatorioEscola, frmRelatorioEscola);
   //  Application.CreateForm(TfrmCadastrarEspecialidades, frmCadastrarEspecialidades);
 //  application.CreateForm(TfrmExcluirEscola, frmExcluirEscola);
 //  Application.CreateForm(TfrmCadastrarEspecialidades, frmCadastrarEspecialidades);

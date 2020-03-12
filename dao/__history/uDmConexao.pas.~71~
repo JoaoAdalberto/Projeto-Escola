@@ -3,7 +3,7 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel, uFuncionarioModel,
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel,uFuncionarioModel,
   DateUtils, StrUtils, Variants, Messages, Dialogs, SimpleDS;
 
 type
@@ -46,6 +46,8 @@ type
     sqlAlterarEspecialidade: TSQLDataSet;
     sqlExcluirEspecialidade: TSQLDataSet;
     tableteste: TSQLTable;
+    sqlSelectEscolaESCDATCAD: TWideStringField;
+    cdsEscolaESCDATCAD: TWideStringField;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);
     procedure CarregarEscola(oEscola : TEscola; iCodigo: Integer);
     procedure CarregarCargo(oEspecialidade : TEspecialidade; iCodigo: Integer);
@@ -53,7 +55,7 @@ type
     function GerarCodEspecialidade: Integer;
     function Excluir(iCodigo: Integer; out sErro: string): Boolean;
     function ExcluirEspecialidade(iCodigo: Integer; out sErro: string): Boolean;
-    function Pesquisar(ANome: string): TDataSet;
+    procedure Pesquisar(ANome: string);
     function Inserir(oEscola : TEscola; out sErro: string): Boolean;
     function InserirEspecialidade(oEspecialidade : TEspecialidade; out sErro: string) :Boolean;
     function Alterar(oEscola :TEscola; out sErro: string) : Boolean;
@@ -149,6 +151,7 @@ begin
     oEscola.ESCCIDADE := sqlEscola.FieldByName('ESCCIDADE').AsString;
     oEscola.ESCEST := sqlEscola.FieldByName('ESCEST').AsString;
   finally
+    FreeAndNil(sqlEscola);
   end;
 end;
 
@@ -182,8 +185,6 @@ begin
   end;
 end;
 
-
-
 function TdmConexao.ExcluirEspecialidade(iCodigo: Integer;
   out sErro: string): Boolean;
 begin
@@ -211,8 +212,7 @@ begin
   sqlInserirEscola.Params.FindParam('ESCBAIRRO').AsString := oEscola.ESCBAIRRO;
   sqlInserirEscola.Params.FindParam('ESCCIDADE').AsString := oEscola.ESCCIDADE;
   sqlInserirEscola.Params.FindParam('ESCEST').AsString := oEscola.ESCEST;
-//  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('YYYY/MM/DD HH:MM:SS', Now);
-
+  sqlInserirEscola.Params.FindParam('ESCDATCAD').AsString := FormatDateTime('DD/MM/YYYY',oEscola.ESCDATCAD);
   try
     sqlInserirEscola.ExecSQL;
     Result := True;
@@ -257,10 +257,10 @@ begin
   end;
 end;
 
-function TdmConexao.Pesquisar(ANome: string): TDataSet;
+procedure TdmConexao.Pesquisar(ANome: string);
 begin
   cdsEscola.Filtered := False;
-  cdsEscola.Filter := 'Upper(ESCNOM) = ' + UpperCase(QuotedStr('%' + ANome + '%'));
+  cdsEscola.Filter := 'ESCNOM = ' + QuotedStr(ANome);
   cdsEscola.Filtered := True;
 end;
 

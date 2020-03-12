@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, uSerieModel, uSerieController, ComCtrls, uDmSerie, uDmAluno, uDmFuncionario, uDmConexao, uAlunoController,
-  DB, Grids, DBGrids, FMTBcd, SqlExpr;
+  DB, Grids, DBGrids, FMTBcd, SqlExpr, DBCtrls;
 
 type
   TfrmCadastrarSerie = class(TForm)
@@ -49,6 +49,9 @@ type
     btnConfirmar: TButton;
     btnCancelarTudo: TButton;
     SQLDataSet1: TSQLDataSet;
+    dblupcbxEscola: TDBLookupComboBox;
+    Label4: TLabel;
+    dsEscola: TDataSource;
     procedure btnFecharClick(Sender: TObject);
     procedure btnFechar2Click(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
@@ -306,6 +309,8 @@ begin
   tbDados.TabVisible := False;
   tbParticipantes.TabVisible := False;
   dsSerie.DataSet.Active := True;
+  dsEscola.DataSet.Active := True;
+
   pgcSerie.ActivePage := tbPesquisar;
 end;
 
@@ -319,7 +324,7 @@ begin
   oSerieController := TSerieController.Create;
   try
     oSerie.SERNOM := lbledtNome.Text;
-    oSerie.SERESC := StrToInt(lbledtCodigoEscola.Text);
+    oSerie.SERESC := dblupcbxEscola.KeyValue;
     if oSerieController.Inserir(oSerie, sError) = False then
       raise Exception.Create(sError);
   finally

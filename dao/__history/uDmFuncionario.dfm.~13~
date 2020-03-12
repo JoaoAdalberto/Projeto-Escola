@@ -116,11 +116,10 @@ object dmFuncionario: TdmFuncionario
   object sqlSelectFuncionario: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
-      'SELECT FUNCOD, FUNESC,  FUNNOM, FUNDATNAS, FUNDATEMP, FUNSEX, FU' +
-      'NCPF, ESCNOM, ESPDES, FUNCEP, FUNRUA, FUNNUM, FUNCOM, FUNBAI, FU' +
-      'NCID, FUNEST, SERNOM ,FUNESP FROM FUNCIONARIO, SERIE, ESCOLA, ES' +
-      'PECIALIDADE WHERE (FUNSER = SERCOD ) and (FUNESP = ESPCOD) and (' +
-      'FUNESC  = ESCCOD)'
+      'SELECT FUNCOD, FUNNOM, FUNDATNAS, FUNDATEMP, FUNSEX, FUNCPF, FUN' +
+      'ESC, FUNESP, FUNCEP, FUNRUA, FUNNUM, FUNCOM, FUNBAI, FUNCID, FUN' +
+      'EST, FUNSER, SERNOM FROM FUNCIONARIO, SERIE WHERE (FUNSER = SERC' +
+      'OD )'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -152,6 +151,14 @@ object dmFuncionario: TdmFuncionario
       Required = True
       Size = 11
     end
+    object intgrfldSelectFuncionarioFUNESC: TIntegerField
+      FieldName = 'FUNESC'
+      Required = True
+    end
+    object intgrfldSelectFuncionarioFUNESP: TIntegerField
+      FieldName = 'FUNESP'
+      Required = True
+    end
     object strngfldSelectFuncionarioFUNCEP: TStringField
       FieldName = 'FUNCEP'
       Size = 8
@@ -182,31 +189,15 @@ object dmFuncionario: TdmFuncionario
       Required = True
       Size = 2
     end
+    object sqlSelectFuncionarioFUNSER: TIntegerField
+      DisplayWidth = 3
+      FieldName = 'FUNSER'
+    end
     object sqlSelectFuncionarioSERNOM: TStringField
       DisplayWidth = 10
       FieldName = 'SERNOM'
       Required = True
       Size = 100
-    end
-    object sqlSelectFuncionarioESCNOM: TStringField
-      DisplayWidth = 20
-      FieldName = 'ESCNOM'
-      Required = True
-      Size = 100
-    end
-    object sqlSelectFuncionarioESPDES: TStringField
-      DisplayWidth = 20
-      FieldName = 'ESPDES'
-      Required = True
-      Size = 100
-    end
-    object sqlSelectFuncionarioFUNESP: TIntegerField
-      FieldName = 'FUNESP'
-      Required = True
-    end
-    object sqlSelectFuncionarioFUNESC: TIntegerField
-      FieldName = 'FUNESC'
-      Required = True
     end
   end
   object sqlAlterarFuncionario: TSQLDataSet
@@ -300,14 +291,15 @@ object dmFuncionario: TdmFuncionario
     ProviderName = 'dspFuncionario'
     Left = 48
     Top = 48
-    object cdsFuncionarioFUNCOD: TIntegerField
-      DisplayLabel = 'C'#243'digo Funcion'#225'rio'
+    object intgrfldFuncionarioFUNCOD: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'C'#243'digo'
       DisplayWidth = 3
       FieldName = 'FUNCOD'
       Required = True
     end
-    object cdsFuncionarioFUNNOM: TStringField
-      DisplayLabel = 'Funcion'#225'rio'
+    object strngfldFuncionarioFUNNOM: TStringField
+      DisplayLabel = 'Nome'
       DisplayWidth = 20
       FieldName = 'FUNNOM'
       Required = True
@@ -323,90 +315,82 @@ object dmFuncionario: TdmFuncionario
       DisplayWidth = 11
       FieldName = 'FUNDATEMP'
     end
-    object cdsFuncionarioFUNSEX: TStringField
+    object strngfldFuncionarioFUNSEX: TStringField
       DisplayLabel = 'Sexo'
       FieldName = 'FUNSEX'
       Required = True
       Size = 1
     end
-    object cdsFuncionarioFUNCPF: TStringField
+    object strngfldFuncionarioFUNCPF: TStringField
       DisplayLabel = 'CPF'
       FieldName = 'FUNCPF'
       Required = True
       Size = 11
     end
-    object cdsFuncionarioFUNCEP: TStringField
+    object intgrfldFuncionarioFUNESC: TIntegerField
+      DisplayLabel = 'C'#243'digo Escola'
+      DisplayWidth = 3
+      FieldName = 'FUNESC'
+      Required = True
+    end
+    object intgrfldFuncionarioFUNESP: TIntegerField
+      DisplayLabel = 'C'#243'digo Especialidade'
+      DisplayWidth = 3
+      FieldName = 'FUNESP'
+      Required = True
+    end
+    object strngfldFuncionarioFUNCEP: TStringField
       DisplayLabel = 'CEP'
       FieldName = 'FUNCEP'
       Size = 8
     end
-    object cdsFuncionarioFUNRUA: TStringField
+    object strngfldFuncionarioFUNRUA: TStringField
       DisplayLabel = 'Rua'
-      DisplayWidth = 20
+      DisplayWidth = 15
       FieldName = 'FUNRUA'
       Size = 100
     end
-    object cdsFuncionarioFUNNUM: TStringField
+    object strngfldFuncionarioFUNNUM: TStringField
       DisplayLabel = 'N'#250'mero'
       FieldName = 'FUNNUM'
       Size = 5
     end
-    object cdsFuncionarioFUNCOM: TStringField
+    object strngfldFuncionarioFUNCOM: TStringField
       DisplayLabel = 'Complemento'
-      DisplayWidth = 20
+      DisplayWidth = 15
       FieldName = 'FUNCOM'
       Size = 100
     end
-    object cdsFuncionarioFUNBAI: TStringField
+    object strngfldFuncionarioFUNBAI: TStringField
       DisplayLabel = 'Bairro'
       DisplayWidth = 15
       FieldName = 'FUNBAI'
       Size = 30
     end
-    object cdsFuncionarioFUNCID: TStringField
+    object strngfldFuncionarioFUNCID: TStringField
       DisplayLabel = 'Cidade'
-      DisplayWidth = 20
+      DisplayWidth = 15
       FieldName = 'FUNCID'
       Required = True
       Size = 50
     end
-    object cdsFuncionarioFUNEST: TStringField
+    object strngfldFuncionarioFUNEST: TStringField
       DisplayLabel = 'Estado'
       FieldName = 'FUNEST'
       Required = True
       Size = 2
     end
+    object cdsFuncionarioFUNSER: TIntegerField
+      DisplayLabel = 'C'#243'digo S'#233'rie'
+      DisplayWidth = 3
+      FieldName = 'FUNSER'
+    end
     object cdsFuncionarioSERNOM: TStringField
       DisplayLabel = 'S'#233'rie'
+      DisplayWidth = 10
       FieldName = 'SERNOM'
       Required = True
       Size = 100
-    end
-    object cdsFuncionarioESCNOM: TStringField
-      DisplayLabel = 'Escola'
-      DisplayWidth = 20
-      FieldName = 'ESCNOM'
-      Required = True
-      Size = 100
-    end
-    object cdsFuncionarioESPDES: TStringField
-      DisplayLabel = 'Especialidade'
-      DisplayWidth = 20
-      FieldName = 'ESPDES'
-      Required = True
-      Size = 100
-    end
-    object cdsFuncionarioFUNESP: TIntegerField
-      DisplayLabel = 'Cod. Especialidade'
-      DisplayWidth = 3
-      FieldName = 'FUNESP'
-      Required = True
-    end
-    object cdsFuncionarioFUNESC: TIntegerField
-      DisplayLabel = 'Cod.Escola'
-      DisplayWidth = 3
-      FieldName = 'FUNESC'
-      Required = True
     end
   end
 end

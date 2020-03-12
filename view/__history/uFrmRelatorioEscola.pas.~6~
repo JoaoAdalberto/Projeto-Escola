@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, RLReport, uDmConexao, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd,
-  DateUtils, StrUtils, SimpleDS, jpeg;
+  DateUtils, StrUtils, SimpleDS;
 
 type
   TfrmRelatorioEscola = class(TForm)
@@ -13,25 +13,14 @@ type
     qryEscola: TSQLQuery;
     dsEscola: TDataSource;
     RLBand1: TRLBand;
-    RLDraw1: TRLDraw;
-    qryEscolaESCCOD: TIntegerField;
-    qryEscolaESCNOM: TStringField;
-    qryEscolaESCDES: TStringField;
-    RLImage1: TRLImage;
-    RLMemo1: TRLMemo;
-    qryEscolaESCDATCAD: TWideStringField;
-    RLGroup1: TRLGroup;
     RLBand2: TRLBand;
+    RLBand3: TRLBand;
+    RLLabel1: TRLLabel;
+    RLDraw1: TRLDraw;
     RLLabel2: TRLLabel;
     RLLabel3: TRLLabel;
-    RLLabel1: TRLLabel;
-    RLLabel6: TRLLabel;
-    RLBand3: TRLBand;
     RLDBText1: TRLDBText;
     RLDBText2: TRLDBText;
-    RLDBText3: TRLDBText;
-    RLDBText4: TRLDBText;
-    RLBand5: TRLBand;
     RLBand4: TRLBand;
     RLSystemInfo1: TRLSystemInfo;
     RLLabel4: TRLLabel;

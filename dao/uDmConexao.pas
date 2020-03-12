@@ -3,7 +3,7 @@ unit uDmConexao;
 interface
 
 uses
-  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel, uFuncionarioModel,
+  SysUtils, Classes, WideStrings, DB, SqlExpr, DBClient, Provider, FMTBcd, uEscolaModel, uEspecialidadeModel,uFuncionarioModel,
   DateUtils, StrUtils, Variants, Messages, Dialogs, SimpleDS;
 
 type
@@ -45,7 +45,6 @@ type
     sqlSelectEspecialidadeESPDES: TStringField;
     sqlAlterarEspecialidade: TSQLDataSet;
     sqlExcluirEspecialidade: TSQLDataSet;
-    tableteste: TSQLTable;
     sqlSelectEscolaESCDATCAD: TWideStringField;
     cdsEscolaESCDATCAD: TWideStringField;
     //procedure cdsEscolaNewRecord(DataSet: TDataSet);

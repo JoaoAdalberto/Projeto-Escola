@@ -11,7 +11,7 @@ object dmConexao: TdmConexao
     Params.Strings = (
       'SchemaOverride=sa.dbo'
       'DriverName=MSSQL'
-      'HostName=PSDEVD14\MSSQLSERVER01'
+      'HostName=DESKTOP-U26BJ62'
       'DataBase=ProjEscola'
       'User_Name='
       'Password='
@@ -22,7 +22,6 @@ object dmConexao: TdmConexao
       'OS Authentication=True'
       'Prepare SQL=False')
     VendorLib = 'oledb'
-    Connected = True
     Left = 344
     Top = 8
   end
@@ -34,70 +33,82 @@ object dmConexao: TdmConexao
   end
   object cdsEscola: TClientDataSet
     Aggregates = <>
-    CommandText = 
-      'SELECT ESCCOD, ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCCOM, ESCNUM, E' +
-      'SCBAIRRO, ESCCIDADE, ESCEST FROM ESCOLA'
     Params = <>
     ProviderName = 'dspEscola'
     Left = 136
     Top = 48
     object cdsEscolaESCCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo'
       DisplayWidth = 3
       FieldName = 'ESCCOD'
       ProviderFlags = [pfInUpdate, pfInKey]
       Required = True
     end
     object cdsEscolaESCNOM: TStringField
+      DisplayLabel = 'Nome'
       DisplayWidth = 25
       FieldName = 'ESCNOM'
       Required = True
       Size = 100
     end
     object cdsEscolaESCDES: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
       DisplayWidth = 25
       FieldName = 'ESCDES'
       Size = 100
     end
     object cdsEscolaESCCEP: TStringField
+      DisplayLabel = 'CEP'
       FieldName = 'ESCCEP'
       Size = 8
     end
     object cdsEscolaESCRUA: TStringField
+      DisplayLabel = 'Rua'
       DisplayWidth = 25
       FieldName = 'ESCRUA'
       Size = 100
     end
     object cdsEscolaESCCOM: TStringField
+      DisplayLabel = 'Complemento'
       DisplayWidth = 25
       FieldName = 'ESCCOM'
       Size = 100
     end
     object cdsEscolaESCNUM: TStringField
+      DisplayLabel = 'N'#250'mero'
       FieldName = 'ESCNUM'
       Size = 5
     end
     object cdsEscolaESCBAIRRO: TStringField
+      DisplayLabel = 'Bairro'
       DisplayWidth = 25
       FieldName = 'ESCBAIRRO'
       Size = 30
     end
     object cdsEscolaESCCIDADE: TStringField
+      DisplayLabel = 'Cidade'
       DisplayWidth = 25
       FieldName = 'ESCCIDADE'
       Required = True
       Size = 50
     end
     object cdsEscolaESCEST: TStringField
+      DisplayLabel = 'Estado'
       FieldName = 'ESCEST'
       Required = True
       Size = 2
+    end
+    object cdsEscolaESCDATCAD: TWideStringField
+      DisplayLabel = 'Data de Cadastro'
+      DisplayWidth = 11
+      FieldName = 'ESCDATCAD'
     end
   end
   object sqlSelectEscola: TSQLDataSet
     SchemaName = 'sa'
     CommandText = 
       'SELECT ESCCOD, ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCCOM, ESCNUM, E' +
-      'SCBAIRRO, ESCCIDADE, ESCEST FROM ESCOLA'
+      'SCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD FROM ESCOLA'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -129,13 +140,13 @@ object dmConexao: TdmConexao
       FieldName = 'ESCNUM'
       Size = 5
     end
-    object sqlSelectEscolaESCCOM: TStringField
-      FieldName = 'ESCCOM'
-      Size = 100
-    end
     object sqlSelectEscolaESCBAIRRO: TStringField
       FieldName = 'ESCBAIRRO'
       Size = 30
+    end
+    object sqlSelectEscolaESCCOM: TStringField
+      FieldName = 'ESCCOM'
+      Size = 100
     end
     object sqlSelectEscolaESCCIDADE: TStringField
       FieldName = 'ESCCIDADE'
@@ -147,6 +158,10 @@ object dmConexao: TdmConexao
       Required = True
       Size = 2
     end
+    object sqlSelectEscolaESCDATCAD: TWideStringField
+      DisplayWidth = 12
+      FieldName = 'ESCDATCAD'
+    end
   end
   object sqlInserirEscola: TSQLDataSet
     SchemaName = 'sa'
@@ -154,7 +169,7 @@ object dmConexao: TdmConexao
       'insert into Escola (ESCCOD ,ESCNOM, ESCDES, ESCCEP, ESCRUA, ESCN' +
       'UM, ESCCOM, ESCBAIRRO, ESCCIDADE, ESCEST, ESCDATCAD)'#13#10'values (:E' +
       'SCCOD, :ESCNOM, :ESCDES, :ESCCEP, :ESCRUA, :ESCNUM, :ESCCOM, :ES' +
-      'CBAIRRO, :ESCCIDADE, :ESCEST, GETDATE())'
+      'CBAIRRO, :ESCCIDADE, :ESCEST, :ESCDATCAD)'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <
@@ -206,6 +221,11 @@ object dmConexao: TdmConexao
       item
         DataType = ftUnknown
         Name = 'ESCEST'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ESCDATCAD'
         ParamType = ptInput
       end>
     SQLConnection = sqlConexao
@@ -295,26 +315,28 @@ object dmConexao: TdmConexao
   object dspEspecialidade: TDataSetProvider
     DataSet = sqlSelectEspecialidade
     Options = [poCascadeDeletes, poCascadeUpdates, poAllowCommandText, poUseQuoteChar]
-    Left = 592
-    Top = 40
+    Left = 640
+    Top = 56
   end
   object cdsEspecialidade: TClientDataSet
-    Active = True
     Aggregates = <>
     CommandText = 'SELECT ESPCOD, ESPDES FROM ESPECIALIDADE'
     Params = <>
     ProviderName = 'dspEspecialidade'
-    Left = 504
-    Top = 40
+    Left = 512
+    Top = 48
     object cdsEspecialidadeESPCOD: TIntegerField
+      DisplayLabel = 'C'#243'digo'#13#10#13#10
       DisplayWidth = 3
       FieldName = 'ESPCOD'
-      ProviderFlags = [pfInUpdate, pfInKey]
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsEspecialidadeESPDES: TStringField
+      DisplayLabel = 'Especialidade'
       DisplayWidth = 20
       FieldName = 'ESPDES'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 100
     end
@@ -397,5 +419,12 @@ object dmConexao: TdmConexao
     SQLConnection = sqlConexao
     Left = 648
     Top = 168
+  end
+  object tableteste: TSQLTable
+    SchemaName = 'sa'
+    MaxBlobSize = -1
+    SQLConnection = sqlConexao
+    Left = 144
+    Top = 176
   end
 end
