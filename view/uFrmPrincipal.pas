@@ -22,10 +22,10 @@ type
     datetime: TTimer;
     lblDataHora: TLabel;
     Relatorios: TMenuItem;
-    Escola1: TMenuItem;
+    EscolaRelatorio: TMenuItem;
     procedure datetimeTimer(Sender: TObject);
     procedure Escolas1Click(Sender: TObject);
-    procedure Escola1Click(Sender: TObject);
+    procedure EscolaRelatorioClick(Sender: TObject);
     procedure Especialidades1Click(Sender: TObject);
     procedure Funcionarios1Click(Sender: TObject);
     procedure Alunos1Click(Sender: TObject);
@@ -74,14 +74,10 @@ end;
 
 
 
-procedure TunFrmPrincipal.Escola1Click(Sender: TObject);
+procedure TunFrmPrincipal.EscolaRelatorioClick(Sender: TObject);
 begin
-  frmRelatorioEscola := TfrmRelatorioEscola.Create(nil);
-  try
-    frmRelatorioEscola.ShowModal;
-  finally
-  FreeAndNil(frmRelatorioEscola);
-  end;
+  TRelatorioEscola.dsEscola.DataSet.Active := True;
+  TrelatorioEscola.RLReport1.Preview;
 end;
 
 procedure TunFrmPrincipal.Escolas1Click(Sender: TObject);

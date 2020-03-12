@@ -79,7 +79,6 @@ object frmCadastrarEspecialidades: TfrmCadastrarEspecialidades
         Height = 123
         Align = alClient
         DataSource = dsEspecialidade
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 2
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText

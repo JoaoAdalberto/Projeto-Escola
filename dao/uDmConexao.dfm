@@ -11,7 +11,7 @@ object dmConexao: TdmConexao
     Params.Strings = (
       'SchemaOverride=sa.dbo'
       'DriverName=MSSQL'
-      'HostName=DESKTOP-U26BJ62'
+      'HostName=PSDEVD14\MSSQLSERVER01'
       'DataBase=ProjEscola'
       'User_Name='
       'Password='

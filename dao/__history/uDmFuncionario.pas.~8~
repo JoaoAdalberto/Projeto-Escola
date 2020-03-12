@@ -27,6 +27,9 @@ type
     strngfldSelectFuncionarioFUNBAI: TStringField;
     strngfldSelectFuncionarioFUNCID: TStringField;
     strngfldSelectFuncionarioFUNEST: TStringField;
+    sqlSelectFuncionarioSERNOM: TStringField;
+    sqlSelectFuncionarioESCNOM: TStringField;
+    sqlSelectFuncionarioESPDES: TStringField;
     cdsFuncionarioFUNCOD: TIntegerField;
     cdsFuncionarioFUNNOM: TStringField;
     cdsFuncionarioFUNDATNAS: TWideStringField;
@@ -40,6 +43,9 @@ type
     cdsFuncionarioFUNBAI: TStringField;
     cdsFuncionarioFUNCID: TStringField;
     cdsFuncionarioFUNEST: TStringField;
+    cdsFuncionarioSERNOM: TStringField;
+    cdsFuncionarioESCNOM: TStringField;
+    cdsFuncionarioESPDES: TStringField;
     sqlSelectFuncionarioFUNESP: TIntegerField;
     cdsFuncionarioFUNESP: TIntegerField;
     sqlSelectFuncionarioFUNESC: TIntegerField;

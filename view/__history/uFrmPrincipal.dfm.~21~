@@ -1,7 +1,7 @@
 object unFrmPrincipal: TunFrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'CRUD Completo Escola'
+  Caption = 'Projeto Scefa'
   ClientHeight = 376
   ClientWidth = 751
   Color = clBtnFace
@@ -12,7 +12,6 @@ object unFrmPrincipal: TunFrmPrincipal
   Font.Style = []
   Menu = mainmenPrincipal
   OldCreateOrder = False
-  OnShow = FormShow
   DesignSize = (
     751
     376)
@@ -70,21 +69,28 @@ object unFrmPrincipal: TunFrmPrincipal
         Caption = 'Escolas'
         OnClick = Escolas1Click
       end
-      object Funcionrios1: TMenuItem
+      object Funcionarios1: TMenuItem
         Caption = 'Funcionarios'
+        OnClick = Funcionarios1Click
       end
       object Alunos1: TMenuItem
         Caption = 'Alunos'
+        OnClick = Alunos1Click
       end
-      object Cargos1: TMenuItem
-        Caption = 'Cargos'
-        OnClick = Cargos1Click
+      object Especialidades1: TMenuItem
+        Caption = 'Especialidades'
+        OnClick = Especialidades1Click
       end
       object Series1: TMenuItem
         Caption = 'Series'
+        OnClick = Series1Click
       end
-      object Disciplinas1: TMenuItem
-        Caption = 'Disciplinas'
+    end
+    object Relatorios: TMenuItem
+      Caption = 'Relat'#243'rios'
+      object EscolaRelatorio: TMenuItem
+        Caption = 'Escola'
+        OnClick = EscolaRelatorioClick
       end
     end
   end

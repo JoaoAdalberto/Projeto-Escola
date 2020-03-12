@@ -1,7 +1,7 @@
-object TRelatorioEscola: TTRelatorioEscola
+object frmRelatorioEscola: TfrmRelatorioEscola
   Left = 0
   Top = 0
-  Caption = 'TRelatorioEscola'
+  Caption = 'frmRelatorioEscola'
   ClientHeight = 635
   ClientWidth = 1051
   Color = clBtnFace
@@ -40,7 +40,7 @@ object TRelatorioEscola: TTRelatorioEscola
       object RLImage1: TRLImage
         Left = 0
         Top = 3
-        Width = 195
+        Width = 193
         Height = 87
         AutoSize = True
         Picture.Data = {
@@ -426,7 +426,7 @@ object TRelatorioEscola: TTRelatorioEscola
       Left = 38
       Top = 145
       Width = 718
-      Height = 506
+      Height = 368
       object RLBand2: TRLBand
         Left = 0
         Top = 0
@@ -497,7 +497,7 @@ object TRelatorioEscola: TTRelatorioEscola
         object RLDBText1: TRLDBText
           Left = 16
           Top = 6
-          Width = 58
+          Width = 49
           Height = 16
           DataField = 'ESCCOD'
           DataSource = dsEscola
@@ -511,7 +511,7 @@ object TRelatorioEscola: TTRelatorioEscola
         object RLDBText2: TRLDBText
           Left = 92
           Top = 6
-          Width = 60
+          Width = 41
           Height = 16
           DataField = 'ESCNOM'
           DataSource = dsEscola
@@ -525,7 +525,7 @@ object TRelatorioEscola: TTRelatorioEscola
         object RLDBText3: TRLDBText
           Left = 239
           Top = 6
-          Width = 56
+          Width = 66
           Height = 16
           DataField = 'ESCDES'
           DataSource = dsEscola
@@ -603,14 +603,14 @@ object TRelatorioEscola: TTRelatorioEscola
   end
   object qryEscola: TSQLQuery
     SchemaName = 'sa'
+    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       
         'select ESCCOD, ESCNOM, ESCDES, ESCDATCAD  from ESCOLA where ESCC' +
         'OD = 1'
-      ' '
-      '')
+      ' ')
     SQLConnection = dmConexao.sqlConexao
     Left = 696
     Top = 280

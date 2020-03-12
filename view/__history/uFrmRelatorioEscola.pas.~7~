@@ -8,7 +8,7 @@ uses
   DateUtils, StrUtils, SimpleDS, jpeg;
 
 type
-  TTRelatorioEscola = class(TForm)
+  TfrmRelatorioEscola = class(TForm)
     RLReport1: TRLReport;
     qryEscola: TSQLQuery;
     dsEscola: TDataSource;
@@ -45,7 +45,7 @@ type
   end;
 
 var
-  TRelatorioEscola: TTRelatorioEscola;
+  frmRelatorioEscola: TfrmRelatorioEscola;
 
 implementation
 

@@ -117,10 +117,8 @@ object dmFuncionario: TdmFuncionario
     SchemaName = 'sa'
     CommandText = 
       'SELECT FUNCOD, FUNESC,  FUNNOM, FUNDATNAS, FUNDATEMP, FUNSEX, FU' +
-      'NCPF, ESCNOM, ESPDES, FUNCEP, FUNRUA, FUNNUM, FUNCOM, FUNBAI, FU' +
-      'NCID, FUNEST, SERNOM ,FUNESP FROM FUNCIONARIO, SERIE, ESCOLA, ES' +
-      'PECIALIDADE WHERE (FUNSER = SERCOD ) and (FUNESP = ESPCOD) and (' +
-      'FUNESC  = ESCCOD)'
+      'NCPF,  FUNCEP, FUNRUA, FUNNUM, FUNCOM, FUNBAI, FUNCID, FUNEST, F' +
+      'UNESP FROM FUNCIONARIO'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -181,24 +179,6 @@ object dmFuncionario: TdmFuncionario
       FieldName = 'FUNEST'
       Required = True
       Size = 2
-    end
-    object sqlSelectFuncionarioSERNOM: TStringField
-      DisplayWidth = 10
-      FieldName = 'SERNOM'
-      Required = True
-      Size = 100
-    end
-    object sqlSelectFuncionarioESCNOM: TStringField
-      DisplayWidth = 20
-      FieldName = 'ESCNOM'
-      Required = True
-      Size = 100
-    end
-    object sqlSelectFuncionarioESPDES: TStringField
-      DisplayWidth = 20
-      FieldName = 'ESPDES'
-      Required = True
-      Size = 100
     end
     object sqlSelectFuncionarioFUNESP: TIntegerField
       FieldName = 'FUNESP'
@@ -375,26 +355,6 @@ object dmFuncionario: TdmFuncionario
       FieldName = 'FUNEST'
       Required = True
       Size = 2
-    end
-    object cdsFuncionarioSERNOM: TStringField
-      DisplayLabel = 'S'#233'rie'
-      FieldName = 'SERNOM'
-      Required = True
-      Size = 100
-    end
-    object cdsFuncionarioESCNOM: TStringField
-      DisplayLabel = 'Escola'
-      DisplayWidth = 20
-      FieldName = 'ESCNOM'
-      Required = True
-      Size = 100
-    end
-    object cdsFuncionarioESPDES: TStringField
-      DisplayLabel = 'Especialidade'
-      DisplayWidth = 20
-      FieldName = 'ESPDES'
-      Required = True
-      Size = 100
     end
     object cdsFuncionarioFUNESP: TIntegerField
       DisplayLabel = 'Cod. Especialidade'

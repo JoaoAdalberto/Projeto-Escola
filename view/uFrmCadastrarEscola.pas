@@ -45,6 +45,8 @@ type
     lblDataCadastro: TLabel;
     btnGerarRelatorio: TButton;
     btnGerarRelatorios: TButton;
+    rgOrdernar: TRadioGroup;
+    btnOrdenar: TButton;
 
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarCadastroClick(Sender: TObject);
@@ -63,6 +65,7 @@ type
     procedure lbledtCidadeKeyPress(Sender: TObject; var Key: Char);
     procedure btnGerarRelatorioClick(Sender: TObject);
     procedure btnGerarRelatoriosClick(Sender: TObject);
+    procedure rgPesquisaClick(Sender: TObject);
   private
     procedure Inserir;
     procedure CarregarEscola;
@@ -171,12 +174,14 @@ end;
 
 procedure TfrmCadastrarEscola.btnGerarRelatorioClick(Sender: TObject);
 begin
-  frmRelatorioEscola.RLReport1.Print;
+
+  tRelatorioEscola.RLReport1.Print;
 end;
 
 procedure TfrmCadastrarEscola.btnGerarRelatoriosClick(Sender: TObject);
 begin
-  frmRelatorioEscola.RLReport1.Preview;
+  TRelatorioEscola.dsEscola.DataSet.Active := True;
+  tRelatorioEscola.RLReport1.Preview;
 end;
 
 procedure TfrmCadastrarEscola.btnListarClick(Sender: TObject);
@@ -284,7 +289,6 @@ begin
   pgcEscola.ActivePage := tbPesquisar;
   dsEscola.DataSet.Active := True;
   ResetarGrid;
-
 end;
 
 procedure TfrmCadastrarEscola.Inserir;
@@ -340,6 +344,11 @@ begin
   dsEscola.DataSet.Filtered := False;
   dsEscola.DataSet.Filter := 'ESCCOD <> NULL';
   dsEscola.DataSet.Filtered := True;
+end;
+
+procedure TfrmCadastrarEscola.rgPesquisaClick(Sender: TObject);
+begin
+
 end;
 
 //Procedure TF_Cliente.EditCodExit(Sender: TObject);

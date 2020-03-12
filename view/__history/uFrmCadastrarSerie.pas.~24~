@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, uSerieModel, uSerieController, ComCtrls, uDmSerie, uDmAluno, uDmFuncionario, uDmConexao,
-  DB, Grids, DBGrids, FMTBcd, SqlExpr;
+  Dialogs, StdCtrls, ExtCtrls, uSerieModel, uSerieController, ComCtrls, uDmSerie, uDmAluno, uDmFuncionario, uDmConexao, uAlunoController,
+  DB, Grids, DBGrids, FMTBcd, SqlExpr, DBCtrls;
 
 type
   TfrmCadastrarSerie = class(TForm)
@@ -48,6 +48,10 @@ type
     Label3: TLabel;
     btnConfirmar: TButton;
     btnCancelarTudo: TButton;
+    SQLDataSet1: TSQLDataSet;
+    dblupcbxEscola: TDBLookupComboBox;
+    Label4: TLabel;
+    dsEscola: TDataSource;
     procedure btnFecharClick(Sender: TObject);
     procedure btnFechar2Click(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
@@ -63,8 +67,8 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarTudoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cbxEscolherprofessoresSelect(Sender: TObject);
   private
-    procedure CarregaCombobox;
     { Private declarations }
   public
     procedure Inserir;
@@ -113,44 +117,20 @@ end;
 procedure TfrmCadastrarSerie.btnCancelarTudoClick(Sender: TObject);
 begin
   pgcSerie.ActivePage:= tbPesquisar;
+  cbxEscolherAlunos.Items.Clear;
+  memoAlunos.Lines.Clear;
+  cbxEscolherprofessores.Items.Clear;
 end;
 
 procedure TfrmCadastrarSerie.btnConfirmarClick(Sender: TObject);
-var
-  Serie : Integer;
-  Escola : Integer;
-  sqlSequencia : TSQLDataSet;
-begin
-  sqlSequencia := TSQLDataSet.Create(nil);
-  try
-    sqlSequencia.SQLConnection := dmConexao.sqlConexao;
-    sqlSequencia.CommandText := 'select coalesce(max(SERCOD), 0) as seq from Serie';
-    sqlSequencia.Open;
-    Serie := sqlSequencia.FieldByName('seq').AsInteger;
-  finally
-    FreeAndNil(sqlSequencia);
-  end;
-  sqlSequencia := TSQLDataSet.Create(nil);
-  try
-    sqlSequencia.SQLConnection := dmConexao.sqlConexao;
-    sqlSequencia.CommandText := 'select SERESC from Serie  where SERCOD = (select max(SERCOD) from Serie)';
-    sqlSequencia.Open;
-    Escola := sqlSequencia.FieldByName('SERESC').AsInteger;
-  finally
-    FreeAndNil(sqlSequencia);
-  end;
-  sqlqryAlunos.SQL.Text := 'select ALUNOM from Aluno where ALUESC = ' + IntToStr(Escola);
-  sqlqryAlunos.Open;
-  sqlqryAlunos.First;
-    while not sqlqryAlunos.Eof do
-      begin
-        cbxEscolherAlunos.Items.Add(sqlqryAlunos.FieldByName('ALUNOM').AsString);
-        sqlqryAlunos.Next;
-      end;
 
+begin
   pgcSerie.ActivePage:= tbPesquisar;
   dsSerie.DataSet.Refresh;
-    end;
+  cbxEscolherAlunos.Items.Clear;
+  memoAlunos.Lines.Clear;
+  memoProfessores.Lines.Clear;
+end;
 
 procedure TfrmCadastrarSerie.btnDetalharClick(Sender: TObject);
 begin
@@ -187,8 +167,38 @@ begin
 end;
 
 procedure TfrmCadastrarSerie.btnGravarClick(Sender: TObject);
+var
+  Escola : Integer;
+  sqlEscola : TSQLDataSet;
 begin
   Inserir;
+  sqlEscola := TSQLDataSet.Create(nil);
+  try
+    sqlEscola.SQLConnection := dmConexao.sqlConexao;
+    sqlEscola.CommandText := 'select SERESC from Serie where SERCOD = (select max(SERCOD) from Serie)';
+    sqlEscola.Open;
+    Escola := sqlEscola.FieldByName('SERESC').AsInteger;
+  finally
+    FreeAndNil(sqlEscola);
+  end;
+  sqlqryAlunos.SQL.Text := 'select ALUNOM from Aluno where (ALUESC = ' + IntToStr(Escola) + ')';
+  sqlqryAlunos.Open;
+  sqlqryAlunos.First;
+    while not sqlqryAlunos.Eof do
+      begin
+        cbxEscolherAlunos.Items.Add(sqlqryAlunos.FieldByName('ALUNOM').AsString);
+        sqlqryAlunos.Next;
+      end;
+  FreeAndNil(sqlqryAlunos);
+  sqlqryProfessores.SQL.Text := 'select FUNNOM from Funcionario where (FUNESC = ' + IntToStr(Escola)+ ') and ((FUNESP = 4) or (FUNESP =5) or (FUNESP = 6) or (FUNESP = 7) or (FUNESP = 9) or (FUNESP = 10) or (FUNESP = 11) or (FUNESP = 12) or (FUNESP = 13) or (FUNESP = 14) or (FUNESP = 15) or (FUNESP = 16) or (FUNESP = 17) or (FUNESP = 18))';
+  sqlqryProfessores.Open;
+  sqlqryProfessores.First;
+    while not sqlqryProfessores.Eof do
+      begin
+        cbxEscolherprofessores.Items.Add(sqlqryProfessores.FieldByName('FUNNOM').AsString);
+        sqlqryProfessores.Next;
+      end;
+  FreeAndNil(sqlqryProfessores);
   pgcSerie.ActivePage:= tbParticipantes;
 end;
 
@@ -232,13 +242,58 @@ begin
 end;
 
 
-procedure TfrmCadastrarSerie.CarregaCombobox;
+procedure TfrmCadastrarSerie.cbxEscolherAlunosSelect(Sender: TObject);
+var
+  sqlSerie : TSQLDataSet;
+  Serie: Integer;
 begin
+  sqlSerie := TSQLDataSet.Create(nil);
+  try
+    sqlSerie.SQLConnection := dmConexao.sqlConexao;
+    sqlSerie.CommandText := 'select coalesce(max(SERCOD), 0) as seq from Serie';
+    sqlSerie.Open;
+    Serie := sqlSerie.FieldByName('seq').AsInteger;
+  finally
+    FreeAndNil(sqlSerie);
+  end;
+  memoAlunos.Lines.Add(cbxEscolherAlunos.Text);
+  sqlSerie := TSQLDataSet.Create(nil);
+  try
+    sqlSerie.SQLConnection := dmConexao.sqlConexao;
+    sqlSerie.CommandText := 'UPDATE Aluno SET SERCOD =:SERCOD WHERE ALUNOM =:ALUNOM';
+    sqlSerie.ParamByName('SERCOD').AsInteger := Serie;
+    sqlSerie.ParamByName('ALUNOM').AsString := cbxEscolherAlunos.Text;
+    sqlSerie.ExecSQL;
+  finally
+    FreeAndNil(sqlSerie);
+  end;
 end;
 
-procedure TfrmCadastrarSerie.cbxEscolherAlunosSelect(Sender: TObject);
+procedure TfrmCadastrarSerie.cbxEscolherprofessoresSelect(Sender: TObject);
+var
+  sqlSerie : TSQLDataSet;
+  Serie: Integer;
 begin
-  memoAlunos.Lines.Add(cbxEscolherAlunos.Text);
+  sqlSerie := TSQLDataSet.Create(nil);
+  try
+    sqlSerie.SQLConnection := dmConexao.sqlConexao;
+    sqlSerie.CommandText := 'select coalesce(max(SERCOD), 0) as seq from Serie';
+    sqlSerie.Open;
+    Serie := sqlSerie.FieldByName('seq').AsInteger;
+  finally
+    FreeAndNil(sqlSerie);
+  end;
+  memoProfessores.Lines.Add(cbxEscolherProfessores.Text);
+  sqlSerie := TSQLDataSet.Create(nil);
+  try
+    sqlSerie.SQLConnection := dmConexao.sqlConexao;
+    sqlSerie.CommandText := 'UPDATE FUNCIONARIO SET FUNSER =:FUNSER WHERE FUNNOM =:FUNNOM';
+    sqlSerie.ParamByName('FUNSER').AsInteger := Serie;
+    sqlSerie.ParamByName('FUNNOM').AsString := cbxEscolherProfessores.Text;
+    sqlSerie.ExecSQL;
+  finally
+    FreeAndNil(sqlSerie);
+  end;
 end;
 
 procedure TfrmCadastrarSerie.FormClose(Sender: TObject;
@@ -254,8 +309,9 @@ begin
   tbDados.TabVisible := False;
   tbParticipantes.TabVisible := False;
   dsSerie.DataSet.Active := True;
+  dsEscola.DataSet.Active := True;
+
   pgcSerie.ActivePage := tbPesquisar;
-  CarregaCombobox;
 end;
 
 procedure TfrmCadastrarSerie.Inserir;
@@ -268,7 +324,7 @@ begin
   oSerieController := TSerieController.Create;
   try
     oSerie.SERNOM := lbledtNome.Text;
-    oSerie.SERESC := StrToInt(lbledtCodigoEscola.Text);
+    oSerie.SERESC := dblupcbxEscola.KeyValue;
     if oSerieController.Inserir(oSerie, sError) = False then
       raise Exception.Create(sError);
   finally

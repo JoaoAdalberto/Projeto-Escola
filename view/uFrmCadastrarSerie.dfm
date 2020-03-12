@@ -20,7 +20,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     Top = 0
     Width = 705
     Height = 369
-    ActivePage = tbDados
+    ActivePage = tbPesquisar
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
@@ -130,6 +130,7 @@ object frmCadastrarSerie: TfrmCadastrarSerie
         Height = 215
         Align = alClient
         DataSource = dsSerie
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 3
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -141,8 +142,6 @@ object frmCadastrarSerie: TfrmCadastrarSerie
     object tbDados: TTabSheet
       Caption = 'tbDados'
       ImageIndex = 1
-      ExplicitLeft = 8
-      ExplicitTop = 28
       object Label4: TLabel
         Left = 32
         Top = 146

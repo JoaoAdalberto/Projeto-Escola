@@ -19,14 +19,10 @@ object frmCadastrarAluno: TfrmCadastrarAluno
     Top = 1
     Width = 616
     Height = 376
-    ActivePage = tbDados
+    ActivePage = tbPesquisar
     TabOrder = 0
     object tbPesquisar: TTabSheet
       Caption = 'tbPesquisar'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 312
@@ -120,6 +116,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Height = 216
         Align = alClient
         DataSource = dsAluno
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 3
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText

@@ -129,24 +129,10 @@ object frmCadastrarAluno: TfrmCadastrarAluno
       ImageIndex = 1
       object Label1: TLabel
         Left = 18
-        Top = 137
+        Top = 133
         Width = 19
         Height = 13
         Caption = 'CEP'
-      end
-      object lblDataMatricula: TLabel
-        Left = 282
-        Top = 91
-        Width = 84
-        Height = 13
-        Caption = 'Data da Matr'#237'cula'
-      end
-      object lblSexo: TLabel
-        Left = 18
-        Top = 91
-        Width = 24
-        Height = 13
-        Caption = 'Sexo'
       end
       object Label2: TLabel
         Left = 112
@@ -156,57 +142,78 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Caption = 'Data de Nascimento'
       end
       object Label3: TLabel
-        Left = 470
+        Left = 452
         Top = 91
         Width = 19
         Height = 13
         Caption = 'CPF'
       end
-      object lblSerie: TLabel
-        Left = 402
-        Top = 183
-        Width = 24
+      object Escola: TLabel
+        Left = 436
+        Top = 45
+        Width = 30
         Height = 13
-        Caption = 'Serie'
+        Caption = 'Escola'
+      end
+      object lblSexo: TLabel
+        Left = 18
+        Top = 91
+        Width = 50
+        Height = 13
+        Caption = 'Sexo(M/F)'
+      end
+      object lblDatadeMatricula: TLabel
+        Left = 280
+        Top = 91
+        Width = 84
+        Height = 13
+        Caption = 'Data de Matricula'
       end
       object lbledtEstado: TLabeledEdit
-        Left = 305
+        Left = 280
         Top = 199
-        Width = 61
+        Width = 57
         Height = 21
+        CharCase = ecUpperCase
         EditLabel.Width = 33
         EditLabel.Height = 13
         EditLabel.Caption = 'Estado'
+        MaxLength = 2
         TabOrder = 13
+        OnKeyPress = lbledtEstadoKeyPress
       end
       object lbledtRua: TLabeledEdit
         Left = 112
         Top = 152
-        Width = 164
+        Width = 143
         Height = 21
         EditLabel.Width = 19
         EditLabel.Height = 13
         EditLabel.Caption = 'Rua'
+        MaxLength = 50
         TabOrder = 8
       end
       object lbledtNumero: TLabeledEdit
-        Left = 305
+        Left = 280
         Top = 152
-        Width = 61
+        Width = 57
         Height = 21
         EditLabel.Width = 37
         EditLabel.Height = 13
         EditLabel.Caption = 'N'#250'mero'
+        MaxLength = 5
         TabOrder = 9
+        OnKeyPress = lbledtNumeroKeyPress
       end
       object lbledtComplemento: TLabeledEdit
-        Left = 402
+        Left = 368
         Top = 152
-        Width = 157
+        Width = 185
         Height = 21
         EditLabel.Width = 65
         EditLabel.Height = 13
         EditLabel.Caption = 'Complemento'
+        MaxLength = 50
         TabOrder = 10
       end
       object lbledtBairro: TLabeledEdit
@@ -217,17 +224,20 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         EditLabel.Width = 28
         EditLabel.Height = 13
         EditLabel.Caption = 'Bairro'
+        MaxLength = 20
         TabOrder = 11
       end
       object lbledtCidade: TLabeledEdit
         Left = 135
         Top = 199
-        Width = 141
+        Width = 120
         Height = 21
         EditLabel.Width = 33
         EditLabel.Height = 13
         EditLabel.Caption = 'Cidade'
+        MaxLength = 25
         TabOrder = 12
+        OnKeyPress = lbledtCidadeKeyPress
       end
       object mskedtCep: TMaskEdit
         Left = 18
@@ -242,77 +252,42 @@ object frmCadastrarAluno: TfrmCadastrarAluno
       object lbledtNome: TLabeledEdit
         Left = 18
         Top = 64
-        Width = 423
+        Width = 391
         Height = 21
         EditLabel.Width = 27
         EditLabel.Height = 13
         EditLabel.Caption = 'Nome'
+        MaxLength = 100
         TabOrder = 1
       end
-      object dattimpickDataMatricula: TDateTimePicker
+      object dattimpickDataNascimento: TDateTimePicker
         Left = 112
         Top = 110
         Width = 143
         Height = 21
         Date = 43879.557137164350000000
         Time = 43879.557137164350000000
-        TabOrder = 5
-      end
-      object cbxSexo: TComboBox
-        Left = 18
-        Top = 110
-        Width = 63
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 3
-        Items.Strings = (
-          'M'
-          'F')
-      end
-      object dattimpckDataNascimento: TDateTimePicker
-        Left = 282
-        Top = 110
-        Width = 159
-        Height = 21
-        Date = 43879.557137164350000000
-        Time = 43879.557137164350000000
         TabOrder = 4
       end
       object mskedtCPF: TMaskEdit
-        Left = 470
+        Left = 452
         Top = 110
-        Width = 89
+        Width = 101
         Height = 21
-        EditMask = '000\.000\.000\.-00;1;_'
-        MaxLength = 15
+        EditMask = '000\.000\.000\-00;1;_'
+        MaxLength = 14
         TabOrder = 6
-        Text = '   .   .   .-  '
-      end
-      object lbledtCodigoEscola: TLabeledEdit
-        Left = 470
-        Top = 64
-        Width = 89
-        Height = 21
-        EditLabel.Width = 81
-        EditLabel.Height = 13
-        EditLabel.Caption = 'C'#243'digo da Escola'
-        TabOrder = 2
+        Text = '   .   .   -  '
       end
       object lbledtNomeResponsavel: TLabeledEdit
         Left = 18
-        Top = 242
-        Width = 423
+        Top = 244
+        Width = 383
         Height = 21
         EditLabel.Width = 91
         EditLabel.Height = 13
         EditLabel.Caption = 'Nome Respons'#225'vel'
-        TabOrder = 16
-      end
-      object dblucbxSerie: TDBLookupComboBox
-        Left = 402
-        Top = 199
-        Width = 157
-        Height = 21
+        MaxLength = 100
         TabOrder = 14
       end
       object lbledtCodigo: TLabeledEdit
@@ -323,6 +298,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         EditLabel.Width = 33
         EditLabel.Height = 13
         EditLabel.Caption = 'C'#243'digo'
+        Enabled = False
         TabOrder = 0
       end
       object Panel1: TPanel
@@ -333,7 +309,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Align = alBottom
         Color = clSilver
         ParentBackground = False
-        TabOrder = 18
+        TabOrder = 16
         object btnListar: TButton
           Left = 276
           Top = 10
@@ -378,7 +354,7 @@ object frmCadastrarAluno: TfrmCadastrarAluno
         Height = 36
         Align = alBottom
         BevelOuter = bvNone
-        TabOrder = 17
+        TabOrder = 15
         object Fechar: TButton
           Left = 456
           Top = 6
@@ -389,21 +365,49 @@ object frmCadastrarAluno: TfrmCadastrarAluno
           OnClick = FecharClick
         end
       end
-      object lbledtSerie: TLabeledEdit
-        Left = 470
-        Top = 244
-        Width = 121
+      object dblucbxEscola: TDBLookupComboBox
+        Left = 436
+        Top = 64
+        Width = 117
         Height = 21
-        EditLabel.Width = 24
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Serie'
-        TabOrder = 15
+        DataField = 'ALUESC'
+        DataSource = dsAluno
+        KeyField = 'ESCCOD'
+        ListField = 'ESCNOM'
+        ListSource = dsEscola
+        TabOrder = 2
+      end
+      object cbxSex: TComboBox
+        Left = 18
+        Top = 110
+        Width = 61
+        Height = 21
+        ItemHeight = 13
+        MaxLength = 1
+        TabOrder = 3
+        Items.Strings = (
+          'M'
+          'F')
+      end
+      object dattimpickDataMatricula: TDateTimePicker
+        Left = 280
+        Top = 110
+        Width = 145
+        Height = 21
+        Date = 43901.363204629630000000
+        Time = 43901.363204629630000000
+        TabOrder = 5
       end
     end
   end
   object dsAluno: TDataSource
     DataSet = dmAluno.cdsAluno
-    Left = 512
-    Top = 184
+    Left = 264
+    Top = 32
+  end
+  object dsEscola: TDataSource
+    DataSet = dmConexao.cdsEscola
+    Left = 208
+    Top = 32
   end
 end

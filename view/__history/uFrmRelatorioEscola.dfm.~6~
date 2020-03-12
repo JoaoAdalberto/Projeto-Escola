@@ -603,14 +603,14 @@ object TRelatorioEscola: TTRelatorioEscola
   end
   object qryEscola: TSQLQuery
     SchemaName = 'sa'
+    Active = True
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       
         'select ESCCOD, ESCNOM, ESCDES, ESCDATCAD  from ESCOLA where ESCC' +
         'OD = 1'
-      ' '
-      '')
+      ' ')
     SQLConnection = dmConexao.sqlConexao
     Left = 696
     Top = 280

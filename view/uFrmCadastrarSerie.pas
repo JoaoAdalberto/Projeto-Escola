@@ -310,7 +310,6 @@ begin
   tbParticipantes.TabVisible := False;
   dsSerie.DataSet.Active := True;
   dsEscola.DataSet.Active := True;
-
   pgcSerie.ActivePage := tbPesquisar;
 end;
 

@@ -1,9 +1,11 @@
 object unFrmPrincipal: TunFrmPrincipal
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Projeto Scefa'
-  ClientHeight = 376
-  ClientWidth = 751
+  ClientHeight = 386
+  ClientWidth = 761
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,8 +15,8 @@ object unFrmPrincipal: TunFrmPrincipal
   Menu = mainmenPrincipal
   OldCreateOrder = False
   DesignSize = (
-    751
-    376)
+    761
+    386)
   PixelsPerInch = 96
   TextHeight = 13
   object lblSCEFA: TLabel
@@ -45,8 +47,8 @@ object unFrmPrincipal: TunFrmPrincipal
     ParentFont = False
   end
   object lblDataHora: TLabel
-    Left = 592
-    Top = 351
+    Left = 602
+    Top = 361
     Width = 5
     Height = 19
     Alignment = taCenter
@@ -88,9 +90,9 @@ object unFrmPrincipal: TunFrmPrincipal
     end
     object Relatorios: TMenuItem
       Caption = 'Relat'#243'rios'
-      object Escola1: TMenuItem
+      object EscolaRelatorio: TMenuItem
         Caption = 'Escola'
-        OnClick = Escola1Click
+        OnClick = EscolaRelatorioClick
       end
     end
   end
